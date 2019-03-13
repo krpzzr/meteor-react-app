@@ -1,0 +1,17 @@
+.Scenario-4 .ui.grid .row .secondColumn {
+  width: 50% !important;
+}
+.Scenario-4 .ui.grid .row .thirdColumn {
+  width: 36% !important;
+  margin-right: 0 !important;
+}
+.Scenario-4 .ui.grid .row #precondition {
+  flex-direction: column;
+  padding: 0 !important;
+}
+.Scenario-4 .ui.grid .row #precondition .row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem !important;
+}

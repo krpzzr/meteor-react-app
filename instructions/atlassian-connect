@@ -1,0 +1,9 @@
+baseUrl - where the app is hosted
+
+modules - which sections of the app will be visible in jira
+	generalPages - main app UI
+	jiraIssueFields - Telescope process field
+
+scopes - allow the app to read and write to jira data; needed for webhooks to work
+
+webhooks - configs on which events and to which addresses to send POST http requests

@@ -1,0 +1,7 @@
+.git/
+.idea/
+.meteor/local
+flow-typed/
+node_modules/
+tests/coverage/
+package-lock.json

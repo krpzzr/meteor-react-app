@@ -1,0 +1,6 @@
+.TreeView .accordion {
+  box-shadow: none !important;
+}
+.TreeView .accordion .title {
+  border-top: none !important;
+}

@@ -1,0 +1,89 @@
+{
+  //https://medium.com/@jzarzoso/setting-eslint-on-meteor-for-react-development-10af658b44e2
+  "env": {
+    "node": true,
+    "browser": true,
+    "jest/globals": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:flowtype/recommended",
+    "hardcore-fp",
+    "plugin:import/warnings",
+    "plugin:jest/recommended",
+    "plugin:react/recommended",
+    "plugin:meteor/recommended",
+    "plugin:promise/recommended"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "plugins": ["flowtype", "import", "jest", "react", "react-hooks", "meteor", "promise"],
+  "overrides": [
+    {
+      "files": ["*.test.js", "*.spec.js"],
+      "rules": {
+        "fp/no-unused-expression": "off"
+      }
+    }
+  ],
+  "rules": {
+    "fp/no-mutating-methods": [
+      "error",
+      {
+        // Allow reassign Lodash methods
+        "allowedObjects": ["_"]
+      }
+    ],
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "fp/no-unused-expression": "off",
+    "fp/no-nil": "off",
+    "indent": ["error", 2],
+    "lines-around-comment": ["warn", {"ignorePattern": "/prettier-ignore|$FlowFixMe/"}],
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "comments": 120,
+        "tabWidth": 2
+      }
+    ],
+    "max-params": ["error", 6],
+    "multiline-ternary": "off",
+    "no-multi-spaces": "off",
+    "no-nested-ternary": "off",
+    "no-unneeded-ternary": "off",
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignore": [0, 1]
+      }
+    ],
+    "no-shadow": [
+      "error",
+      {
+        "builtinGlobals": true
+      }
+    ],
+    "no-undef": "error",
+    "no-unused-vars": "warn",
+    "no-use-before-define": "off",
+    "operator-linebreak": ["error", "before"],
+    "padding-line-between-statements": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {
+    "flowtype": {
+      // Lint all files, no matter if they have '@flow' annotation
+      "onlyFilesWithFlowAnnotation": false
+    }
+  }
+}

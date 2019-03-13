@@ -1,0 +1,50 @@
+.Scenario-2 .ui.grid .row .secondColumn {
+  width: 38% !important;
+}
+.Scenario-2 .ui.grid .row .column {
+  width: 11%;
+}
+.Scenario-2 .ui.grid .row .lastColumn {
+  margin-right: 0 !important;
+}
+.Scenario-2 .ui.grid .row .column:not(.firstColumn) {
+  flex-direction: column;
+  padding: 0 !important;
+}
+.Scenario-2 .ui.grid .row .column:not(.firstColumn) .row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Scenario-2 .ui.grid .row .secondColumn .row {
+  justify-content: initial !important;
+  padding-left: 1rem !important;
+}
+.Scenario-2 .ui.grid .prj-header.row .firstColumn {
+  height: initial;
+}
+.Scenario-2 .ui.grid .prj-header.row .column {
+  flex-direction: column-reverse;
+}
+.Scenario-2 .ui.grid .prj-given .column:not(.firstColumn) .row {
+  height: 50%;
+}
+.Scenario-2 .ui.grid .prj-given .column:not(.firstColumn) .row:nth-child(1) {
+  margin-bottom: 5px;
+}
+.Scenario-2 .ui.grid .prj-when .column:not(.firstColumn) .row {
+  height: 33%;
+}
+.Scenario-2 .ui.grid .prj-when .column:not(.firstColumn) .row:nth-child(1),
+.Scenario-2 .ui.grid .prj-when .column:not(.firstColumn) .row:nth-child(2) {
+  margin-bottom: 5px;
+}
+.Scenario-2 .ui.grid .row .column .row:nth-child(3) {
+  position: relative;
+}
+.Scenario-2 .ui.grid .row .column .row:nth-child(3) .icon {
+  position: absolute;
+  top: 0;
+  right: -4px;
+}

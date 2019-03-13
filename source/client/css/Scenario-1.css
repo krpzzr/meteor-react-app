@@ -1,0 +1,14 @@
+.Scenario-1 .ui.grid .row .secondColumn {
+  width: 88.5% !important;
+  margin-right: 0 !important;
+}
+.Scenario-1 .ui.grid .row #then {
+  flex-direction: column;
+  padding: 0 !important;
+}
+.Scenario-1 .ui.grid .row #then .row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem !important;
+}

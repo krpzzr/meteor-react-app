@@ -1,0 +1,43 @@
+App:
+	Set up public/atlassian-connect.json:
+		- baseUrl: telescope app url
+		
+	Set up app.config.js:
+		- jiraUrl: client jira url
+		- telescopeProcessFieldId: where to take it??
+		- rest_auth_token: 
+				Get your jira user api token
+				api_token="uNc69Df9UudNKwEB3Eb36F34"
+				username = "kat100500@outlook.com"
+				Make a string of them
+				kat100500@outlook.com:uNc69Df9UudNKwEB3Eb36F34
+				base64 encode:
+				a2F0MTAwNTAwQG91dGxvb2suY29tOnVOYzY5RGY5VXVkTkt3RUIzRWIzNkYzNA==
+		
+	Set up Jira:
+		- Add custom field Telescope Process to Task Management Create Issue Screen
+
+MongoDB:
+	Create a db\cluster
+	Create 'app' user with read\write access; save the password!
+		Get the connection string for this user; e.g. in Atlas:
+			- Clusters -> Connect -> Connect your App -> SRV connection string:
+			mongodb+srv://admin:<password>@mongodbcluster-4v90v.mongodb.net/test?retryWrites=true
+			- Substitute 'admin' with 'app' and insert proper pwd
+			- Substiture '.mongodb.net/test?' with '.mongodb.net/telescope?'			
+	Create 'oplog' user with read\write access:
+		- Select: “Create new user”.
+		- Click “advanced”.
+		- Set access to “read” @ “local”.
+		- Create a password and save it!
+		Get the connection string for this user; e.g. in Atlas:
+			- Clusters -> Connect -> Connect your App -> SRV connection string:
+			mongodb+srv://admin:<password>@mongodbcluster-4v90v.mongodb.net/test?retryWrites=true
+			- Substitute 'admin' with 'oplog' and insert proper pwd
+			- Substiture '.mongodb.net/test?retryWrites=true' with '.mongodb.net/local'			
+	
+	(if using Atlas) Add your app IP to Atlas whitelist:
+		- Clusters -> Security -> IP Whitelist -> Add IP address
+
+Build Docker img:
+	sudo meteor build /bundle --server-only --allow-superuser --directory --architecture os.linux.x86_64

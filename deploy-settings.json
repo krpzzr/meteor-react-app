@@ -1,0 +1,10 @@
+{
+	"galaxy.meteor.com": {
+		"env": {
+			"DEPLOY_HOSTNAME": "https://eu-west-1.galaxy-deploy.meteor.com",
+			"ROOT_URL": "https://www.syntia.org",
+			"MONGO_URL": "mongodb+srv://app:zpsWeTmiZXtTP1iu@mongodbcluster-6v93v.mongodb.net/telescope?retryWrites=true",
+			"MONGO_OPLOG_URL": "mongodb+srv://oplog:pY4c6WlSvnfQATrm@mongodbcluster-6v93v.mongodb.net/local"
+		}
+	}
+}

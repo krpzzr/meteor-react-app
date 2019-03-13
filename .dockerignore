@@ -1,0 +1,6 @@
+.meteor/local
+bundle1
+instructions
+node_modules
+packages/*/.build*
+tests

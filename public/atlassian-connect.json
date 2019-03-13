@@ -1,0 +1,63 @@
+{
+  "name": "Telescope",
+  "description": "Telescope web app",
+  "key": "telescope",
+  "baseUrl": "https://www.mysynthia.com",
+  "vendor": {
+    "name": "Automators",
+    "url": "http://automators.com"
+  },
+  "authentication": {
+    "type": "none"
+  },
+  "apiVersion": 2,
+  "scopes": ["read", "write"],
+  "modules": {
+    "generalPages": [
+      {
+        "url": "/",
+        "key": "root",
+        "location": "system.top.navigation.bar",
+        "name": {
+          "value": "Telescope"
+        }
+      }
+    ],
+    "jiraIssueFields": [
+      {
+        "description": {
+          "value": ""
+        },
+        "type": "single_select",
+        "extractions": [
+          {
+            "path": "category",
+            "type": "text",
+            "name": "categoryName"
+          }
+        ],
+        "name": {
+          "value": "Telescope process"
+        },
+        "key": "t-process2"
+      }
+    ],
+    "webhooks": [
+      {
+        "event": "connect_addon_enabled",
+        "url": "/jira-webapp-added",
+        "excludeBody": false
+      },
+      {
+        "event": "jira:issue_created",
+        "url": "/jira-issue-created",
+        "excludeBody": false
+      },
+      {
+        "event": "jira:issue_updated",
+        "url": "/jira-issue-updated",
+        "excludeBody": false
+      }
+    ]
+  }
+}
