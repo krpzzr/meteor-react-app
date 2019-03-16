@@ -1,0 +1,11 @@
+.behaviourName {
+    transform: rotate(-90deg);
+}
+
+.cell {
+    border: 1px solid #000;
+}
+
+.cell_custom {
+    cursor: pointer;
+}
