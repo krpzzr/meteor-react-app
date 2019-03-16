@@ -64,8 +64,13 @@ class App extends React.Component {
   };
 
   saveCellsChanges = () => {
-    this.setState({cellEditInputs: []})
-    console.info('Save Changes', this.state.cellEditInputs)
+    this.setState({cellEditInputs: []});
+    console.info('Saving Changes...', this.state.cellEditInputs)
+  };
+
+  cancelChanges = () => {
+    this.setState({cellEditInputs: []});
+    console.info('Changes Canceled')
   };
 
   render() {
@@ -140,7 +145,11 @@ class App extends React.Component {
                 </table>
 
                 {
-                  this.state.cellEditInputs.length > 0 && <button onClick={this.saveCellsChanges}>Save Changes</button>
+                  this.state.cellEditInputs.length > 0 &&
+                    <div>
+                      <button onClick={this.saveCellsChanges}>Save Changes</button>
+                      <button onClick={this.cancelChanges}>Cancel Changes</button>
+                    </div>
                 }
 
               </div>
