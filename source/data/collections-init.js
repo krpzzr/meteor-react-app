@@ -35,7 +35,8 @@ let tables = [
             {
               id: "test_designer_id",
               level: 0,
-              parend: null,
+              parent: null,
+              children: null,
               name: "TEST DESIGNER",
               cells: [
                 {
@@ -70,6 +71,7 @@ let tables = [
               id: "contact_person_id",
               level: 0,
               parent: null,
+              children: null,
               name: "CONTACT PERSON",
               cells: [
                 {
@@ -111,6 +113,7 @@ let tables = [
               id: "customer_id",
               level: 0,
               parent: null,
+              children: "type_of_user_id",
               name: "CUSTOMER",
               cells: [
                 {
@@ -145,6 +148,7 @@ let tables = [
               id: "type_of_user_id",
               level: 1,
               parent: "customer_id",
+              children: "username_id",
               name: "TYPE OF USER",
               cells: [
                 {
@@ -179,6 +183,7 @@ let tables = [
               id: "username_id",
               level: 2,
               parent: "type_of_user_id",
+              children: null,
               name: "USERNAME",
               cells: [
                 {
@@ -213,6 +218,7 @@ let tables = [
               id: "type_of_user_id2",
               level: 1,
               parent: "customer_id",
+              children: null,
               name: "TYPE OF USER2",
               cells: [
                 {
@@ -252,6 +258,7 @@ let tables = [
             {
               id: "acc_be_should_id",
               parent: null,
+              children: null,
               level: 0,
               name: "THE ACCOUNT BALANCE SHOULD BE ${ENDING_BALANCE}",
               cells: [
@@ -285,6 +292,7 @@ let tables = [
             {
               id: "the_card_should_returned_id",
               parent: null,
+              children: null,
               level: 0,
               name: "THE CARD SHOULD BE RETURNED",
               cells: [

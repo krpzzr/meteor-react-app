@@ -1,11 +1,67 @@
+.container {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.tables_container {
+    background-color: #F1F1F2;
+}
+.topButtons_wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+table {
+    background-color: #fff;
+    width: 100%;
+}
+
+.table-title {
+    font-weight: 500;
+    border-bottom: 1px solid #000;
+    text-align: center;
+}
+
 .behaviourName {
     transform: rotate(-90deg);
 }
 
 .cell {
-    border: 1px solid #000;
+    border: none;
+    height: 60px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #F1F1F2;
 }
 
 .cell_custom {
     cursor: pointer;
+    text-align: center;
+}
+
+.cell.cell-given_when_then {
+    color: #fff;
+    font-weight: normal;
+    border: none;
+}
+
+.cell.GIVEN-cell {
+    background-color: #4F287B;
+}
+.cell.WHEN-cell {
+    background-color: #E85755;
+}
+.cell.THEN-cell {
+    background-color: #3EB775;
+}
+
+.GIVEN-cell-prop {
+    color: #4F287B;
+}
+.WHEN-cell-prop {
+    color: #E85755;
+}
+.THEN-cell-prop {
+    color: #3EB775;
 }
