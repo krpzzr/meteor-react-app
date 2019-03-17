@@ -146,17 +146,8 @@ class App extends React.Component {
                 return (
                   <div key={item.id}>
                     <table>
-                      <caption style={{
-                        cursor: "pointer",
-                        backgroundColor: "#BABAB9",
-                        margin: 7,
-                        padding: 11,
-                        textTransform: "uppercase",
-                        fontSize: 18,
-                        color: "#fff",
-                        fontWeight: 400,
-                      }} onClick={(e) => this.onTableDropdown(e, item)}>
-                        {item.name}
+                      <caption className={_.find(this.state.openTables, {id: item.id}) ? "active" : ""} onClick={(e) => this.onTableDropdown(e, item)}>
+                        <span>{item.name}</span>
                       </caption>
                       {
                         _.find(this.state.openTables, {id: item.id}) &&
