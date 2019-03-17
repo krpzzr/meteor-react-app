@@ -66,14 +66,16 @@ caption.active span::after {
 .cell {
     border: none;
     height: 60px;
-    padding-left: 8px;
-    padding-right: 8px;
     background-color: #F1F1F2;
 }
 
 .cell_custom {
     cursor: pointer;
     text-align: center;
+    max-width: 145px;
+    height: 66px;
+    overflow-y: auto;
+    word-break: break-all;
 }
 
 .cell.cell-given_when_then {
@@ -100,4 +102,17 @@ caption.active span::after {
 }
 .THEN-cell-prop {
     color: #3EB775;
+}
+.GIVEN-cell-prop, .WHEN-cell-prop, .THEN-cell-prop {
+    max-width: 420px;
+}
+
+.cell_input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    resize: vertical;
 }

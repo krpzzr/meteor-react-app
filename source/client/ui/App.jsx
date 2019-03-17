@@ -58,7 +58,6 @@ class App extends React.Component {
     e.stopPropagation();
 
     if (!_.find(this.state.cellEditInputs, {id: cell.id})) {
-
       this.setState(prevState => ({
         cellEditInputs: [
           ...prevState.cellEditInputs,
@@ -193,8 +192,10 @@ class App extends React.Component {
                                                     onClick={(e) => this.editCell(e, cell)}>
                                                     {
                                                       _.find(this.state.cellEditInputs, {id: cell.id}) ?
-                                                        <input
+                                                        <textarea
                                                           type="text"
+                                                          autoFocus
+                                                          className="cell_input"
                                                           onChange={(e) => this.onChangeInputCell(e, cell)}
                                                           value={_.get(_.find(this.state.cellEditInputs, {id: cell.id}), "value")}/> :
                                                         (cell.name && cell.name.length > 0) ? cell.name : "+"
