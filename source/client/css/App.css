@@ -57,6 +57,7 @@ caption.active span::after {
     font-weight: 500;
     border-bottom: 1px solid #000;
     text-align: center;
+    min-width: 145px;
 }
 
 .behaviourName {
@@ -72,10 +73,18 @@ caption.active span::after {
 .cell_custom {
     cursor: pointer;
     text-align: center;
-    max-width: 145px;
+    min-width: 145px;
     height: 66px;
     overflow-y: auto;
-    word-break: break-all;
+    word-break: break-word;
+}
+.cell_custom p {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cell.cell-given_when_then {
@@ -104,7 +113,7 @@ caption.active span::after {
     color: #3EB775;
 }
 .GIVEN-cell-prop, .WHEN-cell-prop, .THEN-cell-prop {
-    max-width: 420px;
+    width: 420px;
 }
 
 .cell_input {
@@ -113,6 +122,10 @@ caption.active span::after {
     outline: none;
     text-align: center;
     width: 100%;
-    height: 100%;
+    padding-top: 26px;
     resize: vertical;
+}
+
+.cell p {
+    padding-left: 15px;
 }

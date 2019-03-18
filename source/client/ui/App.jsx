@@ -181,7 +181,9 @@ class App extends React.Component {
                                       <React.Fragment key={prop.id}>
                                         <tr>
                                           <th className={`cell ${sb.name}-cell-prop`} scope="row"
-                                              style={{paddingLeft: prop.level * 15}}>{prop.name}</th>
+                                              style={{paddingLeft: prop.level * 33}}>
+                                            <p>{prop.name}</p>
+                                          </th>
                                           {
 
                                             this.sortCells(prop.cells, item.titles).map(cell => {
@@ -198,7 +200,7 @@ class App extends React.Component {
                                                           className="cell_input"
                                                           onChange={(e) => this.onChangeInputCell(e, cell)}
                                                           value={_.get(_.find(this.state.cellEditInputs, {id: cell.id}), "value")}/> :
-                                                        (cell.name && cell.name.length > 0) ? cell.name : "+"
+                                                        <p>{(cell.name && cell.name.length > 0) ? cell.name : "+"}</p>
                                                     }
                                                   </td>
                                                 </React.Fragment>
