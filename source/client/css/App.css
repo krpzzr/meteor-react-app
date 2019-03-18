@@ -39,7 +39,7 @@ caption span {
 caption span::after {
     content: '';
     position: absolute;
-    right: -8px;
+    right: -11px;
     top: 50%;
     transform: translateY(-50%);
     border-style: solid;
@@ -50,7 +50,7 @@ caption span::after {
 caption.active span::after {
     border-color: #E85755 transparent transparent transparent;
     border-width: 6px 6px 0 6px;
-    right: -12px;
+    right: -15px;
 }
 
 .table-title {
