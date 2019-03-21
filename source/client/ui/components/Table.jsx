@@ -99,6 +99,9 @@ class Table extends React.Component {
 
             <TableTitlesTop
               item={item}
+              onChangeInputCell={this.onChangeInputCell}
+              editCell={this.editCell}
+              cellEditInputs={this.state.cellEditInputs}
             />
             <TableTitlesLeft
               item={item}
@@ -114,9 +117,24 @@ class Table extends React.Component {
 
         {
           this.state.cellEditInputs.length > 0 &&
-          <div style={{backgroundColor: '#fff', paddingBottom: 14}}>
-            <button onClick={this.saveCellsChanges}>Save Changes</button>
-            <button onClick={this.cancelChanges}>Cancel Changes</button>
+          <div style={{
+            backgroundColor: "#fff",
+            paddingBottom: 11,
+          }}>
+            <button
+              className="action_button"
+              style={{marginRight: 10}}
+              onClick={this.saveCellsChanges}
+            >
+              Save Changes
+            </button>
+            <button
+              className="action_button"
+              style={{marginLeft: 10}}
+              onClick={this.cancelChanges}
+            >
+              Cancel Changes
+            </button>
           </div>
         }
 

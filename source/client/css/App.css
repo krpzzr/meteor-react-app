@@ -198,3 +198,17 @@ caption.active span::after {
 .cell p {
     padding-left: 15px;
 }
+
+.action_button {
+    background-color: transparent;
+    border: 1px solid #532D7E;
+    color: #532D7E;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.action_button:hover {
+    background-color: #532D7E;
+    color: #fff;
+    transition: all .25s ease;
+}
