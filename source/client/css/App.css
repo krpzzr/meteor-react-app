@@ -100,13 +100,16 @@ caption.active span::after {
     min-width: 145px;
 }
 
+.table-title .cell_input {
+    min-height: auto;
+}
+
 .behaviourName {
     transform: rotate(-90deg);
 }
 
 .cell {
     border: none;
-    height: 60px;
     background-color: #F1F1F2;
 }
 
@@ -114,7 +117,7 @@ caption.active span::after {
     cursor: pointer;
     text-align: center;
     min-width: 145px;
-    height: 66px;
+    height: 76px;
     overflow-y: auto;
     word-break: break-word;
 }
@@ -189,7 +192,7 @@ caption.active span::after {
     outline: none;
     text-align: center;
     width: 100%;
-    min-height: 66px;
+    height: 69px;
     resize: none;
     padding-left: 15px;
     padding-right: 15px;
