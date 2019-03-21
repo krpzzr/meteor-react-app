@@ -63,7 +63,7 @@ class TableTitlesLeft extends React.Component {
                     );
                   })
                 }
-                <tr style={{height: 10}}>
+                <tr style={{height: 7}}>
                   <td></td>
                 </tr>
 
