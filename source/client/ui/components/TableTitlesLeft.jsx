@@ -24,35 +24,35 @@ class TableTitlesLeft extends React.Component {
   };
 
   render() {
-    const {item, cellEditInputs, editCell, onChangeInputCell} = this.props;
+    const {table, cellEditInputs, editCell, onChangeInputCell} = this.props;
 
     return (
 
       <React.Fragment>
 
         {
-          item.systemsBehaviour.map(sb => {
+          table.attributes.map(attribute => {
             return (
-              <React.Fragment key={sb.id}>
+              <React.Fragment key={attribute.id}>
                 <tr>
-                  <th className={`cell cell-given_when_then ${sb.name}-cell`}
+                  <th className={`cell cell-given_when_then ${attribute.name}-cell`}
                       scope="rowgroup"
-                      rowSpan={sb.properties.length + 1}>
-                    <p className="behaviourName">{sb.name}</p>
+                      rowSpan={attribute.conditions.length + 1}>
+                    <p className="behaviourName">{attribute.name}</p>
                   </th>
                 </tr>
                 {
-                  sb.properties.map(prop => {
+                  attribute.conditions.map(condition => {
                     return (
-                      <React.Fragment key={prop.id}>
+                      <React.Fragment key={condition.id}>
                         <tr>
-                          <th className={`cell ${sb.name}-cell-prop`} scope="row"
-                              style={{paddingLeft: prop.level * 33}}>
-                            <p>{prop.name}</p>
+                          <th className={`cell ${attribute.name}-cell-prop`} scope="row"
+                              style={{paddingLeft: condition.level * 33}}>
+                            <p>{condition.name}</p>
                           </th>
                           <TableCell
-                            systemBehaviourName={sb.name}
-                            prop={prop}
+                            systemBehaviourName={attribute.name}
+                            condition={condition}
                             item={item}
                             cellEditInputs={cellEditInputs}
                             editCell={editCell}

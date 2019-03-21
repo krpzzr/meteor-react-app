@@ -14,7 +14,7 @@ class App extends React.Component {
 
   render() {
     const tables = this.props.tables.find({}).fetch();
-    console.log(this.props.tables, tables);
+    console.log(tables);
 
     return (
       <div className="container">
@@ -85,11 +85,11 @@ class App extends React.Component {
           <div className="row">
             {
               tables.length > 0 ?
-                tables.map(item => {
+                tables.map(table => {
                   return (
                     <Table
                       key={item.id}
-                      item={item}
+                      table={table}
                     />
                   );
                 }) :

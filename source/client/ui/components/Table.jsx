@@ -82,28 +82,28 @@ class Table extends React.Component {
   count = 1;
 
   render() {
-    const {item} = this.props;
+    const {table} = this.props;
 
     return (
 
       <div style={{overflowX: "auto"}}>
         <table>
-          <caption className={_.find(this.state.openTables, {id: item.id}) ? "active" : ""}
-                   onClick={(e) => this.onTableDropdown(e, item)}>
-            <span>{item.name}</span>
+          <caption className={_.find(this.state.openTables, {id: table.id}) ? "active" : ""}
+                   onClick={(e) => this.onTableDropdown(e, table)}>
+            <span>{table.name}</span>
           </caption>
           {
-            _.find(this.state.openTables, {id: item.id}) &&
+            _.find(this.state.openTables, {id: table.id}) &&
             <tbody>
 
             <TableTitlesTop
-              item={item}
+              table={table}
               onChangeInputCell={this.onChangeInputCell}
               editCell={this.editCell}
               cellEditInputs={this.state.cellEditInputs}
             />
             <TableTitlesLeft
-              item={item}
+              table={table}
               sortCells={this.sortCells}
               onChangeInputCell={this.onChangeInputCell}
               editCell={this.editCell}

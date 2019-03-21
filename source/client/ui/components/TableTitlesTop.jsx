@@ -6,7 +6,7 @@ import * as _ from "lodash";
 class TableTitlesTop extends React.Component {
 
   render() {
-    const {item, cellEditInputs, onChangeInputCell, editCell} = this.props;
+    const {table, cellEditInputs, onChangeInputCell, editCell} = this.props;
 
     return (
 
@@ -14,7 +14,7 @@ class TableTitlesTop extends React.Component {
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         {
-          item.titles.map(title => {
+          table.titles.map(title => {
             return (
               <th
                 key={title.id}

@@ -23,11 +23,11 @@ export default {
       name: "",
     },
   ],
-  systemsBehaviour: [
+  attributes: [
     {
       id: "GIVEN1",
       name: "GIVEN",
-      properties: [
+      conditions: [
 
         {
           id: "test_designer_id",
@@ -104,7 +104,7 @@ export default {
     {
       id: "WHEN1",
       name: "WHEN",
-      properties: [
+      conditions: [
 
         {
           id: "customer_id",
@@ -251,7 +251,7 @@ export default {
     {
       id: "THEN1",
       name: "THEN",
-      properties: [
+      conditions: [
         {
           id: "acc_be_should_id",
           parent: null,
