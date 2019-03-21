@@ -176,7 +176,7 @@ caption.active span::after {
     outline: none;
     text-align: center;
     width: 100%;
-    padding-top: 26px;
+    min-height: 66px;
     resize: vertical;
 }
 
