@@ -23,7 +23,7 @@ class TableCell extends React.Component {
   };
 
   render() {
-    const {prop, item, editCell, onChangeInputCell, cellEditInputs} = this.props;
+    const {prop, item, editCell, onChangeInputCell, cellEditInputs, systemBehaviourName} = this.props;
 
     return (
 
@@ -34,7 +34,7 @@ class TableCell extends React.Component {
             return (
               <td
                 key={cell.id}
-                className="cell cell_custom"
+                className={`cell cell_custom cell_${systemBehaviourName}`}
                 onClick={(e) => editCell(e, cell)}>
                 {
                   _.find(cellEditInputs, {id: cell.id}) ?

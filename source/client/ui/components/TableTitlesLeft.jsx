@@ -51,6 +51,7 @@ class TableTitlesLeft extends React.Component {
                             <p>{prop.name}</p>
                           </th>
                           <TableCell
+                            systemBehaviourName={sb.name}
                             prop={prop}
                             item={item}
                             cellEditInputs={cellEditInputs}

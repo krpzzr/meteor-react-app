@@ -168,6 +168,19 @@ caption.active span::after {
 
 .GIVEN-cell-prop, .WHEN-cell-prop, .THEN-cell-prop {
     width: 420px;
+    font-weight: 400;
+}
+
+.GIVEN-cell-prop:hover, .cell_GIVEN:hover {
+    background-color: rgba(79, 40, 123, 0.16);
+}
+
+.WHEN-cell-prop:hover, .cell_WHEN:hover {
+    background-color: rgba(232, 87, 85, 0.15);
+}
+
+.THEN-cell-prop:hover, .cell_THEN:hover {
+    background-color: rgba(62, 183, 117, 0.16);
 }
 
 .cell_input {
@@ -178,6 +191,8 @@ caption.active span::after {
     width: 100%;
     min-height: 66px;
     resize: vertical;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .cell p {
