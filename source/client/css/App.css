@@ -2,14 +2,51 @@
     margin-left: 15px;
     margin-right: 15px;
 }
+
 .tables_container {
     background-color: #F1F1F2;
 }
+
 .topButtons_wrapper {
     display: flex;
     justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.topButtons_wrapper button {
+    background-color: transparent;
+    border: none;
+    color: #532D7E;
+    text-transform: uppercase;
+    font-size: 17px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.topButtons_wrapper button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background-color: #532D7E;
+    transition: all .25s ease;
+}
+
+.topButtons_wrapper button:hover::after {
+    width: 100%;
+    transition: all .25s ease;
+}
+
+.topButtons_wrapper button svg {
+    position: relative;
+    top: 4px;
+    right: 8px;
 }
 
 table {
@@ -28,14 +65,17 @@ caption {
     font-weight: 300;
     user-select: none;
 }
+
 caption.active {
     color: #E85755;
     background-color: transparent;
     border-bottom: 1px solid #E85755;
 }
+
 caption span {
     position: relative;
 }
+
 caption span::after {
     content: '';
     position: absolute;
@@ -78,6 +118,7 @@ caption.active span::after {
     overflow-y: auto;
     word-break: break-word;
 }
+
 .cell_custom p {
     height: 100%;
     overflow-y: auto;
@@ -85,6 +126,14 @@ caption.active span::after {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.cell_custom span {
+    font-size: 29px;
+    font-weight: 200;
+    color: #fff;
+    position: relative;
+    bottom: 3px;
 }
 
 .cell.cell-given_when_then {
@@ -96,9 +145,11 @@ caption.active span::after {
 .cell.GIVEN-cell {
     background-color: #4F287B;
 }
+
 .cell.WHEN-cell {
     background-color: #E85755;
 }
+
 .cell.THEN-cell {
     background-color: #3EB775;
 }
@@ -106,12 +157,15 @@ caption.active span::after {
 .GIVEN-cell-prop {
     color: #4F287B;
 }
+
 .WHEN-cell-prop {
     color: #E85755;
 }
+
 .THEN-cell-prop {
     color: #3EB775;
 }
+
 .GIVEN-cell-prop, .WHEN-cell-prop, .THEN-cell-prop {
     width: 420px;
 }
