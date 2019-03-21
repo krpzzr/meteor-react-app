@@ -190,7 +190,7 @@ caption.active span::after {
     text-align: center;
     width: 100%;
     min-height: 66px;
-    resize: vertical;
+    resize: none;
     padding-left: 15px;
     padding-right: 15px;
 }
