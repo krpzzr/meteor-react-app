@@ -71,7 +71,6 @@ class Table extends React.Component {
 
   saveCellsChanges = () => {
     this.setState({cellEditInputs: []});
-    Meteor.call("updateCells", this.state.cellEditInputs);
     console.info("Saving Changes...", this.state.cellEditInputs);
   };
 

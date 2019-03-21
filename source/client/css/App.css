@@ -97,11 +97,17 @@ caption.active span::after {
     font-weight: 500;
     border-bottom: 1px solid #000;
     text-align: center;
-    min-width: 145px;
+    min-width: 188px;
+}
+
+.table-title p {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .table-title .cell_input {
     min-height: auto;
+    height: auto;
 }
 
 .behaviourName {
@@ -116,9 +122,7 @@ caption.active span::after {
 .cell_custom {
     cursor: pointer;
     text-align: center;
-    min-width: 145px;
     height: 76px;
-    overflow-y: auto;
     word-break: break-word;
 }
 
@@ -143,6 +147,7 @@ caption.active span::after {
     color: #fff;
     font-weight: normal;
     border: none;
+    width: 50px;
 }
 
 .cell.GIVEN-cell {
@@ -174,6 +179,10 @@ caption.active span::after {
     font-weight: 400;
 }
 
+.GIVEN-cell-prop p, .WHEN-cell-prop p, .THEN-cell-prop p {
+    padding-left: 15px;
+}
+
 .GIVEN-cell-prop:hover, .cell_GIVEN:hover {
     background-color: rgba(79, 40, 123, 0.16);
 }
@@ -199,7 +208,7 @@ caption.active span::after {
 }
 
 .cell p {
-    padding-left: 15px;
+    width: 100%;
 }
 
 .action_button {
