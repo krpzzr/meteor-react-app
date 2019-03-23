@@ -53,7 +53,7 @@ class TableTitlesLeft extends React.Component {
                           <TableCell
                             systemBehaviourName={attribute.name}
                             condition={condition}
-                            item={item}
+                            table={table}
                             cellEditInputs={cellEditInputs}
                             editCell={editCell}
                             onChangeInputCell={onChangeInputCell}

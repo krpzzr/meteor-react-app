@@ -88,7 +88,7 @@ class App extends React.Component {
                 tables.map(table => {
                   return (
                     <Table
-                      key={item.id}
+                      key={table.id}
                       table={table}
                     />
                   );

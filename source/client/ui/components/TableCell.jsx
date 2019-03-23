@@ -23,14 +23,14 @@ class TableCell extends React.Component {
   };
 
   render() {
-    const {condition, item, editCell, onChangeInputCell, cellEditInputs, systemBehaviourName} = this.props;
+    const {condition, table, editCell, onChangeInputCell, cellEditInputs, systemBehaviourName} = this.props;
 
     return (
 
       <React.Fragment>
 
         {
-          this.sortCells(condition.cells, item.titles).map(cell => {
+          this.sortCells(condition.teseCaseValues, table.testCaseNames).map(cell => {
             return (
               <td
                 key={cell.id}

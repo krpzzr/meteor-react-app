@@ -14,7 +14,7 @@ class TableTitlesTop extends React.Component {
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         {
-          table.titles.map(title => {
+          table.testCaseNames.map(title => {
             return (
               <th
                 key={title.id}

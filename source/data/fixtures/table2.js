@@ -1,7 +1,7 @@
 export default {
   id: "table2",
   name: "Table Name 2",
-  titles: [
+  testCaseNames: [
     {
       id: "1",
       name: "STRAIGHT THROUGH",
@@ -35,7 +35,7 @@ export default {
           parent: null,
           children: null,
           name: "TEST DESIGNER",
-          cells: [
+          teseCaseValues: [
             {
               id: "122121",
               titleID: "1",
@@ -70,7 +70,7 @@ export default {
           parent: null,
           children: null,
           name: "CONTACT PERSON",
-          cells: [
+          teseCaseValues: [
             {
               id: "bdssdbsdb",
               titleID: "1",
@@ -112,7 +112,7 @@ export default {
           parent: null,
           children: "type_of_user_id",
           name: "CUSTOMER",
-          cells: [
+          teseCaseValues: [
             {
               id: "99",
               titleID: "1",
@@ -147,7 +147,7 @@ export default {
           parent: "customer_id",
           children: "username_id",
           name: "TYPE OF USER",
-          cells: [
+          teseCaseValues: [
             {
               id: "tqqt22",
               titleID: "1",
@@ -182,7 +182,7 @@ export default {
           parent: "type_of_user_id",
           children: null,
           name: "USERNAME",
-          cells: [
+          teseCaseValues: [
             {
               id: "2jjky9",
               titleID: "1",
@@ -217,7 +217,7 @@ export default {
           parent: "customer_id",
           children: null,
           name: "TYPE OF USER2",
-          cells: [
+          teseCaseValues: [
             {
               id: "dasmdas;lmdas;lmd;asdmas6",
               titleID: "1",
@@ -258,7 +258,7 @@ export default {
           children: null,
           level: 0,
           name: "THE ACCOUNT BALANCE SHOULD BE ${ENDING_BALANCE}",
-          cells: [
+          teseCaseValues: [
             {
               id: "lmsdl,fl;d,sf,sdf;sd,762b",
               titleID: "1",
@@ -292,7 +292,7 @@ export default {
           children: null,
           level: 0,
           name: "THE CARD SHOULD BE RETURNED",
-          cells: [
+          teseCaseValues: [
             {
               id: "fdfndsljfdslf8dsf8ds",
               titleID: "1",
