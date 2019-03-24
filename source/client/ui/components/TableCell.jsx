@@ -30,7 +30,7 @@ class TableCell extends React.Component {
       <React.Fragment>
 
         {
-          this.sortCells(condition.teseCaseValues, table.testCaseNames).map(cell => {
+          this.sortCells(condition.testCaseValues, table.testCaseNames).map(cell => {
             return (
               <td
                 key={cell.id}

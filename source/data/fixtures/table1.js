@@ -39,7 +39,7 @@ export default {
           parent: null,
           children: null,
           name: "TEST DESIGNER",
-          teseCaseValues: [
+          testCaseValues: [
             {
               id: "122121",
               titleID: "1",
@@ -79,7 +79,7 @@ export default {
           parent: null,
           children: null,
           name: "CONTACT PERSON",
-          teseCaseValues: [
+          testCaseValues: [
             {
               id: "bdssdbsdb",
               titleID: "1",
@@ -126,7 +126,7 @@ export default {
           parent: null,
           children: "type_of_user_id",
           name: "CUSTOMER",
-          teseCaseValues: [
+          testCaseValues: [
             {
               id: "99",
               titleID: "1",
@@ -166,7 +166,7 @@ export default {
           parent: "customer_id",
           children: "username_id",
           name: "TYPE OF USER",
-          teseCaseValues: [
+          testCaseValues: [
             {
               id: "tqqt22",
               titleID: "1",
@@ -206,7 +206,7 @@ export default {
           parent: "type_of_user_id",
           children: null,
           name: "USERNAME",
-          teseCaseValues: [
+          testCaseValues: [
             {
               id: "2jjky9",
               titleID: "1",
@@ -246,7 +246,7 @@ export default {
           parent: "customer_id",
           children: null,
           name: "TYPE OF USER2",
-          teseCaseValues: [
+          testCaseValues: [
             {
               id: "dasmdas;lmdas;lmd;asdmas6",
               titleID: "1",
@@ -292,7 +292,7 @@ export default {
           children: null,
           level: 0,
           name: "THE ACCOUNT BALANCE SHOULD BE ${ENDING_BALANCE}",
-          teseCaseValues: [
+          testCaseValues: [
             {
               id: "lmsdl,fl;d,sf,sdf;sd,762b",
               titleID: "1",
@@ -331,7 +331,7 @@ export default {
           children: null,
           level: 0,
           name: "THE CARD SHOULD BE RETURNED",
-          teseCaseValues: [
+          testCaseValues: [
             {
               id: "fdfndsljfdslf8dsf8ds",
               titleID: "1",
