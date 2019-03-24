@@ -6,6 +6,8 @@ import "../../css/App.css";
 import TableTitlesTop from "./TableTitlesTop";
 import TableTitlesLeft from "./TableTitlesLeft";
 
+import {Tables} from "../../../data/collections-init";
+
 class Table extends React.Component {
 
   state = {
@@ -18,7 +20,7 @@ class Table extends React.Component {
 
     let arr = this.state.cellEditInputs;
     arr.forEach(item => {
-      if (item.id === cell.id) {
+      if (item.cellID === cell.id) {
         item.value = e.target.value;
       }
     });
@@ -27,15 +29,18 @@ class Table extends React.Component {
     });
   };
 
-  editCell = (e, cell) => {
+  editCell = (e, cell, tableID, conditionID) => {
     e.stopPropagation();
 
-    if (!_.find(this.state.cellEditInputs, {id: cell.id})) {
+    if (!_.find(this.state.cellEditInputs, {cellID: cell.id})) {
       this.setState(prevState => ({
         cellEditInputs: [
           ...prevState.cellEditInputs,
           {
-            id: cell.id,
+            tableID,
+            conditionID,
+            cellID: cell.id,
+            titleID: cell.titleID,
             value: cell.name,
           },
         ],
@@ -70,6 +75,10 @@ class Table extends React.Component {
   };
 
   saveCellsChanges = () => {
+    this.state.cellEditInputs.forEach(cell => {
+      Tables.update({_id : cell.cellID},{$set: cell});
+    });
+
     this.setState({cellEditInputs: []});
     console.info("Saving Changes...", this.state.cellEditInputs);
   };

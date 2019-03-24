@@ -35,15 +35,15 @@ class TableCell extends React.Component {
               <td
                 key={cell.id}
                 className={`cell cell_custom cell_${systemBehaviourName}`}
-                onClick={(e) => editCell(e, cell)}>
+                onClick={(e) => editCell(e, cell, table._id, condition.id)}>
                 {
-                  _.find(cellEditInputs, {id: cell.id}) ?
+                  _.find(cellEditInputs, {cellID: cell.id}) ?
                     <textarea
                       type="text"
                       autoFocus
                       className="cell_input"
                       onChange={(e) => onChangeInputCell(e, cell)}
-                      value={_.get(_.find(cellEditInputs, {id: cell.id}), "value")}/> :
+                      value={_.get(_.find(cellEditInputs, {cellID: cell.id}), "value")}/> :
                     <p>{(cell.name && cell.name.length > 0) ? cell.name :
                       <span>+</span>}</p>
                 }

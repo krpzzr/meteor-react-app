@@ -24,14 +24,14 @@ class TableTitlesTop extends React.Component {
                 onClick={(e) => editCell(e, title)}
               >
                 {
-                  _.find(cellEditInputs, {id: title.id}) ?
+                  _.find(cellEditInputs, {cellID: title.id}) ?
                     <textarea
                       type="text"
                       autoFocus
                       style={{resize: 'none'}}
                       className="cell_input"
                       onChange={(e) => onChangeInputCell(e, title)}
-                      value={_.get(_.find(cellEditInputs, {id: title.id}), "value").toUpperCase()}/> :
+                      value={_.get(_.find(cellEditInputs, {cellID: title.id}), "value").toUpperCase()}/> :
                     <p>
                       {
                         title.name && title.name.length > 0 ? title.name.toUpperCase() :
