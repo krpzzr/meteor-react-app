@@ -1,5 +1,6 @@
 import React from "react";
 import {withTracker} from "meteor/react-meteor-data";
+import * as _ from "lodash";
 
 import Table from "./components/Table";
 
@@ -46,41 +47,82 @@ class App extends React.Component {
   };
 
   createColumn = (tableID, testCaseName, cells) => {
+    let ID = function () {
+      return "_" + Math.random().toString(36).substr(2, 9);
+    };
+    let id = ID();
     let arr = this.state.tables;
+    let oldLength = [];
 
     arr.forEach(table => {
-      if (table.id === tableID) {
+      if (table._id === tableID) {
         table.testCaseNames.push({
-          id: '1488',
-          name: testCaseName
+          id: id,
+          name: testCaseName,
         });
 
         table.attributes.forEach(attr => {
           attr.conditions.forEach(cond => {
-
             cells.forEach(cell => {
-              if (cell.id === cond.id) {
-                cond.testCaseValues.push({
-                  id: '228',
-                  titleID: '1488',
-                  name: cell.name
-                })
-              } else {
-                cond.testCaseValues.push({
-                  id: '224',
-                  titleID: '1488',
-                  name: ''
-                })
-              }
-            })
 
-          })
-        })
+              if (cell.conditionID === cond.id) {
+                oldLength.push({
+                  id: cond.id,
+                });
+
+                cond.testCaseValues.push({
+                  id: ID(),
+                  titleID: id,
+                  name: cell.value,
+                });
+              }
+
+            });
+          });
+        });
       }
+    });
+
+    arr.forEach(table => {
+      if (table._id === tableID) {
+
+        table.attributes.forEach(attr => {
+          attr.conditions.forEach(cond => {
+            cells.forEach(() => {
+
+              if (!_.find(oldLength, {id: cond.id})) {
+                oldLength.push({
+                  id: cond.id,
+                });
+
+                cond.testCaseValues.push({
+                  id: ID(),
+                  titleID: id,
+                  name: "",
+                });
+              }
+
+            });
+          });
+        });
+
+      }
+    });
+
+    this.setState({
+      tables: arr,
     });
   };
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps", nextProps);
+    const tables = this.props.tables.find({}).fetch();
+
+    this.setState({tables});
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
     const tables = this.props.tables.find({}).fetch();
 
     this.setState({tables});

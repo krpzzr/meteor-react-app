@@ -62,7 +62,7 @@ class TableCell extends React.Component {
                 autoFocus
                 className="cell_input"
                 onChange={(e) => onChangeInputCreateCell(e, condition.id)}
-                value={_.get(_.find(cellCreateInputs, {id: condition.id}), "value")}/> :
+                value={_.get(_.find(cellCreateInputs, {conditionID: condition.id}), "value")}/> :
               <p><span>+</span></p>
           }
         </td>

@@ -13,7 +13,7 @@ class Table extends React.Component {
     openTables: [],
     cellCreateInputs: [],
     tables: [],
-    testCaseName: null,
+    testCaseName: "",
     isShownTextarea: false
   };
 
@@ -36,7 +36,7 @@ class Table extends React.Component {
 
     let arr = this.state.cellCreateInputs;
     arr.forEach(item => {
-      if (item.id === id) {
+      if (item.conditionID === id) {
         item.value = e.target.value;
       }
     });
