@@ -14,7 +14,6 @@ class App extends React.Component {
 
   render() {
     const tables = this.props.tables.find({}).fetch();
-    console.log(tables);
 
     return (
       <div className="container">

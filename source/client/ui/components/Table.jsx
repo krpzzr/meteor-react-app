@@ -75,12 +75,8 @@ class Table extends React.Component {
   };
 
   saveCellsChanges = () => {
-    this.state.cellEditInputs.forEach(cell => {
-      Tables.update({_id : cell.cellID},{$set: cell});
-    });
-
-    this.setState({cellEditInputs: []});
     console.info("Saving Changes...", this.state.cellEditInputs);
+    this.setState({cellEditInputs: []});
   };
 
   cancelChanges = () => {
