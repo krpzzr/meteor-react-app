@@ -17,11 +17,7 @@ export default {
     {
       id: "4",
       name: "WITHDRAW 30 FROM MASTERCARD",
-    },
-    {
-      id: "5",
-      name: "",
-    },
+    }
   ],
   attributes: [
     {
@@ -56,11 +52,6 @@ export default {
               titleID: "4",
               name: "",
             },
-            {
-              id: "h34h4h3",
-              titleID: "5",
-              name: "",
-            },
           ],
         },
 
@@ -89,11 +80,6 @@ export default {
             {
               id: "dfm;sdfl;sd;6765765",
               titleID: "4",
-              name: "",
-            },
-            {
-              id: "dfds.f.ds/f,.5645645",
-              titleID: "5",
               name: "",
             },
           ],
@@ -133,11 +119,6 @@ export default {
               titleID: "4",
               name: "",
             },
-            {
-              id: "gdfgdf,g'df,gfd6463",
-              titleID: "5",
-              name: "",
-            },
           ],
         },
 
@@ -166,11 +147,6 @@ export default {
             {
               id: "plekekmvdkmdlks;6",
               titleID: "4",
-              name: "",
-            },
-            {
-              id: "c,'sc,scopdmme7778",
-              titleID: "5",
               name: "",
             },
           ],
@@ -203,11 +179,6 @@ export default {
               titleID: "4",
               name: "",
             },
-            {
-              id: "dmfklsdfsdfldsfsd;0797",
-              titleID: "5",
-              name: "",
-            },
           ],
         },
 
@@ -226,11 +197,6 @@ export default {
             {
               id: "as,,f,g,,74",
               titleID: "2",
-              name: "",
-            },
-            {
-              id: "kwnfkwenflkcmvkler5",
-              titleID: "5",
               name: "",
             },
             {
@@ -279,11 +245,6 @@ export default {
               titleID: "4",
               name: "",
             },
-            {
-              id: "fdsmfndsmfkldsmf74849454",
-              titleID: "5",
-              name: "",
-            },
           ],
         },
         {
@@ -311,11 +272,6 @@ export default {
             {
               id: "dsfjsdklflkdsfds-345345",
               titleID: "4",
-              name: "",
-            },
-            {
-              id: "dfdsfmdsmf;dslfdsf--404404d",
-              titleID: "5",
               name: "",
             },
           ],

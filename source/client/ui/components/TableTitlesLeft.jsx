@@ -24,7 +24,7 @@ class TableTitlesLeft extends React.Component {
   };
 
   render() {
-    const {table, cellEditInputs, editCell, onChangeInputCell} = this.props;
+    const {table, cellEditInputs, editCell, onChangeInputCell, cellCreateInputs, onChangeInputCreateCell, createCell} = this.props;
 
     return (
 
@@ -57,6 +57,9 @@ class TableTitlesLeft extends React.Component {
                             cellEditInputs={cellEditInputs}
                             editCell={editCell}
                             onChangeInputCell={onChangeInputCell}
+                            cellCreateInputs={cellCreateInputs}
+                            onChangeInputCreateCell={onChangeInputCreateCell}
+                            createCell={createCell}
                           />
                         </tr>
                       </React.Fragment>

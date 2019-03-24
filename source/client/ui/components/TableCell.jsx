@@ -23,7 +23,7 @@ class TableCell extends React.Component {
   };
 
   render() {
-    const {condition, table, editCell, onChangeInputCell, cellEditInputs, systemBehaviourName} = this.props;
+    const {condition, table, editCell, onChangeInputCell, cellEditInputs, systemBehaviourName, onChangeInputCreateCell, cellCreateInputs, createCell} = this.props;
 
     return (
 
@@ -51,6 +51,21 @@ class TableCell extends React.Component {
             );
           })
         }
+        <td
+          className={`cell cell_custom cell_${systemBehaviourName}`}
+          onClick={(e) => createCell(e, table._id, condition.id)}
+        >
+          {
+            _.find(cellCreateInputs, {conditionID: condition.id}) ?
+              <textarea
+                type="text"
+                autoFocus
+                className="cell_input"
+                onChange={(e) => onChangeInputCreateCell(e, condition.id)}
+                value={_.get(_.find(cellCreateInputs, {id: condition.id}), "value")}/> :
+              <p><span>+</span></p>
+          }
+        </td>
       </React.Fragment>
 
     );

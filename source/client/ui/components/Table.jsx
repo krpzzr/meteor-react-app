@@ -6,14 +6,15 @@ import "../../css/App.css";
 import TableTitlesTop from "./TableTitlesTop";
 import TableTitlesLeft from "./TableTitlesLeft";
 
-import {Tables} from "../../../data/collections-init";
-
 class Table extends React.Component {
 
   state = {
     cellEditInputs: [],
     openTables: [],
-    tables: []
+    cellCreateInputs: [],
+    tables: [],
+    testCaseName: null,
+    isShownTextarea: false
   };
 
   onChangeInputCell = (e, cell) => {
@@ -30,8 +31,27 @@ class Table extends React.Component {
     });
   };
 
+  onChangeInputCreateCell = (e, id) => {
+    e.stopPropagation();
+
+    let arr = this.state.cellCreateInputs;
+    arr.forEach(item => {
+      if (item.id === id) {
+        item.value = e.target.value;
+      }
+    });
+    this.setState({
+      cellCreateInputs: arr,
+    });
+  };
+
   editCell = (e, cell, tableID, conditionID) => {
     e.stopPropagation();
+
+    if (this.state.cellCreateInputs.length > 0) {
+      alert("Please save or cancel previous changes");
+      return;
+    }
 
     if (!_.find(this.state.cellEditInputs, {cellID: cell.id})) {
       this.setState(prevState => ({
@@ -48,6 +68,36 @@ class Table extends React.Component {
       }));
 
     }
+  };
+
+  showTextarea = () => {
+    this.setState({
+      isShownTextarea: true
+    })
+  };
+
+  createCell = (e, tableID, conditionID) => {
+    e.stopPropagation();
+
+    if (this.state.cellEditInputs.length > 0) {
+      alert("Please save or cancel previous changes");
+      return;
+    }
+
+    if (!_.find(this.state.cellCreateInputs, {conditionID: conditionID})) {
+      this.setState(prevState => ({
+        cellCreateInputs: [
+          ...prevState.cellCreateInputs,
+          {
+            tableID,
+            conditionID,
+            value: "",
+          },
+        ],
+      }));
+
+    }
+
   };
 
   onTableDropdown = (e, table) => {
@@ -86,6 +136,29 @@ class Table extends React.Component {
     console.info("Changes Canceled");
   };
 
+  addColumn = () => {
+    this.props.createColumn(this.props.table._id, this.state.testCaseName, this.state.cellCreateInputs);
+    console.info("Add column...", this.state.cellCreateInputs);
+    this.setState({
+      cellCreateInputs: [],
+      isShownTextarea: false
+    });
+  };
+
+  cancelColumnChanges = () => {
+    this.setState({
+      cellCreateInputs: [],
+      isShownTextarea: false
+    });
+    console.info("Canceled");
+  };
+
+  onChangeCaseName = (e) => {
+    this.setState({
+      testCaseName: e.target.value
+    })
+  };
+
   count = 1;
 
   render() {
@@ -108,6 +181,8 @@ class Table extends React.Component {
               onChangeInputCell={this.onChangeInputCell}
               editCell={this.editCell}
               cellEditInputs={this.state.cellEditInputs}
+              testCaseName={this.state.testCaseName}
+              isShownTextarea={this.state.isShownTextarea}
             />
             <TableTitlesLeft
               table={table}
@@ -115,6 +190,9 @@ class Table extends React.Component {
               onChangeInputCell={this.onChangeInputCell}
               editCell={this.editCell}
               cellEditInputs={this.state.cellEditInputs}
+              onChangeInputCreateCell={this.onChangeInputCreateCell}
+              cellCreateInputs={this.state.cellCreateInputs}
+              createCell={this.createCell}
             />
 
             </tbody>
@@ -140,6 +218,29 @@ class Table extends React.Component {
               onClick={this.cancelChanges}
             >
               Cancel Changes
+            </button>
+          </div>
+        }
+
+        {
+          this.state.cellCreateInputs.length > 0 &&
+          <div style={{
+            backgroundColor: "#fff",
+            paddingBottom: 11,
+          }}>
+            <button
+              className="action_button"
+              style={{marginRight: 10}}
+              onClick={this.addColumn}
+            >
+              Add column
+            </button>
+            <button
+              className="action_button"
+              style={{marginLeft: 10}}
+              onClick={this.cancelColumnChanges}
+            >
+              Cancel
             </button>
           </div>
         }

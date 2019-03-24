@@ -16,7 +16,7 @@ class App extends React.Component {
     tables: [],
   };
 
-  updateCells = (cells) => {
+  updateCells = cells => {
     let arr = this.state.tables;
 
     cells.forEach(cell => {
@@ -43,6 +43,41 @@ class App extends React.Component {
     });
 
     this.setState({tables: arr});
+  };
+
+  createColumn = (tableID, testCaseName, cells) => {
+    let arr = this.state.tables;
+
+    arr.forEach(table => {
+      if (table.id === tableID) {
+        table.testCaseNames.push({
+          id: '1488',
+          name: testCaseName
+        });
+
+        table.attributes.forEach(attr => {
+          attr.conditions.forEach(cond => {
+
+            cells.forEach(cell => {
+              if (cell.id === cond.id) {
+                cond.testCaseValues.push({
+                  id: '228',
+                  titleID: '1488',
+                  name: cell.name
+                })
+              } else {
+                cond.testCaseValues.push({
+                  id: '224',
+                  titleID: '1488',
+                  name: ''
+                })
+              }
+            })
+
+          })
+        })
+      }
+    });
   };
 
   componentWillReceiveProps() {
@@ -127,6 +162,7 @@ class App extends React.Component {
                       key={table.id}
                       table={table}
                       updateCells={this.updateCells}
+                      createColumn={this.createColumn}
                     />
                   );
                 }) :
