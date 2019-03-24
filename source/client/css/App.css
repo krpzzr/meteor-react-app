@@ -98,6 +98,7 @@ caption.active span::after {
     border-bottom: 1px solid #000;
     text-align: center;
     min-width: 188px;
+    word-break: break-word;
 }
 
 .table-title p {
@@ -124,12 +125,14 @@ caption.active span::after {
     text-align: center;
     height: 76px;
     word-break: break-word;
+    max-width: 300px;
 }
 
 .cell_custom p {
     height: 100%;
     overflow-y: auto;
     padding-right: 15px;
+    padding-left: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -175,7 +178,7 @@ caption.active span::after {
 }
 
 .GIVEN-cell-prop, .WHEN-cell-prop, .THEN-cell-prop {
-    width: 420px;
+    min-width: 420px;
     font-weight: 400;
 }
 

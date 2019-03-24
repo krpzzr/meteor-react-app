@@ -34,7 +34,7 @@ class TableTitlesTop extends React.Component {
                       value={_.get(_.find(cellEditInputs, {id: title.id}), "value").toUpperCase()}/> :
                     <p>
                       {
-                        title.name && title.name.length > 0 ? title.name :
+                        title.name && title.name.length > 0 ? title.name.toUpperCase() :
                           <svg style={{
                             width: 30,
                             height: 30,
