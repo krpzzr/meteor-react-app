@@ -13,6 +13,7 @@ class Table extends React.Component {
   state = {
     cellEditInputs: [],
     openTables: [],
+    tables: []
   };
 
   onChangeInputCell = (e, cell) => {
@@ -75,6 +76,7 @@ class Table extends React.Component {
   };
 
   saveCellsChanges = () => {
+    this.props.updateCells(this.state.cellEditInputs);
     console.info("Saving Changes...", this.state.cellEditInputs);
     this.setState({cellEditInputs: []});
   };

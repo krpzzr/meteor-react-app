@@ -12,9 +12,46 @@ this.Tables = Tables;
 
 class App extends React.Component {
 
-  render() {
+  state = {
+    tables: [],
+  };
+
+  updateCells = (cells) => {
+    let arr = this.state.tables;
+
+    cells.forEach(cell => {
+
+      arr.forEach(table => {
+
+        if (cell.tableID === table._id) {
+          table.attributes.forEach(attr => {
+            attr.conditions.forEach(cond => {
+              if (cond.id === cell.conditionID) {
+                cond.testCaseValues.forEach(tcv => {
+                  if (tcv.id === cell.cellID) {
+                    tcv.name = cell.value;
+                  }
+
+                });
+              }
+            });
+          });
+        }
+
+      });
+
+    });
+
+    this.setState({tables: arr});
+  };
+
+  componentWillReceiveProps() {
     const tables = this.props.tables.find({}).fetch();
 
+    this.setState({tables});
+  }
+
+  render() {
     return (
       <div className="container">
 
@@ -83,12 +120,13 @@ class App extends React.Component {
 
           <div className="row">
             {
-              tables.length > 0 ?
-                tables.map(table => {
+              this.state.tables.length > 0 ?
+                this.state.tables.map(table => {
                   return (
                     <Table
                       key={table.id}
                       table={table}
+                      updateCells={this.updateCells}
                     />
                   );
                 }) :
