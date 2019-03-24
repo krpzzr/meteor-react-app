@@ -58,7 +58,7 @@ class App extends React.Component {
       if (table._id === tableID) {
         table.testCaseNames.push({
           id: id,
-          name: "new row",
+          name: "new column title",
         });
 
         table.attributes.forEach(attr => {
