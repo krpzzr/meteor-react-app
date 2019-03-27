@@ -201,53 +201,53 @@ class Table extends React.Component {
             }
           </table>
 
-          {
-            this.state.cellEditInputs.length > 0 &&
-            <div style={{
-              backgroundColor: "#fff",
-              paddingBottom: 11,
-            }}>
-              <button
-                className="action_button"
-                style={{marginRight: 10}}
-                onClick={this.saveCellsChanges}
-              >
-                Save Changes
-              </button>
-              <button
-                className="action_button"
-                style={{marginLeft: 10}}
-                onClick={this.cancelChanges}
-              >
-                Cancel Changes
-              </button>
-            </div>
-          }
-
-          {
-            this.state.cellCreateInputs.length > 0 &&
-            <div style={{
-              backgroundColor: "#fff",
-              paddingBottom: 11,
-            }}>
-              <button
-                className="action_button"
-                style={{marginRight: 10}}
-                onClick={this.addColumn}
-              >
-                Add column
-              </button>
-              <button
-                className="action_button"
-                style={{marginLeft: 10}}
-                onClick={this.cancelColumnChanges}
-              >
-                Cancel
-              </button>
-            </div>
-          }
-
         </div>
+
+        {
+          this.state.cellEditInputs.length > 0 &&
+          <div style={{
+            paddingBottom: 11,
+            marginTop: 15
+          }}>
+            <button
+              className="action_button"
+              style={{marginRight: 10}}
+              onClick={this.saveCellsChanges}
+            >
+              Save Changes
+            </button>
+            <button
+              className="action_button"
+              style={{marginLeft: 10}}
+              onClick={this.cancelChanges}
+            >
+              Cancel Changes
+            </button>
+          </div>
+        }
+
+        {
+          this.state.cellCreateInputs.length > 0 &&
+          <div style={{
+            paddingBottom: 11,
+            marginTop: 15
+          }}>
+            <button
+              className="action_button"
+              style={{marginRight: 10}}
+              onClick={this.addColumn}
+            >
+              Add column
+            </button>
+            <button
+              className="action_button"
+              style={{marginLeft: 10}}
+              onClick={this.cancelColumnChanges}
+            >
+              Cancel
+            </button>
+          </div>
+        }
       </React.Fragment>
     );
   }
