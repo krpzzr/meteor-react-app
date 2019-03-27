@@ -54,7 +54,7 @@ table {
     width: 100%;
 }
 
-caption {
+.table_name {
     cursor: pointer;
     background-color: #BABAB9;
     margin: 7px;
@@ -64,19 +64,20 @@ caption {
     color: #fff;
     font-weight: 300;
     user-select: none;
+    text-align: center;
 }
 
-caption.active {
+.table_name.active {
     color: #E85755;
     background-color: transparent;
     border-bottom: 1px solid #E85755;
 }
 
-caption span {
+.table_name span {
     position: relative;
 }
 
-caption span::after {
+.table_name span::after {
     content: '';
     position: absolute;
     right: -11px;
@@ -87,7 +88,7 @@ caption span::after {
     border-color: transparent transparent transparent #fff;
 }
 
-caption.active span::after {
+.table_name.active span::after {
     border-color: #E85755 transparent transparent transparent;
     border-width: 6px 6px 0 6px;
     right: -15px;
@@ -151,6 +152,7 @@ caption.active span::after {
     font-weight: normal;
     border: none;
     width: 50px;
+    font-weight: 300;
 }
 
 .cell.GIVEN-cell {
@@ -180,7 +182,9 @@ caption.active span::after {
 .GIVEN-cell-prop, .WHEN-cell-prop, .THEN-cell-prop {
     min-width: 420px;
     font-weight: 400;
+    position: relative;
 }
+
 
 .GIVEN-cell-prop p, .WHEN-cell-prop p, .THEN-cell-prop p {
     padding-left: 15px;

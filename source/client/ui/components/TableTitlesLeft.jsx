@@ -7,6 +7,10 @@ import TableCell from "./TableCell";
 
 class TableTitlesLeft extends React.Component {
 
+  state: {
+    result: []
+  };
+
   sortCells = (cells, titles) => {
     let arr = [];
 
@@ -23,9 +27,27 @@ class TableTitlesLeft extends React.Component {
     return arr;
   };
 
+
+  toFlatData = (node, result = [], curLevel = 0) => {
+    if (node.length) {
+      node.forEach(item => {
+        result.push(item);
+        item.level = curLevel;
+        curLevel++;
+
+        if (item.subconditions && item.subconditions.length > 0) {
+          this.toFlatData(item.subconditions, result, curLevel)
+        }
+        curLevel--
+      })
+    }
+    console.log(result)
+    return result;
+  };
+
   render() {
     const {table, cellEditInputs, editCell, onChangeInputCell, cellCreateInputs, onChangeInputCreateCell, createCell} = this.props;
-
+    console.log(this.result);
     return (
 
       <React.Fragment>
@@ -42,26 +64,32 @@ class TableTitlesLeft extends React.Component {
                   </th>
                 </tr>
                 {
-                  attribute.conditions.map(condition => {
+
+                  this.toFlatData(attribute.conditions).map(condition => {
                     return (
                       <React.Fragment key={condition.id}>
-                        <tr>
-                          <th className={`cell ${attribute.name}-cell-prop`} scope="row"
-                              style={{paddingLeft: condition.level * 33}}>
-                            <p>{condition.name}</p>
-                          </th>
-                          <TableCell
-                            systemBehaviourName={attribute.name}
-                            condition={condition}
-                            table={table}
-                            cellEditInputs={cellEditInputs}
-                            editCell={editCell}
-                            onChangeInputCell={onChangeInputCell}
-                            cellCreateInputs={cellCreateInputs}
-                            onChangeInputCreateCell={onChangeInputCreateCell}
-                            createCell={createCell}
-                          />
-                        </tr>
+
+                        {
+                          condition.level === 0 &&
+                          <tr>
+                            <th className={`cell ${attribute.name}-cell-prop`} scope="row"
+                                style={{paddingLeft: condition.level * 33}}>
+                              <p>{condition.name}</p>
+                            </th>
+                            <TableCell
+                              systemBehaviourName={attribute.name}
+                              condition={condition}
+                              table={table}
+                              cellEditInputs={cellEditInputs}
+                              editCell={editCell}
+                              onChangeInputCell={onChangeInputCell}
+                              cellCreateInputs={cellCreateInputs}
+                              onChangeInputCreateCell={onChangeInputCreateCell}
+                              createCell={createCell}
+                            />
+                          </tr>
+                        }
+
                       </React.Fragment>
                     );
                   })

@@ -27,10 +27,8 @@ export default {
 
         {
           id: "test_designer_id",
-          level: 0,
-          parent: null,
-          children: null,
           name: "TEST DESIGNER",
+          subconditions: [],
           testCaseValues: [
             {
               id: "122121",
@@ -57,10 +55,8 @@ export default {
 
         {
           id: "contact_person_id",
-          level: 0,
-          parent: null,
-          children: null,
           name: "CONTACT PERSON",
+          subconditions: [],
           testCaseValues: [
             {
               id: "bdssdbsdb",
@@ -94,10 +90,92 @@ export default {
 
         {
           id: "customer_id",
-          level: 0,
-          parent: null,
           children: "type_of_user_id",
           name: "CUSTOMER",
+          subconditions: [
+            {
+              id: "type_of_user_id",
+              name: "TYPE OF USER",
+              subconditions: [
+                {
+                  id: "username_id",
+                  name: "USERNAME",
+                  subconditions: [],
+                  testCaseValues: [
+                    {
+                      id: "2jjky9",
+                      titleID: "1",
+                      name: "MASTERCARD PLATINUM",
+                    },
+                    {
+                      id: "d;sa',d;sad;'asd,a'sd,",
+                      titleID: "2",
+                      name: "",
+                    },
+                    {
+                      id: "g;lds;glsdl;m666",
+                      titleID: "3",
+                      name: "",
+                    },
+                    {
+                      id: "ckwkfmwepfmwepfwef75",
+                      titleID: "4",
+                      name: "",
+                    },
+                  ],
+                },
+              ],
+              testCaseValues: [
+                {
+                  id: "tqqt22",
+                  titleID: "1",
+                  name: "MASTERCARD",
+                },
+                {
+                  id: "reg445645",
+                  titleID: "2",
+                  name: "MIR",
+                },
+                {
+                  id: "d;v,.ds;v,ds;fds;fdsf3",
+                  titleID: "3",
+                  name: "",
+                },
+                {
+                  id: "plekekmvdkmdlks;6",
+                  titleID: "4",
+                  name: "",
+                },
+              ],
+            },
+            {
+              id: "type_of_user_id2",
+              name: "TYPE OF USER2",
+              subconditions: [],
+              testCaseValues: [
+                {
+                  id: "dasmdas;lmdas;lmd;asdmas6",
+                  titleID: "1",
+                  name: "TEST1",
+                },
+                {
+                  id: "as,,f,g,,74",
+                  titleID: "2",
+                  name: "",
+                },
+                {
+                  id: "sdflsdf;ds,fdsl;35353",
+                  titleID: "3",
+                  name: "TEST2",
+                },
+                {
+                  id: "fsdf,sd,fl;dsf,;sd9876",
+                  titleID: "4",
+                  name: "",
+                },
+              ],
+            },
+          ],
           testCaseValues: [
             {
               id: "99",
@@ -121,97 +199,6 @@ export default {
             },
           ],
         },
-
-        {
-          id: "type_of_user_id",
-          level: 1,
-          parent: "customer_id",
-          children: "username_id",
-          name: "TYPE OF USER",
-          testCaseValues: [
-            {
-              id: "tqqt22",
-              titleID: "1",
-              name: "MASTERCARD",
-            },
-            {
-              id: "reg445645",
-              titleID: "2",
-              name: "MIR",
-            },
-            {
-              id: "d;v,.ds;v,ds;fds;fdsf3",
-              titleID: "3",
-              name: "",
-            },
-            {
-              id: "plekekmvdkmdlks;6",
-              titleID: "4",
-              name: "",
-            },
-          ],
-        },
-
-        {
-          id: "username_id",
-          level: 2,
-          parent: "type_of_user_id",
-          children: null,
-          name: "USERNAME",
-          testCaseValues: [
-            {
-              id: "2jjky9",
-              titleID: "1",
-              name: "MASTERCARD PLATINUM",
-            },
-            {
-              id: "d;sa',d;sad;'asd,a'sd,",
-              titleID: "2",
-              name: "",
-            },
-            {
-              id: "g;lds;glsdl;m666",
-              titleID: "3",
-              name: "",
-            },
-            {
-              id: "ckwkfmwepfmwepfwef75",
-              titleID: "4",
-              name: "",
-            },
-          ],
-        },
-
-        {
-          id: "type_of_user_id2",
-          level: 1,
-          parent: "customer_id",
-          children: null,
-          name: "TYPE OF USER2",
-          testCaseValues: [
-            {
-              id: "dasmdas;lmdas;lmd;asdmas6",
-              titleID: "1",
-              name: "TEST1",
-            },
-            {
-              id: "as,,f,g,,74",
-              titleID: "2",
-              name: "",
-            },
-            {
-              id: "sdflsdf;ds,fdsl;35353",
-              titleID: "3",
-              name: "TEST2",
-            },
-            {
-              id: "fsdf,sd,fl;dsf,;sd9876",
-              titleID: "4",
-              name: "",
-            },
-          ],
-        },
-
       ],
     },
     {
@@ -220,10 +207,8 @@ export default {
       conditions: [
         {
           id: "acc_be_should_id",
-          parent: null,
-          children: null,
-          level: 0,
           name: "THE ACCOUNT BALANCE SHOULD BE ${ENDING_BALANCE}",
+          subconditions: [],
           testCaseValues: [
             {
               id: "lmsdl,fl;d,sf,sdf;sd,762b",
@@ -249,10 +234,8 @@ export default {
         },
         {
           id: "the_card_should_returned_id",
-          parent: null,
-          children: null,
-          level: 0,
           name: "THE CARD SHOULD BE RETURNED",
+          subconditions: [],
           testCaseValues: [
             {
               id: "fdfndsljfdslf8dsf8ds",

@@ -14,7 +14,7 @@ class Table extends React.Component {
     cellCreateInputs: [],
     tables: [],
     testCaseName: "",
-    isShownTextarea: false
+    isShownTextarea: false,
   };
 
   onChangeInputCell = (e, cell) => {
@@ -72,8 +72,8 @@ class Table extends React.Component {
 
   showTextarea = () => {
     this.setState({
-      isShownTextarea: true
-    })
+      isShownTextarea: true,
+    });
   };
 
   createCell = (e, tableID, conditionID) => {
@@ -141,22 +141,22 @@ class Table extends React.Component {
     console.info("Add column...", this.state.cellCreateInputs);
     this.setState({
       cellCreateInputs: [],
-      isShownTextarea: false
+      isShownTextarea: false,
     });
   };
 
   cancelColumnChanges = () => {
     this.setState({
       cellCreateInputs: [],
-      isShownTextarea: false
+      isShownTextarea: false,
     });
     console.info("Canceled");
   };
 
   onChangeCaseName = (e) => {
     this.setState({
-      testCaseName: e.target.value
-    })
+      testCaseName: e.target.value,
+    });
   };
 
   count = 1;
@@ -165,87 +165,90 @@ class Table extends React.Component {
     const {table} = this.props;
 
     return (
+      <React.Fragment>
+        <div
+          className={_.find(this.state.openTables, {id: table.id}) ? "active table_name" : "table_name"}
+          onClick={(e) => this.onTableDropdown(e, table)}
+        >
+          <span>{table.name}</span>
+        </div>
+        <div style={{overflowX: "auto"}}>
+          <table>
+            {
+              _.find(this.state.openTables, {id: table.id}) &&
+              <tbody>
 
-      <div style={{overflowX: "auto"}}>
-        <table>
-          <caption className={_.find(this.state.openTables, {id: table.id}) ? "active" : ""}
-                   onClick={(e) => this.onTableDropdown(e, table)}>
-            <span>{table.name}</span>
-          </caption>
+              <TableTitlesTop
+                table={table}
+                onChangeInputCell={this.onChangeInputCell}
+                editCell={this.editCell}
+                cellEditInputs={this.state.cellEditInputs}
+                testCaseName={this.state.testCaseName}
+                isShownTextarea={this.state.isShownTextarea}
+              />
+              <TableTitlesLeft
+                table={table}
+                sortCells={this.sortCells}
+                onChangeInputCell={this.onChangeInputCell}
+                editCell={this.editCell}
+                cellEditInputs={this.state.cellEditInputs}
+                onChangeInputCreateCell={this.onChangeInputCreateCell}
+                cellCreateInputs={this.state.cellCreateInputs}
+                createCell={this.createCell}
+              />
+
+              </tbody>
+            }
+          </table>
+
           {
-            _.find(this.state.openTables, {id: table.id}) &&
-            <tbody>
-
-            <TableTitlesTop
-              table={table}
-              onChangeInputCell={this.onChangeInputCell}
-              editCell={this.editCell}
-              cellEditInputs={this.state.cellEditInputs}
-              testCaseName={this.state.testCaseName}
-              isShownTextarea={this.state.isShownTextarea}
-            />
-            <TableTitlesLeft
-              table={table}
-              sortCells={this.sortCells}
-              onChangeInputCell={this.onChangeInputCell}
-              editCell={this.editCell}
-              cellEditInputs={this.state.cellEditInputs}
-              onChangeInputCreateCell={this.onChangeInputCreateCell}
-              cellCreateInputs={this.state.cellCreateInputs}
-              createCell={this.createCell}
-            />
-
-            </tbody>
+            this.state.cellEditInputs.length > 0 &&
+            <div style={{
+              backgroundColor: "#fff",
+              paddingBottom: 11,
+            }}>
+              <button
+                className="action_button"
+                style={{marginRight: 10}}
+                onClick={this.saveCellsChanges}
+              >
+                Save Changes
+              </button>
+              <button
+                className="action_button"
+                style={{marginLeft: 10}}
+                onClick={this.cancelChanges}
+              >
+                Cancel Changes
+              </button>
+            </div>
           }
-        </table>
 
-        {
-          this.state.cellEditInputs.length > 0 &&
-          <div style={{
-            backgroundColor: "#fff",
-            paddingBottom: 11,
-          }}>
-            <button
-              className="action_button"
-              style={{marginRight: 10}}
-              onClick={this.saveCellsChanges}
-            >
-              Save Changes
-            </button>
-            <button
-              className="action_button"
-              style={{marginLeft: 10}}
-              onClick={this.cancelChanges}
-            >
-              Cancel Changes
-            </button>
-          </div>
-        }
+          {
+            this.state.cellCreateInputs.length > 0 &&
+            <div style={{
+              backgroundColor: "#fff",
+              paddingBottom: 11,
+            }}>
+              <button
+                className="action_button"
+                style={{marginRight: 10}}
+                onClick={this.addColumn}
+              >
+                Add column
+              </button>
+              <button
+                className="action_button"
+                style={{marginLeft: 10}}
+                onClick={this.cancelColumnChanges}
+              >
+                Cancel
+              </button>
+            </div>
+          }
 
-        {
-          this.state.cellCreateInputs.length > 0 &&
-          <div style={{
-            backgroundColor: "#fff",
-            paddingBottom: 11,
-          }}>
-            <button
-              className="action_button"
-              style={{marginRight: 10}}
-              onClick={this.addColumn}
-            >
-              Add column
-            </button>
-            <button
-              className="action_button"
-              style={{marginLeft: 10}}
-              onClick={this.cancelColumnChanges}
-            >
-              Cancel
-            </button>
-          </div>
-        }
-
-      </div>
+        </div>
+      </React.Fragment>
     );
   }
 }
