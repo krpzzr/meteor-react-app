@@ -7,8 +7,8 @@ import TableCell from "./TableCell";
 
 class TableTitlesLeft extends React.Component {
 
-  state: {
-    result: []
+  state = {
+    subconditionsShown: [],
   };
 
   sortCells = (cells, titles) => {
@@ -27,7 +27,6 @@ class TableTitlesLeft extends React.Component {
     return arr;
   };
 
-
   toFlatData = (node, result = [], curLevel = 0) => {
     if (node.length) {
       node.forEach(item => {
@@ -36,18 +35,74 @@ class TableTitlesLeft extends React.Component {
         curLevel++;
 
         if (item.subconditions && item.subconditions.length > 0) {
-          this.toFlatData(item.subconditions, result, curLevel)
+          this.toFlatData(item.subconditions, result, curLevel);
         }
-        curLevel--
-      })
+        curLevel--;
+      });
     }
-    console.log(result)
+
     return result;
+  };
+
+  subconditionShow = (e, condition) => {
+    e.stopPropagation();
+
+    let subconditionsShownID = [];
+    let include = false;
+
+    this.state.subconditionsShown.forEach(i => {
+      subconditionsShownID.push(i.subconditionID);
+    });
+    this.toFlatData(condition.subconditions).forEach(subcondition => {
+      if (subconditionsShownID.includes(subcondition.id)) {
+        this.setState({
+          subconditionsShown: this.state.subconditionsShown.filter(item => item.subconditionID !== subcondition.id),
+        });
+
+        include = true;
+      }
+    });
+
+    if (include) {
+      return;
+    }
+
+    condition.subconditions.forEach(subcondition => {
+      this.setState(prevState => ({
+        subconditionsShown: [
+          ...prevState.subconditionsShown,
+          {
+            conditionID: condition.id,
+            subconditionID: subcondition.id,
+          },
+        ],
+      }));
+
+    });
+
+  };
+
+  count = (conditions) => {
+    let count = 0;
+    this.state.subconditionsShown.forEach(i => {
+      this.toFlatData(conditions).forEach(attr => {
+        if (attr.id === i.subconditionID) {
+          count++;
+        }
+      });
+    });
+
+    return count;
   };
 
   render() {
     const {table, cellEditInputs, editCell, onChangeInputCell, cellCreateInputs, onChangeInputCreateCell, createCell} = this.props;
-    console.log(this.result);
+    let subconditionsShownID = [];
+    this.state.subconditionsShown.forEach(i => {
+      subconditionsShownID.push(i.subconditionID);
+    });
+    console.log(this.state.subconditionsShown);
+
     return (
 
       <React.Fragment>
@@ -57,11 +112,11 @@ class TableTitlesLeft extends React.Component {
             return (
               <React.Fragment key={attribute.id}>
                 <tr>
-                  <th className={`cell cell-given_when_then ${attribute.name}-cell`}
+                  <td className={`cell cell-given_when_then ${attribute.name}-cell`}
                       scope="rowgroup"
-                      rowSpan={attribute.conditions.length + 1}>
+                      rowSpan={attribute.conditions.length + 1 + this.count(attribute.conditions)}>
                     <p className="behaviourName">{attribute.name}</p>
-                  </th>
+                  </td>
                 </tr>
                 {
 
@@ -70,10 +125,13 @@ class TableTitlesLeft extends React.Component {
                       <React.Fragment key={condition.id}>
 
                         {
-                          condition.level === 0 &&
+                          (condition.level === 0 || subconditionsShownID.includes(condition.id)) &&
                           <tr>
-                            <th className={`cell ${attribute.name}-cell-prop`} scope="row"
-                                style={{paddingLeft: condition.level * 33}}>
+                            <th
+                              onClick={(e) => this.subconditionShow(e, condition)}
+                              className={`cell ${attribute.name}-cell-prop`}
+                              scope="row"
+                              style={{paddingLeft: condition.level * 33}}>
                               <p>{condition.name}</p>
                             </th>
                             <TableCell

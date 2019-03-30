@@ -182,6 +182,8 @@ table {
 .GIVEN-cell-prop, .WHEN-cell-prop, .THEN-cell-prop {
     min-width: 420px;
     font-weight: 400;
+    cursor: pointer;
+    user-select: none;
     position: relative;
 }
 
