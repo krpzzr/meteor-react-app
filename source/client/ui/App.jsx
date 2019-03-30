@@ -17,7 +17,7 @@ class App extends React.Component {
     tables: [],
   };
 
-  recursiveChangeCells = (node, cell = {}) => {
+  recursiveChangeCells = (node, cell) => {
     node.forEach(cond => {
       if (cond.id === cell.conditionID) {
 
@@ -29,7 +29,7 @@ class App extends React.Component {
 
       } else if (cond.subconditions && cond.subconditions.length > 0) {
 
-        this.recursiveChangeCells(cond.subconditions);
+        this.recursiveChangeCells(cond.subconditions, cell);
 
       }
     });
@@ -53,8 +53,8 @@ class App extends React.Component {
             titleID: id,
             name: cell.value,
           });
-        } else if (node.subconditions && node.subconditions.length > 0) {
-          this.recursiveChangeCells(node.subconditions, cells, oldLength);
+        } else if (cond.subconditions && cond.subconditions.length > 0) {
+          this.recursiveCreateCells(cond.subconditions, id, cells, oldLength);
         }
 
       });
@@ -79,8 +79,10 @@ class App extends React.Component {
           titleID: id,
           name: "",
         });
-      } else if (node.subconditions && node.subconditions.length > 0) {
-        this.recursiveChangeCells(node.subconditions, oldLength);
+      }
+
+      if (cond.subconditions && cond.subconditions.length > 0) {
+        this.recursiveCreateEmptyCells(cond.subconditions, id, oldLength);
       }
 
     });
@@ -143,14 +145,12 @@ class App extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps", nextProps);
     const tables = this.props.tables.find({}).fetch();
 
     this.setState({tables});
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
     const tables = this.props.tables.find({}).fetch();
 
     this.setState({tables});
