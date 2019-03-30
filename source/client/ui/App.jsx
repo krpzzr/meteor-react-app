@@ -17,6 +17,75 @@ class App extends React.Component {
     tables: [],
   };
 
+  recursiveChangeCells = (node, cell = {}) => {
+    node.forEach(cond => {
+      if (cond.id === cell.conditionID) {
+
+        cond.testCaseValues.forEach(tcv => {
+          if (tcv.id === cell.cellID) {
+            tcv.name = cell.value;
+          }
+        });
+
+      } else if (cond.subconditions && cond.subconditions.length > 0) {
+
+        this.recursiveChangeCells(cond.subconditions);
+
+      }
+    });
+  };
+
+  recursiveCreateCells = (node, id, cells, oldLength) => {
+    const ID = function () {
+      return "_" + Math.random().toString(36).substr(2, 9);
+    };
+
+    node.forEach(cond => {
+      cells.forEach(cell => {
+
+        if (cell.conditionID === cond.id) {
+          oldLength.push({
+            id: cond.id,
+          });
+
+          cond.testCaseValues.push({
+            id: ID(),
+            titleID: id,
+            name: cell.value,
+          });
+        } else if (node.subconditions && node.subconditions.length > 0) {
+          this.recursiveChangeCells(node.subconditions, cells, oldLength);
+        }
+
+      });
+
+    });
+  };
+
+  recursiveCreateEmptyCells = (node, id, oldLength) => {
+    const ID = function () {
+      return "_" + Math.random().toString(36).substr(2, 9);
+    };
+
+    node.forEach(cond => {
+
+      if (!_.find(oldLength, {id: cond.id})) {
+        oldLength.push({
+          id: cond.id,
+        });
+
+        cond.testCaseValues.push({
+          id: ID(),
+          titleID: id,
+          name: "",
+        });
+      } else if (node.subconditions && node.subconditions.length > 0) {
+        this.recursiveChangeCells(node.subconditions, oldLength);
+      }
+
+    });
+  };
+
   updateCells = cells => {
     let arr = this.state.tables;
 
@@ -26,16 +95,7 @@ class App extends React.Component {
 
         if (cell.tableID === table._id) {
           table.attributes.forEach(attr => {
-            attr.conditions.forEach(cond => {
-              if (cond.id === cell.conditionID) {
-                cond.testCaseValues.forEach(tcv => {
-                  if (tcv.id === cell.cellID) {
-                    tcv.name = cell.value;
-                  }
-
-                });
-              }
-            });
+            this.recursiveChangeCells(attr.conditions, cell);
           });
         }
 
@@ -47,7 +107,7 @@ class App extends React.Component {
   };
 
   createColumn = (tableID, testCaseName, cells) => {
-    let ID = function () {
+    const ID = function () {
       return "_" + Math.random().toString(36).substr(2, 9);
     };
     let id = ID();
@@ -62,24 +122,7 @@ class App extends React.Component {
         });
 
         table.attributes.forEach(attr => {
-          attr.conditions.forEach(cond => {
-            cells.forEach(cell => {
-
-              if (cell.conditionID === cond.id) {
-                oldLength.push({
-                  id: cond.id,
-                });
-
-                cond.testCaseValues.push({
-                  id: ID(),
-                  titleID: id,
-                  name: cell.value,
-                });
-              }
-
-            });
-
-          });
+          this.recursiveCreateCells(attr.conditions, id, cells, oldLength);
         });
       }
     });
@@ -88,23 +131,7 @@ class App extends React.Component {
       if (table._id === tableID) {
 
         table.attributes.forEach(attr => {
-          attr.conditions.forEach(cond => {
-            cells.forEach(() => {
-
-              if (!_.find(oldLength, {id: cond.id})) {
-                oldLength.push({
-                  id: cond.id,
-                });
-
-                cond.testCaseValues.push({
-                  id: ID(),
-                  titleID: id,
-                  name: "",
-                });
-              }
-
-            });
-          });
+          this.recursiveCreateEmptyCells(attr.conditions, id, oldLength);
         });
 
       }
