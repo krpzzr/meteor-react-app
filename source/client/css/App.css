@@ -1,3 +1,5 @@
+/* TABLE COMPONENTS */
+
 .container {
     margin-left: 15px;
     margin-right: 15px;
@@ -240,4 +242,60 @@ table {
     background-color: #532D7E;
     color: #fff;
     transition: all .25s ease;
+}
+
+/* TABLE CREATE COMPONENTS */
+
+.new_table_wrapper {
+    display: flex;
+    background-color: #fff;
+    padding-top: 36px;
+}
+
+.init_setup_wrapper {
+    width: 25%;
+    border: 1px solid #F1F1F1;
+    padding: 7px;
+}
+
+.init_attr_wrapper {
+    width: 75%;
+    border: 1px solid #F1F1F1;
+    padding: 7px;
+}
+
+.title_wrapper {
+    position: relative;
+    background-color: #fff;
+    bottom: 17px;
+    color: #C4C4C3;
+    text-transform: uppercase;
+    font-size: 20px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.input_wrapper {
+    display: flex;
+    flex-flow: column;
+    margin-top: 15px;
+    margin-bottom: 35px;
+    padding-left: 19px;
+    padding-right: 19px;
+}
+
+.input_wrapper label {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+}
+
+.input_wrapper input {
+    margin-top: 10px;
+    border: none;
+    border-bottom: 1px solid #000;
+    height: 30px;
+    width: 70%;
+    outline: none !important;
 }

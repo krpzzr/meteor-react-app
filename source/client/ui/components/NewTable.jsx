@@ -31,16 +31,19 @@ class NewTable extends React.Component {
             this.state.openTable &&
             <div className="new_table_wrapper">
               <div className="init_setup_wrapper">
-                <h3>STEP 1 – INITIAL SET UP</h3>
+                <span className="title_wrapper">STEP 1 – INITIAL SET UP</span>
 
-                <div>
+                <div className="input_wrapper">
                   <label htmlFor="table_name_input">TABLE NAME</label>
                   <input id="table_name_input" type="text"/>
                 </div>
                 <div>
-                  <div>
+                  <div className="input_wrapper">
                     <label htmlFor="columnTitle_name_input">COLUMN TITLES</label>
-                    <input id="columnTitle_name_input" type="text"/>
+                    <div>
+                      <input id="columnTitle_name_input" type="text"/>
+                      <button>+</button>
+                    </div>
                   </div>
                   <div>
                     <div>STRAIGHT THROUGH</div>
@@ -49,7 +52,7 @@ class NewTable extends React.Component {
               </div>
               <div className="init_attr_wrapper">
                 <div>
-                  <h3>STEP 2 – DEFINE YOUR GIVEN | WHEN | THEN</h3>
+                  <span className="title_wrapper">STEP 2 – DEFINE YOUR GIVEN | WHEN | THEN</span>
 
                   <div className="gwt_wrapper">
                     <div className="g_create_wrapper">
