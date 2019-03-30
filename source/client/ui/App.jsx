@@ -43,17 +43,20 @@ class App extends React.Component {
     node.forEach(cond => {
       cells.forEach(cell => {
 
-        if (cell.conditionID === cond.id) {
-          oldLength.push({
-            id: cond.id,
-          });
+        if (!_.find(oldLength, {id: cond.id})) {
+          if (cell.conditionID === cond.id) {
+            oldLength.push({
+              id: cond.id,
+            });
 
-          cond.testCaseValues.push({
-            id: ID(),
-            titleID: id,
-            name: cell.value,
-          });
-        } else if (cond.subconditions && cond.subconditions.length > 0) {
+            cond.testCaseValues.push({
+              id: ID(),
+              titleID: id,
+              name: cell.value,
+            });
+          }
+        }
+        if (cond.subconditions && cond.subconditions.length > 0) {
           this.recursiveCreateCells(cond.subconditions, id, cells, oldLength);
         }
 
@@ -68,7 +71,6 @@ class App extends React.Component {
     };
 
     node.forEach(cond => {
-
       if (!_.find(oldLength, {id: cond.id})) {
         oldLength.push({
           id: cond.id,

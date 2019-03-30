@@ -185,6 +185,7 @@ class Table extends React.Component {
                 cellEditInputs={this.state.cellEditInputs}
                 testCaseName={this.state.testCaseName}
                 isShownTextarea={this.state.isShownTextarea}
+                addColumn={this.addColumn}
               />
               <TableTitlesLeft
                 table={table}
@@ -232,13 +233,6 @@ class Table extends React.Component {
             paddingBottom: 11,
             marginTop: 15
           }}>
-            <button
-              className="action_button"
-              style={{marginRight: 10}}
-              onClick={this.addColumn}
-            >
-              Add column
-            </button>
             <button
               className="action_button"
               style={{marginLeft: 10}}

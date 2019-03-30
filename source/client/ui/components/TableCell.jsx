@@ -24,7 +24,6 @@ class TableCell extends React.Component {
 
   render() {
     const {condition, table, editCell, onChangeInputCell, cellEditInputs, systemBehaviourName, onChangeInputCreateCell, cellCreateInputs, createCell} = this.props;
-
     return (
 
       <React.Fragment>
