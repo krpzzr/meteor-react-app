@@ -33,11 +33,17 @@ class TableTitlesLeft extends React.Component {
         result.push(item);
         item.level = curLevel;
         curLevel++;
+        item.last = false;
 
         if (item.subconditions && item.subconditions.length > 0) {
+          item.last = false;
           this.toFlatData(item.subconditions, result, curLevel);
+        } else if (item.subconditions && item.subconditions.length === 0) {
+          item.last = true
         }
-        curLevel--;
+
+
+          curLevel--;
       });
     }
 
@@ -55,7 +61,6 @@ class TableTitlesLeft extends React.Component {
           subconditionsShown: prevState.subconditionsShown.filter(id => id !== subcondition.id),
         }));
 
-
         include = true;
       }
     });
@@ -68,7 +73,7 @@ class TableTitlesLeft extends React.Component {
       this.setState(prevState => ({
         subconditionsShown: [
           ...prevState.subconditionsShown,
-          subcondition.id
+          subcondition.id,
         ],
       }));
 
@@ -118,8 +123,20 @@ class TableTitlesLeft extends React.Component {
                               onClick={(e) => this.subconditionShow(e, condition)}
                               className={`cell ${attribute.name}-cell-prop`}
                               scope="row"
-                              style={{paddingLeft: condition.level * 33}}>
-                              <p>{condition.name}</p>
+                              style={{paddingLeft: condition.level * 33}}
+                              ref={ (thElement) => this.thElement = thElement}>
+                              <div>
+                                <div
+                                  style={{
+                                    borderWidth: `0 45px ${this.thElement ? this.thElement.clientHeight : 0}px ${(condition.last ? 0 : condition.level - 1) * 26}px`,
+                                    borderColor: `#fff ${condition.last ? "#fff" : "transparent"} #fff #fff`
+                                  }}
+                                  className={condition.level > 0 ? "triangle" : ""}
+                                ></div>
+                                <p>
+                                  {condition.name}
+                                </p>
+                              </div>
                             </th>
                             <TableCell
                               systemBehaviourName={attribute.name}

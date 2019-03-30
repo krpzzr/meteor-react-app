@@ -3,6 +3,7 @@ import {withTracker} from "meteor/react-meteor-data";
 import * as _ from "lodash";
 
 import Table from "./components/Table";
+import NewTable from "./components/NewTable";
 
 import "../css/App.css";
 
@@ -15,6 +16,7 @@ class App extends React.Component {
 
   state = {
     tables: [],
+    newTableShown: false,
   };
 
   recursiveChangeCells = (node, cell) => {
@@ -158,6 +160,12 @@ class App extends React.Component {
     this.setState({tables});
   }
 
+  createTable = () => {
+    this.setState({
+      newTableShown: true,
+    });
+  };
+
   render() {
     return (
       <div className="container">
@@ -166,7 +174,7 @@ class App extends React.Component {
           <div className="row">
             <div className="topButtons_wrapper">
               <div className="left_wr">
-                <button>
+                <button onClick={this.createTable}>
                   <svg style={{
                     width: 24,
                     height: 24,
@@ -227,18 +235,20 @@ class App extends React.Component {
 
           <div className="row">
             {
-              this.state.tables.length > 0 ?
-                this.state.tables.map(table => {
-                  return (
-                    <Table
-                      key={table.id}
-                      table={table}
-                      updateCells={this.updateCells}
-                      createColumn={this.createColumn}
-                    />
-                  );
-                }) :
-                "Loading data..."
+              this.state.tables.length > 0 &&
+              this.state.tables.map(table => {
+                return (
+                  <Table
+                    key={table.id}
+                    table={table}
+                    updateCells={this.updateCells}
+                    createColumn={this.createColumn}
+                  />
+                );
+              })
+            }
+            {
+              this.state.newTableShown && <NewTable/>
             }
           </div>
 

@@ -187,6 +187,14 @@ table {
     position: relative;
 }
 
+.triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 .GIVEN-cell-prop p, .WHEN-cell-prop p, .THEN-cell-prop p {
     padding-left: 15px;
