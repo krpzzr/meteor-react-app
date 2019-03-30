@@ -47,17 +47,14 @@ class TableTitlesLeft extends React.Component {
   subconditionShow = (e, condition) => {
     e.stopPropagation();
 
-    let subconditionsShownID = [];
     let include = false;
 
-    this.state.subconditionsShown.forEach(i => {
-      subconditionsShownID.push(i.subconditionID);
-    });
     this.toFlatData(condition.subconditions).forEach(subcondition => {
-      if (subconditionsShownID.includes(subcondition.id)) {
-        this.setState({
-          subconditionsShown: this.state.subconditionsShown.filter(item => item.subconditionID !== subcondition.id),
-        });
+      if (this.state.subconditionsShown.includes(subcondition.id)) {
+        this.setState(prevState => ({
+          subconditionsShown: prevState.subconditionsShown.filter(id => id !== subcondition.id),
+        }));
+
 
         include = true;
       }
@@ -71,10 +68,7 @@ class TableTitlesLeft extends React.Component {
       this.setState(prevState => ({
         subconditionsShown: [
           ...prevState.subconditionsShown,
-          {
-            conditionID: condition.id,
-            subconditionID: subcondition.id,
-          },
+          subcondition.id
         ],
       }));
 
@@ -84,12 +78,10 @@ class TableTitlesLeft extends React.Component {
 
   count = (conditions) => {
     let count = 0;
-    this.state.subconditionsShown.forEach(i => {
-      this.toFlatData(conditions).forEach(attr => {
-        if (attr.id === i.subconditionID) {
-          count++;
-        }
-      });
+    this.toFlatData(conditions).forEach(condition => {
+      if (this.state.subconditionsShown.includes(condition.id)) {
+        count++;
+      }
     });
 
     return count;
@@ -97,11 +89,6 @@ class TableTitlesLeft extends React.Component {
 
   render() {
     const {table, cellEditInputs, editCell, onChangeInputCell, cellCreateInputs, onChangeInputCreateCell, createCell} = this.props;
-    let subconditionsShownID = [];
-    this.state.subconditionsShown.forEach(i => {
-      subconditionsShownID.push(i.subconditionID);
-    });
-    console.log(this.state.subconditionsShown);
 
     return (
 
@@ -125,7 +112,7 @@ class TableTitlesLeft extends React.Component {
                       <React.Fragment key={condition.id}>
 
                         {
-                          (condition.level === 0 || subconditionsShownID.includes(condition.id)) &&
+                          (condition.level === 0 || this.state.subconditionsShown.includes(condition.id)) &&
                           <tr>
                             <th
                               onClick={(e) => this.subconditionShow(e, condition)}
