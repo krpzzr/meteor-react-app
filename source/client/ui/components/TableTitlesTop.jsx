@@ -6,7 +6,7 @@ import * as _ from "lodash";
 class TableTitlesTop extends React.Component {
 
   render() {
-    const {table, cellEditInputs, onChangeInputCell, editCell, testCaseName, onChangeCaseName, isShownTextarea, showTextarea, addColumn} = this.props;
+    const {table, titleEditInputs, onChangeInputTitile, editTitle, addColumn} = this.props;
 
     return (
 
@@ -21,17 +21,17 @@ class TableTitlesTop extends React.Component {
                 valign="bottom"
                 className="table-title"
                 scope="col"
-                onClick={(e) => editCell(e, title)}
+                onClick={(e) => editTitle(e, title, table._id)}
               >
                 {
-                  _.find(cellEditInputs, {cellID: title.id}) ?
+                  _.find(titleEditInputs, {id: title.id}) ?
                     <textarea
                       type="text"
                       autoFocus
                       style={{resize: "none"}}
                       className="cell_input"
-                      onChange={(e) => onChangeInputCell(e, title)}
-                      value={_.get(_.find(cellEditInputs, {cellID: title.id}), "value").toUpperCase()}/> :
+                      onChange={(e) => onChangeInputTitile(e, title)}
+                      value={_.get(_.find(titleEditInputs, {id: title.id}), "name").toUpperCase()}/> :
                     <p>
                       {
                         title.name && title.name.length > 0 ? title.name.toUpperCase() :
@@ -56,17 +56,17 @@ class TableTitlesTop extends React.Component {
         <th
           valign="bottom"
           className="table-title"
-          onClick={showTextarea}
+          // onClick={showTextarea}
         >
           {
-            isShownTextarea ?
-              <textarea
-                type="text"
-                autoFocus
-                style={{resize: "none"}}
-                className="cell_input"
-                onChange={onChangeCaseName}
-                value={testCaseName.toUpperCase()}/> :
+            // isShownTextarea ?
+            //   <textarea
+            //     type="text"
+            //     autoFocus
+            //     style={{resize: "none"}}
+            //     className="cell_input"
+            //     onChange={onChangeCaseName}
+            //     value={testCaseName.toUpperCase()}/> :
               <p>
                 <span
                   onClick={addColumn}

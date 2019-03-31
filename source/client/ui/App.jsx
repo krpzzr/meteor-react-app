@@ -148,6 +148,30 @@ class App extends React.Component {
     });
   };
 
+  updateTitles = titles => {
+    let arr = this.state.tables;
+
+    console.log(titles);
+
+    titles.forEach(title => {
+
+      arr.forEach(table => {
+
+        if (title.tableID === table._id) {
+          table.testCaseNames.forEach(i => {
+            if (i.id === title.id) {
+              i.name = title.name;
+            }
+          })
+        }
+
+      });
+
+    });
+
+    this.setState({tables: arr});
+  };
+
   componentWillReceiveProps(nextProps) {
     const tables = this.props.tables.find({}).fetch();
 
@@ -242,6 +266,7 @@ class App extends React.Component {
                     key={table.id}
                     table={table}
                     updateCells={this.updateCells}
+                    updateTitles={this.updateTitles}
                     createColumn={this.createColumn}
                   />
                 );

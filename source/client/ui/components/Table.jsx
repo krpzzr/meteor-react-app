@@ -10,6 +10,7 @@ class Table extends React.Component {
 
   state = {
     cellEditInputs: [],
+    titleEditInputs: [],
     openTables: [],
     cellCreateInputs: [],
     tables: [],
@@ -31,6 +32,43 @@ class Table extends React.Component {
     });
   };
 
+  onChangeInputTitile = (e, title) => {
+    e.stopPropagation();
+
+    let arr = this.state.titleEditInputs;
+    arr.forEach(item => {
+      if (item.id === title.id) {
+        item.name = e.target.value;
+      }
+    });
+    this.setState({
+      titleEditInputs: arr,
+    });
+  };
+
+  editTitle = (e, title, tableID) => {
+    e.stopPropagation();
+
+    if (this.state.cellCreateInputs.length > 0 || this.state.cellEditInputs.length > 0) {
+      alert("Please save or cancel previous changes");
+      return;
+    }
+
+    if (!_.find(this.state.titleEditInputs, {id: title.id})) {
+      this.setState(prevState => ({
+        titleEditInputs: [
+          ...prevState.titleEditInputs,
+          {
+            tableID,
+            id: title.id,
+            name: title.name,
+          },
+        ],
+      }));
+
+    }
+  };
+
   onChangeInputCreateCell = (e, id) => {
     e.stopPropagation();
 
@@ -48,7 +86,7 @@ class Table extends React.Component {
   editCell = (e, cell, tableID, conditionID) => {
     e.stopPropagation();
 
-    if (this.state.cellCreateInputs.length > 0) {
+    if (this.state.cellCreateInputs.length > 0 || this.state.titleEditInputs.length > 0) {
       alert("Please save or cancel previous changes");
       return;
     }
@@ -70,16 +108,10 @@ class Table extends React.Component {
     }
   };
 
-  showTextarea = () => {
-    this.setState({
-      isShownTextarea: true,
-    });
-  };
-
   createCell = (e, tableID, conditionID) => {
     e.stopPropagation();
 
-    if (this.state.cellEditInputs.length > 0) {
+    if (this.state.cellEditInputs.length > 0 || this.state.titleEditInputs.length > 0) {
       alert("Please save or cancel previous changes");
       return;
     }
@@ -125,41 +157,31 @@ class Table extends React.Component {
 
   };
 
+  saveTitleChanges = () => {
+    this.props.updateTitles(this.state.titleEditInputs);
+
+    this.cancelChanges();
+  };
+
   saveCellsChanges = () => {
     this.props.updateCells(this.state.cellEditInputs);
-    console.info("Saving Changes...", this.state.cellEditInputs);
-    this.setState({cellEditInputs: []});
+
+    this.cancelChanges()
   };
 
   cancelChanges = () => {
-    this.setState({cellEditInputs: []});
-    console.info("Changes Canceled");
+    this.setState({
+      cellEditInputs: [],
+      cellCreateInputs: [],
+      titleEditInputs: []
+    });
   };
 
   addColumn = () => {
     this.props.createColumn(this.props.table._id, this.state.testCaseName, this.state.cellCreateInputs);
-    console.info("Add column...", this.state.cellCreateInputs);
-    this.setState({
-      cellCreateInputs: [],
-      isShownTextarea: false,
-    });
-  };
 
-  cancelColumnChanges = () => {
-    this.setState({
-      cellCreateInputs: [],
-      isShownTextarea: false,
-    });
-    console.info("Canceled");
+    this.cancelChanges();
   };
-
-  onChangeCaseName = (e) => {
-    this.setState({
-      testCaseName: e.target.value,
-    });
-  };
-
-  count = 1;
 
   render() {
     const {table} = this.props;
@@ -180,11 +202,9 @@ class Table extends React.Component {
 
               <TableTitlesTop
                 table={table}
-                onChangeInputCell={this.onChangeInputCell}
-                editCell={this.editCell}
-                cellEditInputs={this.state.cellEditInputs}
-                testCaseName={this.state.testCaseName}
-                isShownTextarea={this.state.isShownTextarea}
+                onChangeInputTitile={this.onChangeInputTitile}
+                titleEditInputs={this.state.titleEditInputs}
+                editTitle={this.editTitle}
                 addColumn={this.addColumn}
               />
               <TableTitlesLeft
@@ -215,14 +235,37 @@ class Table extends React.Component {
               style={{marginRight: 10}}
               onClick={this.saveCellsChanges}
             >
-              Save Changes
+              Change Cells
             </button>
             <button
               className="action_button"
               style={{marginLeft: 10}}
               onClick={this.cancelChanges}
             >
-              Cancel Changes
+              Cancel
+            </button>
+          </div>
+        }
+
+        {
+          this.state.titleEditInputs.length > 0 &&
+          <div style={{
+            paddingBottom: 11,
+            marginTop: 15
+          }}>
+            <button
+              className="action_button"
+              style={{marginRight: 10}}
+              onClick={this.saveTitleChanges}
+            >
+              Change Titles
+            </button>
+            <button
+              className="action_button"
+              style={{marginLeft: 10}}
+              onClick={this.cancelChanges}
+            >
+              Cancel
             </button>
           </div>
         }
@@ -236,7 +279,7 @@ class Table extends React.Component {
             <button
               className="action_button"
               style={{marginLeft: 10}}
-              onClick={this.cancelColumnChanges}
+              onClick={this.cancelChanges}
             >
               Cancel
             </button>

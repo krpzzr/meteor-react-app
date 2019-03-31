@@ -200,6 +200,7 @@ table {
 
 .GIVEN-cell-prop p, .WHEN-cell-prop p, .THEN-cell-prop p {
     padding-left: 15px;
+    padding-right: 30px;
 }
 
 .GIVEN-cell-prop:hover, .cell_GIVEN:hover {
