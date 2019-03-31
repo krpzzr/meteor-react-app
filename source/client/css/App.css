@@ -344,3 +344,17 @@ i.condition_arrow {
     width: 70%;
     outline: none !important;
 }
+
+.gwt_wrapper {
+    display: flex;
+}
+
+.button_create_wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.columnTitles_list {
+    padding-left: 19px;
+    padding-right: 19px;
+}

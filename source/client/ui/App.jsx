@@ -190,6 +190,10 @@ class App extends React.Component {
     });
   };
 
+  addTable = (data) => {
+    let table;
+  };
+
   render() {
     return (
       <div className="container">
@@ -263,7 +267,7 @@ class App extends React.Component {
               this.state.tables.map(table => {
                 return (
                   <Table
-                    key={table.id}
+                    key={table._id}
                     table={table}
                     updateCells={this.updateCells}
                     updateTitles={this.updateTitles}

@@ -20,3 +20,7 @@ export function add_fixtures_if_needed(tablesCollection) {
 
   return void 0;
 }
+
+export function addTable(table) {
+  tablesCollection.insert(table);
+}

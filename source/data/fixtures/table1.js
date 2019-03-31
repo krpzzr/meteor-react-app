@@ -1,5 +1,4 @@
 export default {
-  id: "table1",
   name: "Table Name 1",
   testCaseNames: [
     {
