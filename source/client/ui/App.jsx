@@ -162,7 +162,7 @@ class App extends React.Component {
             if (i.id === title.id) {
               i.name = title.name;
             }
-          })
+          });
         }
 
       });
@@ -191,7 +191,91 @@ class App extends React.Component {
   };
 
   addTable = (data) => {
-    let table;
+    const ID = function () {
+      return "_" + Math.random().toString(36).substr(2, 9);
+    };
+    let table = {};
+    let testCaseValues = [];
+
+    table._id = ID();
+
+    table.name = data.tableName;
+
+    table.testCaseNames = [];
+    data.tableTitles.forEach(title => {
+      let id = ID();
+      table.testCaseNames.push({
+        id: id,
+        name: title.name,
+      });
+      testCaseValues.push({
+        id: ID(),
+        titleID: id,
+        name: "",
+      });
+    });
+
+    let givenConditions = [];
+    data.givenConditions.forEach(condition => {
+      givenConditions.push({
+        id: ID(),
+        name: condition.name,
+        subconditions: [],
+        testCaseValues: testCaseValues,
+      });
+    });
+
+    let whenConditions = [];
+    data.whenConditions.forEach(condition => {
+      whenConditions.push({
+        id: ID(),
+        name: condition.name,
+        subconditions: [],
+        testCaseValues: testCaseValues,
+      });
+    });
+
+    let thenConditions = [];
+    data.thenConditions.forEach(condition => {
+      thenConditions.push({
+        id: ID(),
+        name: condition.name,
+        subconditions: [],
+        testCaseValues: testCaseValues,
+      });
+    });
+
+    table.attributes = [
+      {
+        id: ID(),
+        name: "GIVEN",
+        conditions: givenConditions,
+      },
+      {
+        id: ID(),
+        name: "WHEN",
+        conditions: whenConditions,
+      },
+      {
+        id: ID(),
+        name: "THEN",
+        conditions: thenConditions,
+      },
+    ];
+
+    console.log(table)
+
+    this.setState(prevState => ({
+      tables: [
+        ...prevState.tables,
+        table
+      ]
+    }));
+
+  };
+
+  hideCreateTableComponent = () => {
+    this.setState({newTableShown: false});
   };
 
   render() {
@@ -277,7 +361,11 @@ class App extends React.Component {
               })
             }
             {
-              this.state.newTableShown && <NewTable/>
+              this.state.newTableShown &&
+              <NewTable
+                addTable={this.addTable}
+                hideCreateTableComponent={this.hideCreateTableComponent}
+              />
             }
           </div>
 

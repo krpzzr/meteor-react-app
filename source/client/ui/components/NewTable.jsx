@@ -93,6 +93,18 @@ class NewTable extends React.Component {
     }));
   };
 
+  createTable = () => {
+    let table = {};
+    table.tableName = this.state.tableName;
+    table.tableTitles = this.state.columnTitles;
+    table.givenConditions = this.state.givenAttributeArray;
+    table.whenConditions = this.state.whenAttributeArray;
+    table.thenConditions = this.state.thenAttributeArray;
+
+    this.props.addTable(table);
+    this.props.hideCreateTableComponent();
+  };
+
 
 
   render() {
@@ -136,8 +148,8 @@ class NewTable extends React.Component {
                   </div>
                   <div className="columnTitles_list">
                     {
-                      this.state.columnTitles.map(item => {
-                        return <div key={item.name}>{item.name}</div>
+                      this.state.columnTitles.map((item, index) => {
+                        return <div key={index}>{item.name}</div>
                       })
                     }
                   </div>
@@ -211,7 +223,9 @@ class NewTable extends React.Component {
                   </div>
 
                   <div className="button_create_wrapper">
-                    <button>CREATE TABLE</button>
+                    <button
+                      onClick={this.createTable}
+                    >CREATE TABLE</button>
                   </div>
                 </div>
               </div>
