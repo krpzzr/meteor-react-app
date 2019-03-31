@@ -126,15 +126,19 @@ class TableTitlesLeft extends React.Component {
                               style={{paddingLeft: condition.level * 33}}
                               ref={ (thElement) => this.thElement = thElement}>
                               <div>
-                                <div
-                                  style={{
-                                    borderWidth: `0 45px ${this.thElement ? this.thElement.clientHeight : 0}px ${(condition.last ? 0 : condition.level - 1) * 26}px`,
-                                    borderColor: `#fff ${condition.last ? "#fff" : "transparent"} #fff #fff`
-                                  }}
-                                  className={condition.level > 0 ? "triangle" : ""}
-                                ></div>
+                                {/*<div*/}
+                                  {/*style={{*/}
+                                    {/*borderWidth: `0 45px ${this.thElement ? this.thElement.clientHeight : 0}px ${(condition.last ? 0 : condition.level - 1) * 26}px`,*/}
+                                    {/*borderColor: `#fff ${condition.last ? "#fff" : "transparent"} #fff #fff`*/}
+                                  {/*}}*/}
+                                  {/*className={condition.level > 0 ? "triangle" : ""}*/}
+                                {/*></div>*/}
                                 <p>
                                   {condition.name}
+                                  {
+                                    condition.subconditions.length > 0 &&
+                                    <i className={`condition_arrow ${this.state.subconditionsShown.includes(condition.subconditions[0].id) ? "condition_arrow_up" : "condition_arrow_down"}`}></i>
+                                  }
                                 </p>
                               </div>
                             </th>

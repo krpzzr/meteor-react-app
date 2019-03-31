@@ -244,6 +244,50 @@ table {
     transition: all .25s ease;
 }
 
+.GIVEN-cell-prop i.condition_arrow {
+    border: solid #4F287B;
+    border-width: 0 2px 2px 0;
+}
+
+.WHEN-cell-prop i.condition_arrow {
+    border: solid #E85755;
+    border-width: 0 2px 2px 0;
+}
+
+.THEN-cell-prop i.condition_arrow {
+    border: solid #3EB775;
+    border-width: 0 2px 2px 0;
+}
+
+i.condition_arrow {
+    display: inline-block;
+    padding: 3px;
+    position: relative;
+    left: 10px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.condition_arrow_up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    bottom: -1px;
+}
+
+.condition_arrow_down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    bottom: 3px;
+}
+
 /* TABLE CREATE COMPONENTS */
 
 .new_table_wrapper {
