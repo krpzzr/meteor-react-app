@@ -195,7 +195,9 @@ class App extends React.Component {
       return "_" + Math.random().toString(36).substr(2, 9);
     };
     let table = {};
-    let testCaseValues = [];
+    let testCaseValuesGiven = [];
+    let testCaseValuesWhen = [];
+    let testCaseValuesThen = [];
 
     table._id = ID();
 
@@ -208,7 +210,17 @@ class App extends React.Component {
         id: id,
         name: title.name,
       });
-      testCaseValues.push({
+      testCaseValuesGiven.push({
+        id: ID(),
+        titleID: id,
+        name: "",
+      });
+      testCaseValuesWhen.push({
+        id: ID(),
+        titleID: id,
+        name: "",
+      });
+      testCaseValuesThen.push({
         id: ID(),
         titleID: id,
         name: "",
@@ -221,7 +233,7 @@ class App extends React.Component {
         id: ID(),
         name: condition.name,
         subconditions: [],
-        testCaseValues: testCaseValues,
+        testCaseValues: testCaseValuesGiven,
       });
     });
 
@@ -231,7 +243,7 @@ class App extends React.Component {
         id: ID(),
         name: condition.name,
         subconditions: [],
-        testCaseValues: testCaseValues,
+        testCaseValues: testCaseValuesWhen,
       });
     });
 
@@ -241,7 +253,7 @@ class App extends React.Component {
         id: ID(),
         name: condition.name,
         subconditions: [],
-        testCaseValues: testCaseValues,
+        testCaseValues: testCaseValuesThen,
       });
     });
 
