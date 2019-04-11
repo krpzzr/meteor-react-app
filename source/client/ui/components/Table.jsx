@@ -200,15 +200,19 @@ class Table extends React.Component {
               _.find(this.state.openTables, {id: table.id}) &&
               <tbody>
 
-              <TableTitlesTop
+              {/*<TableTitlesTop*/}
+                {/*table={table}*/}
+                {/*onChangeInputTitile={this.onChangeInputTitile}*/}
+                {/*titleEditInputs={this.state.titleEditInputs}*/}
+                {/*editTitle={this.editTitle}*/}
+                {/*addColumn={this.addColumn}*/}
+              {/*/>*/}
+              <TableTitlesLeft
                 table={table}
                 onChangeInputTitile={this.onChangeInputTitile}
                 titleEditInputs={this.state.titleEditInputs}
                 editTitle={this.editTitle}
                 addColumn={this.addColumn}
-              />
-              <TableTitlesLeft
-                table={table}
                 sortCells={this.sortCells}
                 onChangeInputCell={this.onChangeInputCell}
                 editCell={this.editCell}

@@ -151,8 +151,6 @@ class App extends React.Component {
   updateTitles = titles => {
     let arr = this.state.tables;
 
-    console.log(titles);
-
     titles.forEach(title => {
 
       arr.forEach(table => {
@@ -168,6 +166,10 @@ class App extends React.Component {
       });
 
     });
+
+
+
+
 
     this.setState({tables: arr});
   };
@@ -199,7 +201,7 @@ class App extends React.Component {
     let testCaseValuesWhen = [];
     let testCaseValuesThen = [];
 
-    table._id = ID();
+    // table._id = ID();
 
     table.name = data.tableName;
 
@@ -275,14 +277,7 @@ class App extends React.Component {
       },
     ];
 
-    console.log(table)
-
-    this.setState(prevState => ({
-      tables: [
-        ...prevState.tables,
-        table
-      ]
-    }));
+    Tables.insert(table);
 
   };
 
@@ -379,6 +374,7 @@ class App extends React.Component {
                 hideCreateTableComponent={this.hideCreateTableComponent}
               />
             }
+
           </div>
 
         </div>

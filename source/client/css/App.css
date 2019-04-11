@@ -51,6 +51,47 @@
     right: 8px;
 }
 
+.gwt_row {
+    display: flex;
+}
+
+.attr-cells_row {
+    display: flex;
+}
+
+.gwt_wrapper {
+    background-color: red;
+}
+
+.header {
+    height: 40px;
+    width: 200px;
+    flex: 0 0 200px;
+    border: 1px dashed #292518;
+}
+
+.gwt_wrapper, .empty_header-1 {
+    width: 50px;
+    min-width: 50px;
+    flex: 0 0 50px;
+}
+
+.attr, .empty_header-2 {
+    width: 420px;
+    border: 1px dashed #292518;
+    flex: 0 0 420px;
+}
+
+.table_headers {
+    display: flex;
+}
+
+.cells {
+    width: 200px;
+    flex: 0 0 200px;
+    border: 1px dashed #292518;
+}
+
 table {
     background-color: #fff;
     width: 100%;
@@ -189,6 +230,13 @@ table {
     position: relative;
 }
 
+.GIVEN-cell-prop > div, .WHEN-cell-prop > div, .THEN-cell-prop > div {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .triangle {
     width: 0;
     height: 0;
@@ -199,8 +247,7 @@ table {
 }
 
 .GIVEN-cell-prop p, .WHEN-cell-prop p, .THEN-cell-prop p {
-    padding-left: 15px;
-    padding-right: 30px;
+    margin: 0;
 }
 
 .GIVEN-cell-prop:hover, .cell_GIVEN:hover {
@@ -289,6 +336,19 @@ i.condition_arrow {
     bottom: 3px;
 }
 
+.combination_wrapper {
+    height: 420px;
+}
+
+.edit_button {
+    height: 60px;
+    width: 60px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
 /* TABLE CREATE COMPONENTS */
 
 .new_table_wrapper {
@@ -358,3 +418,6 @@ i.condition_arrow {
     padding-left: 19px;
     padding-right: 19px;
 }
+
+
+

@@ -56,17 +56,8 @@ class TableTitlesTop extends React.Component {
         <th
           valign="bottom"
           className="table-title"
-          // onClick={showTextarea}
         >
           {
-            // isShownTextarea ?
-            //   <textarea
-            //     type="text"
-            //     autoFocus
-            //     style={{resize: "none"}}
-            //     className="cell_input"
-            //     onChange={onChangeCaseName}
-            //     value={testCaseName.toUpperCase()}/> :
               <p>
                 <span
                   onClick={addColumn}
