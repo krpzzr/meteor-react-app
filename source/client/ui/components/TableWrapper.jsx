@@ -199,6 +199,7 @@ class TableWrapper extends React.Component {
                 onChangeInputCreateCell={this.onChangeInputCreateCell}
                 cellCreateInputs={this.state.cellCreateInputs}
                 createCell={this.createCell}
+                createInstance={this.props.createInstance}
               />
 
             }

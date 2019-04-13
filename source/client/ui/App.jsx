@@ -278,8 +278,45 @@ class App extends React.Component {
   };
 
   // Create INSTANCE
-  createInstance = (attributeID, conditionID, titleID, value) => {
 
+  recursiveCreateInstance = (node, conditionID, name) => {
+    const ID = function () {
+      return "_" + Math.random().toString(36).substr(2, 9);
+    };
+
+    node.forEach(cond => {
+      if (cond.id === conditionID) {
+
+        cond.instances.push({
+          id: ID(),
+          name,
+          subconditions: []
+        })
+
+      } else if (cond.subconditions && cond.subconditions.length > 0) {
+
+        this.recursiveCreateInstance(cond.subconditions, conditionID, name);
+
+      }
+    });
+  };
+
+  createInstance = (tableID, attributeID, conditionID, name) => {
+    let arr = this.state.tables;
+
+    arr.forEach(table => {
+
+      if (tableID === table._id) {
+        table.attributes.forEach(attr => {
+          if (attr.id === attributeID) {
+            this.recursiveCreateInstance(attr.conditions, conditionID, name);
+          }
+        });
+      }
+
+    });
+
+    this.setState({tables: arr});
   };
 
   // Create COMBINATION
@@ -365,6 +402,7 @@ class App extends React.Component {
                     updateCells={this.updateCells}
                     updateTitles={this.updateTitles}
                     createColumn={this.createColumn}
+                    createInstance={this.createInstance}
                   />
                 );
               })

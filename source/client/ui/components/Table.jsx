@@ -268,9 +268,11 @@ class Table extends React.Component {
                                   (combination.attributeID !== attribute.id)
                                 ) &&
                                 <CombinationWrapper
+                                  tableID={table._id}
                                   combination={combination}
                                   attribute={attribute}
                                   condition={condition}
+                                  createInstance={this.props.createInstance}
                                 />
                               }
 

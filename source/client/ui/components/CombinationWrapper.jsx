@@ -6,6 +6,16 @@ import "../../css/App.css";
 
 class CombinationWrapper extends React.Component {
 
+  state = {
+    value: ''
+  };
+
+  onInputChange = (e) => {
+    this.setState({
+      value: e.target.value
+    });
+  };
+
   currentName = () => {
     const {combination, condition} = this.props;
 
@@ -19,7 +29,7 @@ class CombinationWrapper extends React.Component {
   };
 
   render() {
-    const {combination, attribute, condition} = this.props;
+    const {tableID, combination, attribute, condition, createInstance} = this.props;
     return (
 
       <div
@@ -31,10 +41,15 @@ class CombinationWrapper extends React.Component {
             this.currentName()
           }
         </div>
-        
+
         <div className="comb_input_wrapper">
-          <input type="text"/>
+          <input
+            value={this.state.value}
+            onChange={this.onInputChange}
+            type="text"
+          />
         </div>
+        <button onClick={() => createInstance(tableID, combination.attributeID, combination.conditionID, this.state.value)}>Add</button>
       </div>
 
     );
