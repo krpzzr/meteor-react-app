@@ -137,6 +137,17 @@ class Table extends React.Component {
     this.hideDropdown();
   };
 
+  hideCombination = () => {
+    this.setState({
+      combination: {
+        isShown: false,
+        attributeID: null,
+        conditionID: null,
+        type: ""
+      }
+    });
+  };
+
   render() {
     const {
       table, cellEditInputs, onChangeInputCell, cellCreateInputs,
@@ -272,6 +283,7 @@ class Table extends React.Component {
                                   combination={combination}
                                   attribute={attribute}
                                   condition={condition}
+                                  hideCombination={this.hideCombination}
                                   createInstance={this.props.createInstance}
                                 />
                               }

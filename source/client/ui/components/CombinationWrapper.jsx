@@ -29,7 +29,7 @@ class CombinationWrapper extends React.Component {
   };
 
   render() {
-    const {tableID, combination, attribute, condition, createInstance} = this.props;
+    const {tableID, combination, attribute, condition, createInstance, hideCombination} = this.props;
     return (
 
       <div
@@ -50,6 +50,7 @@ class CombinationWrapper extends React.Component {
           />
         </div>
         <button onClick={() => createInstance(tableID, combination.attributeID, combination.conditionID, this.state.value)}>Add</button>
+        <button onClick={hideCombination}>Hide</button>
       </div>
 
     );
