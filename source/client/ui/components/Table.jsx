@@ -5,6 +5,7 @@ import * as _ from "lodash";
 import "../../css/App.css";
 import TableCell from "./TableCell";
 import CombinationWrapper from "./CombinationWrapper";
+import Dropdown from "./Dropdown";
 
 class Table extends React.Component {
 
@@ -17,6 +18,7 @@ class Table extends React.Component {
       type: "",
     },
     dropdown: {
+      id: null,
       isShown: false,
       data: [],
     },
@@ -109,7 +111,6 @@ class Table extends React.Component {
   showDropdown = (e, attribute, condition, cell) => {
     e.stopPropagation();
 
-    console.log("showDropdown", attribute, condition);
     this.setState({
       dropdown: {
         id: cell.id,
@@ -119,9 +120,26 @@ class Table extends React.Component {
     });
   };
 
+  hideDropdown = () => {
+    this.setState({
+      dropdown: {
+        id: null,
+        isShown: false,
+        data: [],
+      },
+    });
+  };
+
+  updateCell = (e, cell, tableID, conditionID, value) => {
+    e.stopPropagation();
+
+    this.props.updateCell(cell, tableID, conditionID, value);
+    this.hideDropdown();
+  };
+
   render() {
     const {
-      table, cellEditInputs, editCell, onChangeInputCell, cellCreateInputs,
+      table, cellEditInputs, onChangeInputCell, cellCreateInputs,
       onChangeInputCreateCell, createCell, titleEditInputs, onChangeInputTitile,
       editTitle, addColumn,
     } = this.props;
@@ -274,19 +292,14 @@ class Table extends React.Component {
 
                                       {
                                         this.state.dropdown.id === cell.id && this.state.dropdown.isShown &&
-                                        <div className="cells_dropdown">
-                                          {
-                                            this.state.dropdown.data.map(instance => {
-                                              return <p
-                                                key={instance.id}
-                                                onClick={() => console.log(instance.name)}
-                                                title={instance.name}
-                                              >
-                                                {instance.name}
-                                              </p>;
-                                            })
-                                          }
-                                        </div>
+                                        <Dropdown
+                                          updateCell={this.updateCell}
+                                          hideDropdown={this.hideDropdown}
+                                          cell={cell}
+                                          tableID={table._id}
+                                          conditionID={condition.id}
+                                          dropdown={this.state.dropdown}
+                                        />
 
                                       }
                                     </div>

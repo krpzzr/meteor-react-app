@@ -92,20 +92,16 @@ class App extends React.Component {
     });
   };
 
-  updateCells = cells => {
+  updateCells = cell => {
     let arr = this.state.tables;
 
-    cells.forEach(cell => {
+    arr.forEach(table => {
 
-      arr.forEach(table => {
-
-        if (cell.tableID === table._id) {
-          table.attributes.forEach(attr => {
-            this.recursiveChangeCells(attr.conditions, cell);
-          });
-        }
-
-      });
+      if (cell.tableID === table._id) {
+        table.attributes.forEach(attr => {
+          this.recursiveChangeCells(attr.conditions, cell);
+        });
+      }
 
     });
 

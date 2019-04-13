@@ -83,29 +83,16 @@ class TableWrapper extends React.Component {
     });
   };
 
-  editCell = (e, cell, tableID, conditionID) => {
-    e.stopPropagation();
+  updateCell = (cell, tableID, conditionID, value) => {
+    let updateCell = {
+      tableID,
+      conditionID,
+      cellID: cell.id,
+      titleID: cell.titleID,
+      value,
+    };
 
-    if (this.state.cellCreateInputs.length > 0 || this.state.titleEditInputs.length > 0) {
-      alert("Please save or cancel previous changes");
-      return;
-    }
-
-    if (!_.find(this.state.cellEditInputs, {cellID: cell.id})) {
-      this.setState(prevState => ({
-        cellEditInputs: [
-          ...prevState.cellEditInputs,
-          {
-            tableID,
-            conditionID,
-            cellID: cell.id,
-            titleID: cell.titleID,
-            value: cell.name,
-          },
-        ],
-      }));
-
-    }
+    this.props.updateCells(updateCell);
   };
 
   createCell = (e, tableID, conditionID) => {
@@ -207,7 +194,7 @@ class TableWrapper extends React.Component {
                 addColumn={this.addColumn}
                 sortCells={this.sortCells}
                 onChangeInputCell={this.onChangeInputCell}
-                editCell={this.editCell}
+                updateCell={this.updateCell}
                 cellEditInputs={this.state.cellEditInputs}
                 onChangeInputCreateCell={this.onChangeInputCreateCell}
                 cellCreateInputs={this.state.cellCreateInputs}
