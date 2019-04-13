@@ -3,287 +3,246 @@ import React from "react";
 import * as _ from "lodash";
 
 import "../../css/App.css";
-import TableTitlesTop from "./TableTitlesTop";
-import TableTitlesLeft from "./TableTitlesLeft";
+import TableCell from "./TableCell";
 
 class Table extends React.Component {
 
   state = {
-    cellEditInputs: [],
-    titleEditInputs: [],
-    openTables: [],
-    cellCreateInputs: [],
-    tables: [],
-    testCaseName: "",
-    isShownTextarea: false,
+    subconditionsShown: [],
+    currentCombinations: [],
   };
 
-  onChangeInputCell = (e, cell) => {
+  sortCells = (cells, titles) => {
+    let arr = [];
+
+    titles.map(title => {
+      return cells.map(cell => {
+
+        if (title.id === cell.titleID) {
+          arr.push(cell);
+        }
+
+      });
+    });
+
+    return arr;
+  };
+
+  toFlatData = (node, result = [], curLevel = 0) => {
+    if (node.length) {
+      node.forEach(item => {
+        result.push(item);
+        item.level = curLevel;
+        curLevel++;
+        item.last = false;
+
+        if (item.subconditions && item.subconditions.length > 0) {
+          item.last = false;
+          this.toFlatData(item.subconditions, result, curLevel);
+        } else if (item.subconditions && item.subconditions.length === 0) {
+          item.last = true;
+        }
+
+        curLevel--;
+      });
+    }
+
+    return result;
+  };
+
+  subconditionShow = (e, condition) => {
     e.stopPropagation();
 
-    let arr = this.state.cellEditInputs;
-    arr.forEach(item => {
-      if (item.cellID === cell.id) {
-        item.value = e.target.value;
+    let include = false;
+
+    this.toFlatData(condition.subconditions).forEach(subcondition => {
+      if (this.state.subconditionsShown.includes(subcondition.id)) {
+        this.setState(prevState => ({
+          subconditionsShown: prevState.subconditionsShown.filter(id => id !== subcondition.id),
+        }));
+
+        include = true;
       }
     });
-    this.setState({
-      cellEditInputs: arr,
-    });
-  };
 
-  onChangeInputTitile = (e, title) => {
-    e.stopPropagation();
-
-    let arr = this.state.titleEditInputs;
-    arr.forEach(item => {
-      if (item.id === title.id) {
-        item.name = e.target.value;
-      }
-    });
-    this.setState({
-      titleEditInputs: arr,
-    });
-  };
-
-  editTitle = (e, title, tableID) => {
-    e.stopPropagation();
-
-    if (this.state.cellCreateInputs.length > 0 || this.state.cellEditInputs.length > 0) {
-      alert("Please save or cancel previous changes");
+    if (include) {
       return;
     }
 
-    if (!_.find(this.state.titleEditInputs, {id: title.id})) {
+    condition.subconditions.forEach(subcondition => {
       this.setState(prevState => ({
-        titleEditInputs: [
-          ...prevState.titleEditInputs,
-          {
-            tableID,
-            id: title.id,
-            name: title.name,
-          },
+        subconditionsShown: [
+          ...prevState.subconditionsShown,
+          subcondition.id,
         ],
       }));
 
-    }
+    });
+
   };
 
-  onChangeInputCreateCell = (e, id) => {
-    e.stopPropagation();
-
-    let arr = this.state.cellCreateInputs;
-    arr.forEach(item => {
-      if (item.conditionID === id) {
-        item.value = e.target.value;
+  count = (conditions) => {
+    let count = 0;
+    this.toFlatData(conditions).forEach(condition => {
+      if (this.state.subconditionsShown.includes(condition.id)) {
+        count++;
       }
     });
-    this.setState({
-      cellCreateInputs: arr,
-    });
+
+    return count;
   };
 
-  editCell = (e, cell, tableID, conditionID) => {
+  editButtonColor = (attributeName) => {
+    if (attributeName === "GIVEN") {
+      return "#4F287B";
+    }
+    if (attributeName === "WHEN") {
+      return "#E85755";
+    }
+    if (attributeName === "THEN") {
+      return "#3EB775";
+    }
+  };
+
+  showCombinations = (e, attributeID, conitionID) => {
     e.stopPropagation();
 
-    if (this.state.cellCreateInputs.length > 0 || this.state.titleEditInputs.length > 0) {
-      alert("Please save or cancel previous changes");
-      return;
-    }
-
-    if (!_.find(this.state.cellEditInputs, {cellID: cell.id})) {
-      this.setState(prevState => ({
-        cellEditInputs: [
-          ...prevState.cellEditInputs,
-          {
-            tableID,
-            conditionID,
-            cellID: cell.id,
-            titleID: cell.titleID,
-            value: cell.name,
-          },
-        ],
-      }));
-
-    }
-  };
-
-  createCell = (e, tableID, conditionID) => {
-    e.stopPropagation();
-
-    if (this.state.cellEditInputs.length > 0 || this.state.titleEditInputs.length > 0) {
-      alert("Please save or cancel previous changes");
-      return;
-    }
-
-    if (!_.find(this.state.cellCreateInputs, {conditionID: conditionID})) {
-      this.setState(prevState => ({
-        cellCreateInputs: [
-          ...prevState.cellCreateInputs,
-          {
-            tableID,
-            conditionID,
-            value: "",
-          },
-        ],
-      }));
-
-    }
-
-  };
-
-  onTableDropdown = (e, table) => {
-    e.stopPropagation();
-
-    if (!_.find(this.state.openTables, {id: table.id})) {
-
-      this.setState(prevState => ({
-        openTables: [
-          ...prevState.openTables,
-          {
-            id: table.id,
-          },
-        ],
-      }));
-
-    } else {
-      this.setState(prevState => ({
-        openTables: prevState.openTables.filter(item => {
-          return item.id !== table.id;
-        }),
-      }));
-
-    }
-
-  };
-
-  saveTitleChanges = () => {
-    this.props.updateTitles(this.state.titleEditInputs);
-
-    this.cancelChanges();
-  };
-
-  saveCellsChanges = () => {
-    this.props.updateCells(this.state.cellEditInputs);
-
-    this.cancelChanges()
-  };
-
-  cancelChanges = () => {
-    this.setState({
-      cellEditInputs: [],
-      cellCreateInputs: [],
-      titleEditInputs: []
-    });
-  };
-
-  addColumn = () => {
-    this.props.createColumn(this.props.table._id, this.state.testCaseName, this.state.cellCreateInputs);
-
-    this.cancelChanges();
+    this.setState(prevState => ({
+      currentCombinations: [
+        ...prevState.currentCombinations,
+        conitionID,
+      ],
+    }));
   };
 
   render() {
-    const {table} = this.props;
+    const {
+      table, cellEditInputs, editCell, onChangeInputCell, cellCreateInputs,
+      onChangeInputCreateCell, createCell, titleEditInputs, onChangeInputTitile,
+      editTitle, addColumn,
+    } = this.props;
 
     return (
+
       <React.Fragment>
-        <div
-          className={_.find(this.state.openTables, {id: table.id}) ? "active table_name" : "table_name"}
-          onClick={(e) => this.onTableDropdown(e, table)}
-        >
-          <span>{table.name}</span>
-        </div>
-        <div style={{overflowX: "auto", backgroundColor: '#fff'}}>
-          <div className="table">
 
+        <div className="table_headers">
+          <div className="empty_header-1 header"></div>
+          <div className="empty_header-2 header"></div>
+          {/*<div className={"header comb"}></div>*/}
           {
-              _.find(this.state.openTables, {id: table.id}) &&
-              <TableTitlesLeft
-                table={table}
-                onChangeInputTitile={this.onChangeInputTitile}
-                titleEditInputs={this.state.titleEditInputs}
-                editTitle={this.editTitle}
-                addColumn={this.addColumn}
-                sortCells={this.sortCells}
-                onChangeInputCell={this.onChangeInputCell}
-                editCell={this.editCell}
-                cellEditInputs={this.state.cellEditInputs}
-                onChangeInputCreateCell={this.onChangeInputCreateCell}
-                cellCreateInputs={this.state.cellCreateInputs}
-                createCell={this.createCell}
-              />
+            table.testCaseNames.map(title => {
+              return (
+                <div
+                  className="header"
+                  key={title.id}
+                  title={title.name}
+                  onClick={(e) => editTitle(e, title, table._id)}
+                >
 
-            }
+                  {
+                    _.find(titleEditInputs, {id: title.id}) ?
+                      <textarea
+                        type="text"
+                        autoFocus
+                        style={{resize: "none"}}
+                        className="header_input"
+                        onChange={(e) => onChangeInputTitile(e, title)}
+                        value={_.get(_.find(titleEditInputs, {id: title.id}), "name").toUpperCase()}/> :
+                      <p>{title.name.length > 28 ? `${title.name.substring(0, 28)}...` : `${title.name}`}</p>
+                  }
+                </div>
+              );
+            })
+          }
+
+          <div className="header">
+                <span
+                  style={{cursor: "pointer"}}
+                  onClick={addColumn}
+                >
+                  <svg
+                    style={{
+                      width: 30,
+                      height: 30,
+                    }}
+                    viewBox="0 0 24 24">
+                  <path
+                    fill="#000000"
+                    d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z"
+                  />
+                </svg>
+                </span>
           </div>
 
         </div>
 
         {
-          this.state.cellEditInputs.length > 0 &&
-          <div style={{
-            paddingBottom: 11,
-            marginTop: 15
-          }}>
-            <button
-              className="action_button"
-              style={{marginRight: 10}}
-              onClick={this.saveCellsChanges}
-            >
-              Change Cells
-            </button>
-            <button
-              className="action_button"
-              style={{marginLeft: 10}}
-              onClick={this.cancelChanges}
-            >
-              Cancel
-            </button>
-          </div>
-        }
+          table.attributes.map(attribute => {
+            return (
+              <div className="gwt_row" key={attribute.id}>
+                <div className={`gwt gwt-${attribute.name}`}>
+                  <p className="behaviourName">{attribute.name}</p>
+                </div>
+                <div className="attr-cells_wrapper">
 
-        {
-          this.state.titleEditInputs.length > 0 &&
-          <div style={{
-            paddingBottom: 11,
-            marginTop: 15
-          }}>
-            <button
-              className="action_button"
-              style={{marginRight: 10}}
-              onClick={this.saveTitleChanges}
-            >
-              Change Titles
-            </button>
-            <button
-              className="action_button"
-              style={{marginLeft: 10}}
-              onClick={this.cancelChanges}
-            >
-              Cancel
-            </button>
-          </div>
-        }
+                  {
+                    this.toFlatData(attribute.conditions).map(condition => {
+                      return (
+                        <React.Fragment key={condition.id}>
+                          {
 
-        {
-          this.state.cellCreateInputs.length > 0 &&
-          <div style={{
-            paddingBottom: 11,
-            marginTop: 15
-          }}>
-            <button
-              className="action_button"
-              style={{marginLeft: 10}}
-              onClick={this.cancelChanges}
-            >
-              Cancel
-            </button>
-          </div>
+                            (condition.level === 0 || this.state.subconditionsShown.includes(condition.id)) &&
+
+                            <div className="attr-cells_row">
+                              <div
+                                className={`attr attr-${attribute.name}`}
+                                onClick={(e) => this.subconditionShow(e, condition)}
+                                title={condition.name}
+                              >
+                                <p style={{paddingLeft: condition.level * 33}}>
+                                  {condition.name.length > 111 ? `${condition.name.substring(0, 111)}...` : `${condition.name}`}
+                                  {
+                                    condition.subconditions.length > 0 &&
+                                    <i
+                                      className={`condition_arrow ${this.state.subconditionsShown.includes(condition.subconditions[0].id) ? "condition_arrow_up" : "condition_arrow_down"}`}
+                                    />
+                                  }
+                                </p>
+                              </div>
+
+                              {
+                                this.sortCells(condition.testCaseValues, table.testCaseNames).map(cell => {
+                                  return (
+                                    <div key={cell.id} className={`cells cells-${attribute.name}`}
+                                         title={cell.name}>
+                                      <p>
+                                        {(cell.name && cell.name.length > 0) ? cell.name :
+                                          <span>+</span>}
+                                      </p>
+                                    </div>
+                                  );
+                                })
+                              }
+                              <div className="cells">
+                                <span>+</span>
+                              </div>
+                            </div>
+
+                          }
+                        </React.Fragment>
+                      );
+                    })
+                  }
+                </div>
+              </div>
+            );
+          })
         }
       </React.Fragment>
+
     );
   }
 }
 
 export default Table;
-

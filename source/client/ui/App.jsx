@@ -2,7 +2,7 @@ import React from "react";
 import {withTracker} from "meteor/react-meteor-data";
 import * as _ from "lodash";
 
-import Table from "./components/Table";
+import TableWrapper from "./components/TableWrapper";
 import NewTable from "./components/NewTable";
 
 import "../css/App.css";
@@ -357,7 +357,7 @@ class App extends React.Component {
               this.state.tables.length > 0 &&
               this.state.tables.map(table => {
                 return (
-                  <Table
+                  <TableWrapper
                     key={table._id}
                     table={table}
                     updateCells={this.updateCells}
