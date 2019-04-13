@@ -51,34 +51,83 @@
     right: 8px;
 }
 
+.table {
+    background-color: #fff;
+    width: 100%;
+}
+
 .gwt_row {
     display: flex;
+    margin-bottom: 10px;
 }
 
 .attr-cells_row {
     display: flex;
 }
 
-.gwt_wrapper {
-    background-color: red;
+.gwt {
+    color: #fff;
+    border: none;
+    width: 50px;
+    flex: 0 0 50px;
+    font-weight: 400;
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.gwt-GIVEN {
+    background-color: #4F287B;
+}
+
+.gwt-WHEN {
+    background-color: #E85755;
+}
+
+.gwt-THEN {
+    background-color: #3EB775;
 }
 
 .header {
     height: 40px;
     width: 200px;
     flex: 0 0 200px;
-    border: 1px dashed #292518;
+    font-weight: 500;
+    border-bottom: 1px solid #000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    word-break: break-word;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.header_input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    resize: none;
+}
+
+.empty_header-1, .empty_header-2 {
+    border-bottom: none;
 }
 
 .gwt_wrapper, .empty_header-1 {
     width: 50px;
     min-width: 50px;
     flex: 0 0 50px;
+
 }
 
 .attr, .empty_header-2 {
     width: 420px;
-    border: 1px dashed #292518;
     flex: 0 0 420px;
 }
 
@@ -87,14 +136,47 @@
 }
 
 .cells {
+    cursor: pointer;
     width: 200px;
     flex: 0 0 200px;
-    border: 1px dashed #292518;
+    height: 76px;
+    background-color: #F1F1F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
-table {
-    background-color: #fff;
-    width: 100%;
+.cells > p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.cells span {
+    font-size: 29px;
+    font-weight: 200;
+    color: #fff;
+}
+
+.cells, .header {
+    margin-right: 3px;
+    margin-left: 3px;
+    margin-bottom: 3px;
+}
+
+.behaviourName {
+    transform: rotate(-90deg);
+}
+
+.attr {
+    background-color: #F1F1F2;
+    height: 76px;
+    margin-right: 3px;
+    margin-left: 3px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .table_name {
@@ -153,10 +235,6 @@ table {
 .table-title .cell_input {
     min-height: auto;
     height: auto;
-}
-
-.behaviourName {
-    transform: rotate(-90deg);
 }
 
 .cell {

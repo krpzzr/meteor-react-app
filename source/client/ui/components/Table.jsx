@@ -194,19 +194,11 @@ class Table extends React.Component {
         >
           <span>{table.name}</span>
         </div>
-        <div style={{overflowX: "auto"}}>
-          <table>
-            {
-              _.find(this.state.openTables, {id: table.id}) &&
-              <tbody>
+        <div style={{overflowX: "auto", backgroundColor: '#fff'}}>
+          <div className="table">
 
-              {/*<TableTitlesTop*/}
-                {/*table={table}*/}
-                {/*onChangeInputTitile={this.onChangeInputTitile}*/}
-                {/*titleEditInputs={this.state.titleEditInputs}*/}
-                {/*editTitle={this.editTitle}*/}
-                {/*addColumn={this.addColumn}*/}
-              {/*/>*/}
+          {
+              _.find(this.state.openTables, {id: table.id}) &&
               <TableTitlesLeft
                 table={table}
                 onChangeInputTitile={this.onChangeInputTitile}
@@ -222,9 +214,8 @@ class Table extends React.Component {
                 createCell={this.createCell}
               />
 
-              </tbody>
             }
-          </table>
+          </div>
 
         </div>
 
