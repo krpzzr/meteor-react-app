@@ -149,7 +149,7 @@ class TableTitlesLeft extends React.Component {
                         className="header_input"
                         onChange={(e) => onChangeInputTitile(e, title)}
                         value={_.get(_.find(titleEditInputs, {id: title.id}), "name").toUpperCase()}/> :
-                      <p>{title.name.length > 32 ? `${title.name.toUpperCase().substring(0, 32)}...` : `${title.name}`}</p>
+                      <p>{title.name.length > 28 ? `${title.name.toUpperCase().substring(0, 28)}...` : `${title.name}`}</p>
                   }
                 </div>
               );
@@ -196,11 +196,11 @@ class TableTitlesLeft extends React.Component {
 
                             <div className="attr-cells_row">
                               <div
-                                className="attr"
+                                className={`attr attr-${attribute.name}`}
                                 onClick={(e) => this.subconditionShow(e, condition)}
                                 title={condition.name}
                               >
-                                {condition.name}
+                                <p style={{paddingLeft: condition.level * 33}}>{condition.name.length > 111 ? `${condition.name.substring(0, 111)}...` : `${condition.name}`}</p>
                               </div>
 
                               {

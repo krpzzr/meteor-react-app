@@ -172,12 +172,31 @@
 .attr {
     background-color: #F1F1F2;
     height: 76px;
+    padding-left: 15px;
     margin-right: 3px;
     margin-left: 3px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    user-select: none;
 }
+
+.attr p {
+    padding: 15px;
+}
+
+.attr-GIVEN {
+    color: #4F287B;
+}
+
+.attr-WHEN {
+    color: #E85755;
+}
+
+.attr-THEN {
+    color: #3EB775
+}
+/**/
 
 .table_name {
     cursor: pointer;
