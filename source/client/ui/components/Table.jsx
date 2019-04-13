@@ -206,7 +206,12 @@ class Table extends React.Component {
 
                             (condition.level === 0 || this.state.subconditionsShown.includes(condition.id)) &&
 
-                            <div className="attr-cells_row">
+                            <div
+                              className="attr-cells_row"
+                              style={{
+                                position: this.state.combination.isShown && this.state.combination.conditionID === condition.id ? 'static' : 'relative'
+                              }}
+                            >
                               <div
                                 className={`attr attr-${attribute.name}`}
                                 onClick={(e) => this.subconditionShow(e, condition)}
@@ -237,7 +242,11 @@ class Table extends React.Component {
                               </div>
 
                               {
-                                this.state.combination.isShown  &&
+                                this.state.combination.isShown &&
+                                (
+                                  ((condition.level === 0) && (this.state.combination.conditionID === condition.id) || (this.state.combination.attributeID === attribute.id)) ||
+                                  (this.state.combination.attributeID !== attribute.id)
+                                ) &&
                                 <div
                                   className="comb_wrapper"
                                   style={{height: (this.state.combination.attributeID === attribute.id) ? 392 : 76}}
