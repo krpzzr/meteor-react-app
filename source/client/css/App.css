@@ -135,6 +135,10 @@
     flex: 0 0 420px;
 }
 
+.attr-cells_wrapper {
+    position: relative;
+}
+
 .table_headers {
     display: flex;
 }
@@ -147,14 +151,9 @@
     background-color: #F1F1F2;
     display: flex;
     align-items: center;
+    text-align: center;
     justify-content: center;
     padding: 10px;
-}
-
-.cells > p {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .cells span {
@@ -183,11 +182,39 @@
     display: flex;
     align-items: center;
     user-select: none;
+    position: relative;
 }
 
 .attr p {
+    margin: 0;
     padding: 15px;
     padding-right: 35px;
+}
+
+.open-inst_comb {
+    position: absolute;
+    width: 50px;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    display: none;
+}
+
+.attr:hover .open-inst_comb {
+    display: flex;
+}
+
+.attr-GIVEN .open-inst_comb path {
+    fill: #4F287B;
+}
+
+.attr-WHEN .open-inst_comb path {
+    fill: #E85755;
+}
+
+.attr-THEN .open-inst_comb path {
+    fill: #3EB775;
 }
 
 .attr-GIVEN {
@@ -229,6 +256,14 @@
     border-width: 0 2px 2px 0;
 }
 
+.gwt_row.inst_comb-isOpen {
+    min-height: 392px;
+}
+
+.inst_comb-isOpen .attr, .inst_comb-isOpen .empty_header-2 {
+    margin-right: 480px;
+}
+
 i.condition_arrow {
     display: inline-block;
     padding: 3px;
@@ -246,6 +281,14 @@ i.condition_arrow {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     bottom: 3px;
+}
+
+.comb_wrapper {
+    position: absolute;
+    left: 454px;
+    width: 420px;
+    height: 392px;
+    background-color: #ffa6a6;
 }
 
 /**/

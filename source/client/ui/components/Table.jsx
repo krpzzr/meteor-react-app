@@ -9,7 +9,12 @@ class Table extends React.Component {
 
   state = {
     subconditionsShown: [],
-    currentCombinations: [],
+    combination: {
+      isShown: false,
+      attributeID: null,
+      conditionID: null,
+
+    },
   };
 
   sortCells = (cells, titles) => {
@@ -104,15 +109,16 @@ class Table extends React.Component {
     }
   };
 
-  showCombinations = (e, attributeID, conitionID) => {
+  showCombinations = (e, attributeID, conditionID) => {
     e.stopPropagation();
 
-    this.setState(prevState => ({
-      currentCombinations: [
-        ...prevState.currentCombinations,
-        conitionID,
-      ],
-    }));
+    this.setState({
+      combination: {
+        isShown: true,
+        attributeID,
+        conditionID,
+      },
+    });
   };
 
   render() {
@@ -126,7 +132,8 @@ class Table extends React.Component {
 
       <React.Fragment>
 
-        <div className="table_headers">
+        <div
+          className={`table_headers ${this.state.combination.isShown ? "inst_comb-isOpen" : ""}`}>
           <div className="empty_header-1 header"></div>
           <div className="empty_header-2 header"></div>
           {/*<div className={"header comb"}></div>*/}
@@ -180,7 +187,12 @@ class Table extends React.Component {
         {
           table.attributes.map(attribute => {
             return (
-              <div className="gwt_row" key={attribute.id}>
+              <div
+                className={`gwt_row ${this.state.combination.isShown ? "inst_comb-isOpen" : ""}`}
+                style={{
+                  minHeight: (this.state.combination.isShown && this.state.combination.attributeID === attribute.id) ? 392 : 76,
+                }}
+                key={attribute.id}>
                 <div className={`gwt gwt-${attribute.name}`}>
                   <p className="behaviourName">{attribute.name}</p>
                 </div>
@@ -209,7 +221,28 @@ class Table extends React.Component {
                                     />
                                   }
                                 </p>
+
+                                <span
+                                  className="open-inst_comb"
+                                  onClick={(e) => this.showCombinations(e, attribute.id, condition.id)}
+                                >
+                                  <svg style={{
+                                    width: 24,
+                                    height: 24,
+                                  }} viewBox="0 0 24 24">
+                                    <path
+                                      d="M16.84,2.73C16.45,2.73 16.07,2.88 15.77,3.17L13.65,5.29L18.95,10.6L21.07,8.5C21.67,7.89 21.67,6.94 21.07,6.36L17.9,3.17C17.6,2.88 17.22,2.73 16.84,2.73M12.94,6L4.84,14.11L7.4,14.39L7.58,16.68L9.86,16.85L10.15,19.41L18.25,11.3M4.25,15.04L2.5,21.73L9.2,19.94L8.96,17.78L6.65,17.61L6.47,15.29"/>
+                                  </svg>
+                                </span>
                               </div>
+
+                              {
+                                this.state.combination.isShown  &&
+                                <div
+                                  className="comb_wrapper"
+                                  style={{height: (this.state.combination.attributeID === attribute.id) ? 392 : 76}}
+                                >123</div>
+                              }
 
                               {
                                 this.sortCells(condition.testCaseValues, table.testCaseNames).map(cell => {
@@ -217,7 +250,9 @@ class Table extends React.Component {
                                     <div key={cell.id} className={`cells cells-${attribute.name}`}
                                          title={cell.name}>
                                       <p>
-                                        {(cell.name && cell.name.length > 0) ? cell.name :
+                                        {(cell.name && cell.name.length > 0) ? (
+                                            cell.name.length > 48 ? `${cell.name.substring(0, 48)}...` : `${cell.name}`
+                                          ) :
                                           <span>+</span>}
                                       </p>
                                     </div>

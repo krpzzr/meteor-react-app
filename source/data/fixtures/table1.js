@@ -143,7 +143,7 @@ export default {
                 },
                 {
                   id: "type_of_user_id2",
-                  name: "TYPE OF USER2 VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY VERY LONG",
+                  name: "PASSWORD",
                   subconditions: [],
                   testCaseValues: [
                     {
