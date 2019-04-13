@@ -241,10 +241,12 @@ class Table extends React.Component {
                                 </span>
                               </div>
 
+
                               {
                                 this.state.combination.isShown &&
                                 (
-                                  ((condition.level === 0) && (this.state.combination.conditionID === condition.id) || (this.state.combination.attributeID === attribute.id)) ||
+                                  ((condition.level === 0) && (this.state.combination.conditionID === condition.id)) ||
+                                  (this.state.combination.conditionID === condition.id) ||
                                   (this.state.combination.attributeID !== attribute.id)
                                 ) &&
                                 <div
