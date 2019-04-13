@@ -149,7 +149,7 @@ class TableTitlesLeft extends React.Component {
                         className="header_input"
                         onChange={(e) => onChangeInputTitile(e, title)}
                         value={_.get(_.find(titleEditInputs, {id: title.id}), "name").toUpperCase()}/> :
-                      <p>{title.name.length > 28 ? `${title.name.toUpperCase().substring(0, 28)}...` : `${title.name}`}</p>
+                      <p>{title.name.length > 28 ? `${title.name.substring(0, 28)}...` : `${title.name}`}</p>
                   }
                 </div>
               );
@@ -200,13 +200,22 @@ class TableTitlesLeft extends React.Component {
                                 onClick={(e) => this.subconditionShow(e, condition)}
                                 title={condition.name}
                               >
-                                <p style={{paddingLeft: condition.level * 33}}>{condition.name.length > 111 ? `${condition.name.substring(0, 111)}...` : `${condition.name}`}</p>
+                                <p style={{paddingLeft: condition.level * 33}}>
+                                  {condition.name.length > 111 ? `${condition.name.substring(0, 111)}...` : `${condition.name}`}
+                                  {
+                                    condition.subconditions.length > 0 &&
+                                    <i
+                                      className={`condition_arrow ${this.state.subconditionsShown.includes(condition.subconditions[0].id) ? "condition_arrow_up" : "condition_arrow_down"}`}
+                                    />
+                                  }
+                                </p>
                               </div>
 
                               {
                                 this.sortCells(condition.testCaseValues, table.testCaseNames).map(cell => {
                                   return (
-                                    <div key={cell.id} className="cells" title={cell.name}>
+                                    <div key={cell.id} className={`cells cells-${attribute.name}`}
+                                         title={cell.name}>
                                       <p>
                                         {(cell.name && cell.name.length > 0) ? cell.name :
                                           <span>+</span>}

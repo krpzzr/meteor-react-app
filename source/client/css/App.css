@@ -105,6 +105,10 @@
     margin-top: 10px;
 }
 
+.header p {
+    text-transform: uppercase;
+}
+
 .header_input {
     background-color: transparent;
     border: none;
@@ -183,6 +187,7 @@
 
 .attr p {
     padding: 15px;
+    padding-right: 35px;
 }
 
 .attr-GIVEN {
@@ -196,6 +201,53 @@
 .attr-THEN {
     color: #3EB775
 }
+
+.attr-GIVEN:hover, .cells-GIVEN:hover {
+    background-color: rgba(79, 40, 123, 0.16);
+}
+
+.attr-WHEN:hover, .cells-WHEN:hover {
+    background-color: rgba(232, 87, 85, 0.15);
+}
+
+.attr_THEN:hover, .cells-THEN:hover {
+    background-color: rgba(62, 183, 117, 0.16);
+}
+
+.attr-GIVEN i.condition_arrow {
+    border: solid #4F287B;
+    border-width: 0 2px 2px 0;
+}
+
+.attr-WHEN i.condition_arrow {
+    border: solid #E85755;
+    border-width: 0 2px 2px 0;
+}
+
+.attr-THEN i.condition_arrow {
+    border: solid #3EB775;
+    border-width: 0 2px 2px 0;
+}
+
+i.condition_arrow {
+    display: inline-block;
+    padding: 3px;
+    position: relative;
+    left: 10px;
+}
+
+.condition_arrow_up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    bottom: -1px;
+}
+
+.condition_arrow_down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    bottom: 3px;
+}
+
 /**/
 
 .table_name {
@@ -387,50 +439,6 @@
     background-color: #532D7E;
     color: #fff;
     transition: all .25s ease;
-}
-
-.GIVEN-cell-prop i.condition_arrow {
-    border: solid #4F287B;
-    border-width: 0 2px 2px 0;
-}
-
-.WHEN-cell-prop i.condition_arrow {
-    border: solid #E85755;
-    border-width: 0 2px 2px 0;
-}
-
-.THEN-cell-prop i.condition_arrow {
-    border: solid #3EB775;
-    border-width: 0 2px 2px 0;
-}
-
-i.condition_arrow {
-    display: inline-block;
-    padding: 3px;
-    position: relative;
-    left: 10px;
-}
-
-.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-}
-
-.left {
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-}
-
-.condition_arrow_up {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-    bottom: -1px;
-}
-
-.condition_arrow_down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    bottom: 3px;
 }
 
 .combination_wrapper {
