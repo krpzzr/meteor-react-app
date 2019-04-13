@@ -16,7 +16,7 @@ export default {
     {
       id: "4",
       name: "WITHDRAW 30 FROM MASTERCARD",
-    }
+    },
   ],
   attributes: [
     {
@@ -28,6 +28,18 @@ export default {
           id: "test_designer_id",
           name: "TEST DESIGNER",
           subconditions: [],
+          instances: [
+            {
+              id: "122121",
+              name: "VISA",
+              subInstances: [],
+            },
+            {
+              id: "622362",
+              name: "MASTERCARD",
+              subInstances: [],
+            },
+          ],
           testCaseValues: [
             {
               id: "122121",
@@ -56,6 +68,7 @@ export default {
           id: "contact_person_id",
           name: "CONTACT PERSON",
           subconditions: [],
+          instances: [],
           testCaseValues: [
             {
               id: "bdssdbsdb",
@@ -100,6 +113,13 @@ export default {
                   id: "username_id",
                   name: "USERNAME",
                   subconditions: [],
+                  instances: [
+                    {
+                      id: "2jjky9",
+                      name: "MASTERCARD PLATINUM",
+                      subInstances: [],
+                    },
+                  ],
                   testCaseValues: [
                     {
                       id: "2jjky9",
@@ -122,6 +142,18 @@ export default {
                       name: "",
                     },
                   ],
+                },
+              ],
+              instances: [
+                {
+                  id: "tqqt22",
+                  name: "MASTERCARD",
+                  subInstances: [],
+                },
+                {
+                  id: "reg445645",
+                  name: "MIR",
+                  subInstances: [],
                 },
               ],
               testCaseValues: [
@@ -151,6 +183,18 @@ export default {
               id: "type_of_user_id2",
               name: "TYPE OF USER2",
               subconditions: [],
+              instances: [
+                {
+                  id: "dasmdas;lmdas;lmd;asdmas6",
+                  name: "TEST1",
+                  subInstances: [],
+                },
+                {
+                  id: "sdflsdf;ds,fdsl;35353",
+                  name: "TEST2",
+                  subInstances: [],
+                },
+              ],
               testCaseValues: [
                 {
                   id: "dasmdas;lmdas;lmd;asdmas6",
@@ -173,6 +217,18 @@ export default {
                   name: "",
                 },
               ],
+            },
+          ],
+          instances: [
+            {
+              id: "99",
+              name: "VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA cell_customcell_customcell_customcell_customcell_customcell_customcell_customcell_customcell_customcell_customcell_custom",
+              subInstances: [],
+            },
+            {
+              id: "968t7tt",
+              name: "MASTERCARD",
+              subInstances: [],
             },
           ],
           testCaseValues: [
@@ -208,6 +264,7 @@ export default {
           id: "acc_be_should_id",
           name: "THE ACCOUNT BALANCE SHOULD BE ${ENDING_BALANCE}",
           subconditions: [],
+          instances: [],
           testCaseValues: [
             {
               id: "lmsdl,fl;d,sf,sdf;sd,762b",
@@ -235,6 +292,13 @@ export default {
           id: "the_card_should_returned_id",
           name: "THE CARD SHOULD BE RETURNED",
           subconditions: [],
+          instances: [
+            {
+              id: "efkskf;lfdfds-44",
+              name: "VISA PLATINUM SUPER PLUS",
+              subInstances: []
+            }
+          ],
           testCaseValues: [
             {
               id: "fdfndsljfdslf8dsf8ds",

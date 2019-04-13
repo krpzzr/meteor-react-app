@@ -167,10 +167,6 @@ class App extends React.Component {
 
     });
 
-
-
-
-
     this.setState({tables: arr});
   };
 
@@ -283,6 +279,16 @@ class App extends React.Component {
 
   hideCreateTableComponent = () => {
     this.setState({newTableShown: false});
+  };
+
+  // Create INSTANCE
+  createInstance = (attributeID, conditionID, titleID, value) => {
+
+  };
+
+  // Create COMBINATION
+  createCombination = () => {
+
   };
 
   render() {

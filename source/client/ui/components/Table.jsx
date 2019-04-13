@@ -14,7 +14,11 @@ class Table extends React.Component {
       isShown: false,
       attributeID: null,
       conditionID: null,
-
+      type: "",
+    },
+    dropdown: {
+      isShown: false,
+      data: [],
     },
   };
 
@@ -87,37 +91,30 @@ class Table extends React.Component {
 
   };
 
-  count = (conditions) => {
-    let count = 0;
-    this.toFlatData(conditions).forEach(condition => {
-      if (this.state.subconditionsShown.includes(condition.id)) {
-        count++;
-      }
-    });
-
-    return count;
-  };
-
-  editButtonColor = (attributeName) => {
-    if (attributeName === "GIVEN") {
-      return "#4F287B";
-    }
-    if (attributeName === "WHEN") {
-      return "#E85755";
-    }
-    if (attributeName === "THEN") {
-      return "#3EB775";
-    }
-  };
-
-  showCombinations = (e, attributeID, conditionID) => {
+  showCombinations = (e, attributeID, conditionID, condition) => {
     e.stopPropagation();
+
+    let type = condition.subconditions.length > 0 ? "COMBINATION" : "INSTANCE";
 
     this.setState({
       combination: {
         isShown: true,
         attributeID,
         conditionID,
+        type,
+      },
+    });
+  };
+
+  showDropdown = (e, attribute, condition, cell) => {
+    e.stopPropagation();
+
+    console.log("showDropdown", attribute, condition);
+    this.setState({
+      dropdown: {
+        id: cell.id,
+        isShown: true,
+        data: condition.instances,
       },
     });
   };
@@ -129,12 +126,14 @@ class Table extends React.Component {
       editTitle, addColumn,
     } = this.props;
 
+    const {combination, subconditionsShown} = this.state;
+
     return (
 
       <React.Fragment>
 
         <div
-          className={`table_headers ${this.state.combination.isShown ? "inst_comb-isOpen" : ""}`}>
+          className={`table_headers ${combination.isShown ? "inst_comb-isOpen" : ""}`}>
           <div className="empty_header-1 header"></div>
           <div className="empty_header-2 header"></div>
           {/*<div className={"header comb"}></div>*/}
@@ -189,9 +188,9 @@ class Table extends React.Component {
           table.attributes.map(attribute => {
             return (
               <div
-                className={`gwt_row ${this.state.combination.isShown ? "inst_comb-isOpen" : ""}`}
+                className={`gwt_row ${combination.isShown ? "inst_comb-isOpen" : ""}`}
                 style={{
-                  minHeight: (this.state.combination.isShown && this.state.combination.attributeID === attribute.id) ? 392 : 76,
+                  minHeight: (combination.isShown && combination.attributeID === attribute.id) ? 392 : 76,
                 }}
                 key={attribute.id}>
                 <div className={`gwt gwt-${attribute.name}`}>
@@ -205,12 +204,12 @@ class Table extends React.Component {
                         <React.Fragment key={condition.id}>
                           {
 
-                            (condition.level === 0 || this.state.subconditionsShown.includes(condition.id)) &&
+                            (condition.level === 0 || subconditionsShown.includes(condition.id)) &&
 
                             <div
                               className="attr-cells_row"
                               style={{
-                                position: this.state.combination.isShown && this.state.combination.conditionID === condition.id ? 'static' : 'relative'
+                                position: combination.isShown && combination.conditionID === condition.id ? "static" : "relative",
                               }}
                             >
                               <div
@@ -223,14 +222,14 @@ class Table extends React.Component {
                                   {
                                     condition.subconditions.length > 0 &&
                                     <i
-                                      className={`condition_arrow ${this.state.subconditionsShown.includes(condition.subconditions[0].id) ? "condition_arrow_up" : "condition_arrow_down"}`}
+                                      className={`condition_arrow ${subconditionsShown.includes(condition.subconditions[0].id) ? "condition_arrow_up" : "condition_arrow_down"}`}
                                     />
                                   }
                                 </p>
 
                                 <span
                                   className="open-inst_comb"
-                                  onClick={(e) => this.showCombinations(e, attribute.id, condition.id)}
+                                  onClick={(e) => this.showCombinations(e, attribute.id, condition.id, condition)}
                                 >
                                   <svg style={{
                                     width: 24,
@@ -244,14 +243,14 @@ class Table extends React.Component {
 
 
                               {
-                                this.state.combination.isShown &&
+                                combination.isShown &&
                                 (
-                                  ((condition.level === 0) && (this.state.combination.conditionID === condition.id)) ||
-                                  (this.state.combination.conditionID === condition.id) ||
-                                  (this.state.combination.attributeID !== attribute.id)
+                                  ((condition.level === 0) && (combination.conditionID === condition.id)) ||
+                                  (combination.conditionID === condition.id) ||
+                                  (combination.attributeID !== attribute.id)
                                 ) &&
                                 <CombinationWrapper
-                                  combination={this.state.combination}
+                                  combination={combination}
                                   attribute={attribute}
                                   condition={condition}
                                 />
@@ -260,14 +259,36 @@ class Table extends React.Component {
                               {
                                 this.sortCells(condition.testCaseValues, table.testCaseNames).map(cell => {
                                   return (
-                                    <div key={cell.id} className={`cells cells-${attribute.name}`}
-                                         title={cell.name}>
+                                    <div
+                                      key={cell.id}
+                                      className={`cells cells-${attribute.name}`}
+                                      onClick={(e) => this.showDropdown(e, attribute, condition, cell)}
+                                      title={cell.name}
+                                    >
                                       <p>
                                         {(cell.name && cell.name.length > 0) ? (
                                             cell.name.length > 48 ? `${cell.name.substring(0, 48)}...` : `${cell.name}`
                                           ) :
                                           <span>+</span>}
                                       </p>
+
+                                      {
+                                        this.state.dropdown.id === cell.id && this.state.dropdown.isShown &&
+                                        <div className="cells_dropdown">
+                                          {
+                                            this.state.dropdown.data.map(instance => {
+                                              return <p
+                                                key={instance.id}
+                                                onClick={() => console.log(instance.name)}
+                                                title={instance.name}
+                                              >
+                                                {instance.name}
+                                              </p>;
+                                            })
+                                          }
+                                        </div>
+
+                                      }
                                     </div>
                                   );
                                 })

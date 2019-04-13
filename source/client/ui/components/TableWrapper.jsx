@@ -3,7 +3,7 @@ import React from "react";
 import * as _ from "lodash";
 
 import "../../css/App.css";
-import TableTitlesTop from "./TableTitlesTop";
+
 import Table from "./Table";
 
 class TableWrapper extends React.Component {
