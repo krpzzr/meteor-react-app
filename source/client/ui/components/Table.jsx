@@ -4,6 +4,7 @@ import * as _ from "lodash";
 
 import "../../css/App.css";
 import TableCell from "./TableCell";
+import CombinationWrapper from "./CombinationWrapper";
 
 class Table extends React.Component {
 
@@ -249,10 +250,11 @@ class Table extends React.Component {
                                   (this.state.combination.conditionID === condition.id) ||
                                   (this.state.combination.attributeID !== attribute.id)
                                 ) &&
-                                <div
-                                  className="comb_wrapper"
-                                  style={{height: (this.state.combination.attributeID === attribute.id) ? 392 : 76}}
-                                >123</div>
+                                <CombinationWrapper
+                                  combination={this.state.combination}
+                                  attribute={attribute}
+                                  condition={condition}
+                                />
                               }
 
                               {
