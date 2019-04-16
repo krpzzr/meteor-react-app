@@ -83,13 +83,12 @@ class TableWrapper extends React.Component {
     });
   };
 
-  updateCell = (cell, tableID, conditionID, value) => {
+  updateCell = (tableID, conditionID, instanceID, cellID) => {
     let updateCell = {
       tableID,
       conditionID,
-      cellID: cell.id,
-      titleID: cell.titleID,
-      value,
+      instanceID,
+      cellID
     };
 
     this.props.updateCells(updateCell);

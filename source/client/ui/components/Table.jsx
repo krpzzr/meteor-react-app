@@ -24,17 +24,28 @@ class Table extends React.Component {
     },
   };
 
-  sortCells = (cells, titles) => {
-    let arr = [];
-
+  sortCells = (condition, titles, arr = []) => {
     titles.map(title => {
-      return cells.map(cell => {
+      return condition.testCaseValues.map(cell => {
 
         if (title.id === cell.titleID) {
-          arr.push(cell);
+          arr.push(_.assign({}, cell));
         }
 
       });
+    });
+
+    condition.instances.forEach(instance => {
+      arr.forEach(cell => {
+
+        if (instance.id === cell.instanceID) {
+          cell.name = instance.name;
+        }
+      });
+    });
+
+    arr.forEach(cell => {
+      if (!cell.name) cell.name = '';
     });
 
     return arr;
@@ -42,17 +53,13 @@ class Table extends React.Component {
 
   toFlatData = (node, result = [], curLevel = 0) => {
     if (node.length) {
-      node.forEach(item => {
-        result.push(item);
-        item.level = curLevel;
+      node.map(item => {
+        result.push(_.assign({}, item, {level: curLevel}));
         curLevel++;
-        item.last = false;
 
         if (item.subconditions && item.subconditions.length > 0) {
-          item.last = false;
           this.toFlatData(item.subconditions, result, curLevel);
         } else if (item.subconditions && item.subconditions.length === 0) {
-          item.last = true;
         }
 
         curLevel--;
@@ -130,10 +137,10 @@ class Table extends React.Component {
     });
   };
 
-  updateCell = (e, cell, tableID, conditionID, value) => {
+  updateCell = (e, tableID, conditionID, instanceID, cellID) => {
     e.stopPropagation();
 
-    this.props.updateCell(cell, tableID, conditionID, value);
+    this.props.updateCell(tableID, conditionID, instanceID, cellID);
     this.hideDropdown();
   };
 
@@ -143,8 +150,8 @@ class Table extends React.Component {
         isShown: false,
         attributeID: null,
         conditionID: null,
-        type: ""
-      }
+        type: "",
+      },
     });
   };
 
@@ -165,7 +172,6 @@ class Table extends React.Component {
           className={`table_headers ${combination.isShown ? "inst_comb-isOpen" : ""}`}>
           <div className="empty_header-1 header"></div>
           <div className="empty_header-2 header"></div>
-          {/*<div className={"header comb"}></div>*/}
           {
             table.testCaseNames.map(title => {
               return (
@@ -289,7 +295,7 @@ class Table extends React.Component {
                               }
 
                               {
-                                this.sortCells(condition.testCaseValues, table.testCaseNames).map(cell => {
+                                this.sortCells(condition, table.testCaseNames).map(cell => {
                                   return (
                                     <div
                                       key={cell.id}

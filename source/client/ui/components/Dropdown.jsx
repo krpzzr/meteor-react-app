@@ -40,7 +40,7 @@ class Dropdown extends React.Component {
           dropdown.data.map(instance => {
             return <p
               key={instance.id}
-              onClick={(e) => updateCell(e, cell, tableID, conditionID, instance.name)}
+              onClick={(e) => updateCell(e, tableID, conditionID, instance.id, cell.id)}
               title={instance.name}
             >
               {instance.name}

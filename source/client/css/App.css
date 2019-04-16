@@ -278,7 +278,97 @@ i.condition_arrow {
     left: 454px;
     width: 420px;
     height: 392px;
-    background-color: #ffa6a6;
+    padding: 20px;
+    background-color: #f1f1f2;
+    z-index: 100;
+}
+
+.GIVEN-comb {
+    background-color: #f3e9ff;
+}
+
+.WHEN-comb {
+    background-color: #FCF4F4;
+}
+
+.THEN-comb {
+    background-color: #d8f5e5;
+}
+
+.GIVEN-comb .comb_title {
+    color: #4F287B;
+}
+
+.WHEN-comb .comb_title {
+    color: #E85755;
+}
+
+.THEN-comb .comb_title {
+    color: #3EB775;
+}
+
+.comb_input_wrapper input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    margin-top: 23px;
+    outline: none;
+}
+
+.comb_input_wrapper input::placeholder {
+    opacity: .4;
+    text-transform: uppercase;
+}
+
+.GIVEN-comb .comb_input_wrapper input, .GIVEN-comb .comb_input_wrapper input::placeholder {
+    color: #4F287B;
+}
+
+.GIVEN-comb .comb_input_wrapper input {
+    border-bottom: 1px solid #4F287B;
+}
+
+.WHEN-comb .comb_input_wrapper input, .WHEN-comb .comb_input_wrapper input::placeholder {
+    color: #E85755;
+}
+
+.WHEN-comb .comb_input_wrapper input {
+    border-bottom: 1px solid #E85755;
+}
+
+.THEN-comb .comb_input_wrapper input, .THEN-comb .comb_input_wrapper input::placeholder {
+    color: #3EB775;
+}
+
+.THEN-comb .comb_input_wrapper input {
+    border-bottom: 1px solid #3EB775;
+}
+
+.comb_opacity {
+    display: flex;
+}
+
+.comb_item {
+    width: 50%;
+    background-color: red;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 40px;
+    display: flex;
+    position: relative;
+}
+
+.comb_item:nth-child(odd) {
+    margin-right: 2px;
+}
+
+.comb_item:nth-child(even) {
+    margin-left: 2px;
+}
+
+.comb_edit-delete_btns {
+    position: absolute;
 }
 
 .cells_dropdown {

@@ -44,22 +44,22 @@ export default {
             {
               id: "122121",
               titleID: "1",
-              name: "VISA",
+              instanceID: "122121"
             },
             {
               id: "622362",
               titleID: "2",
-              name: "MASTERCARD",
+              instanceID: "622362"
             },
             {
               id: "3g4g3",
               titleID: "3",
-              name: "",
+              instanceID: null
             },
             {
               id: "g3g3g3g",
               titleID: "4",
-              name: "",
+              instanceID: null
             },
           ],
         },
@@ -73,22 +73,22 @@ export default {
             {
               id: "bdssdbsdb",
               titleID: "1",
-              name: "",
+              instanceID: null
             },
             {
               id: "nre9ern",
               titleID: "2",
-              name: "",
+              instanceID: null
             },
             {
               id: "lkxcls4",
               titleID: "3",
-              name: "",
+              instanceID: null
             },
             {
-              id: "dfm;sdfl;sd;6765765",
+              id: "dfm-aasdfl-asd-6765765",
               titleID: "4",
-              name: "",
+              instanceID: null
             },
           ],
         },
@@ -124,22 +124,22 @@ export default {
                     {
                       id: "2jjky9",
                       titleID: "1",
-                      name: "MASTERCARD PLATINUM",
+                      instanceID: "2jjky9"
                     },
                     {
-                      id: "d;sa',d;sad;'asd,a'sd,",
+                      id: "dfasasf132-dsad-asd-asd,",
                       titleID: "2",
-                      name: "",
+                      instanceID: null
                     },
                     {
                       id: "g;lds;glsdl;m666",
                       titleID: "3",
-                      name: "",
+                      instanceID: null
                     },
                     {
                       id: "ckwkfmwepfmwepfwef75",
                       titleID: "4",
-                      name: "",
+                      instanceID: null
                     },
                   ],
                 },
@@ -160,22 +160,22 @@ export default {
                 {
                   id: "tqqt22",
                   titleID: "1",
-                  name: "MASTERCARD",
+                  instanceID: "tqqt22",
                 },
                 {
                   id: "reg445645",
                   titleID: "2",
-                  name: "MIR",
+                  instanceID: "reg445645"
                 },
                 {
-                  id: "d;v,.ds;v,ds;fds;fdsf3",
+                  id: "dafaf-dsvds-fds-fdsf3",
                   titleID: "3",
-                  name: "",
+                  instanceID: null
                 },
                 {
-                  id: "plekekmvdkmdlks;6",
+                  id: "plekekmvdk-mdlks6",
                   titleID: "4",
-                  name: "",
+                  instanceID: null
                 },
               ],
             },
@@ -185,36 +185,36 @@ export default {
               subconditions: [],
               instances: [
                 {
-                  id: "dasmdas;lmdas;lmd;asdmas6",
+                  id: "dasmdas-lmdas-lmd-asdmas6",
                   name: "TEST1",
                   subInstances: [],
                 },
                 {
-                  id: "sdflsdf;ds,fdsl;35353",
+                  id: "sdflsdf-ds-fdsl-35353",
                   name: "TEST2",
                   subInstances: [],
                 },
               ],
               testCaseValues: [
                 {
-                  id: "dasmdas;lmdas;lmd;asdmas6",
+                  id: "dasmdas-lmdas-lmd-asdmas6",
                   titleID: "1",
-                  name: "TEST1",
+                  instanceID: "dasmdas-lmdas-lmd-asdmas6"
                 },
                 {
-                  id: "as,,f,g,,74",
+                  id: "asadf-as-asgasd-ad74",
                   titleID: "2",
-                  name: "",
+                  instanceID: null
                 },
                 {
-                  id: "sdflsdf;ds,fdsl;35353",
+                  id: "sdflsdf-ds-fdsl-35353",
                   titleID: "3",
-                  name: "TEST2",
+                  instanceID: "sdflsdf-ds-fdsl-35353"
                 },
                 {
-                  id: "fsdf,sd,fl;dsf,;sd9876",
+                  id: "fsdfs-dfl-dsf-sd9876",
                   titleID: "4",
-                  name: "",
+                  instanceID: null
                 },
               ],
             },
@@ -235,22 +235,22 @@ export default {
             {
               id: "99",
               titleID: "1",
-              name: "VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA VISA cell_customcell_customcell_customcell_customcell_customcell_customcell_customcell_customcell_customcell_customcell_custom",
+              instanceID: "99"
             },
             {
               id: "968t7tt",
               titleID: "2",
-              name: "MASTERCARD",
+              instanceID: "968t7tt"
             },
             {
-              id: "msdasl;dmsa;l6m6",
+              id: "msdasl-dmsa-l6m6",
               titleID: "3",
-              name: "",
+              instanceID: null
             },
             {
-              id: "sdfsd44,,ww",
+              id: "sdfsd44asda-asdaasda-ww",
               titleID: "4",
-              name: "",
+              instanceID: null
             },
           ],
         },
@@ -267,24 +267,24 @@ export default {
           instances: [],
           testCaseValues: [
             {
-              id: "lmsdl,fl;d,sf,sdf;sd,762b",
+              id: "lmsdl=fl-sf-df-sd62b",
               titleID: "1",
-              name: "",
+              instanceID: null
             },
             {
-              id: "ddsgsdt6llfdlg;,df",
+              id: "ddsgsdt6llfdlg-sasdf",
               titleID: "2",
-              name: "",
+              instanceID: null
             },
             {
               id: "dnfldsn6je6lse5-5e",
               titleID: "3",
-              name: "",
+              instanceID: null
             },
             {
               id: "mg;sdmgksdmgksld9494949--4i4i4m",
               titleID: "4",
-              name: "",
+              instanceID: null
             },
           ],
         },
@@ -294,7 +294,7 @@ export default {
           subconditions: [],
           instances: [
             {
-              id: "efkskf;lfdfds-44",
+              id: "efkskf-lfdfds-44",
               name: "VISA PLATINUM SUPER PLUS",
               subInstances: []
             }
@@ -303,22 +303,22 @@ export default {
             {
               id: "fdfndsljfdslf8dsf8ds",
               titleID: "1",
-              name: "",
+              instanceID: null
             },
             {
-              id: "efkskf;lfdfds-44",
+              id: "efkskf-lfdfds-44",
               titleID: "3",
               name: "VISA PLATINUM SUPER PLUS",
             },
             {
               id: "fdsfmdskfmdskf993393",
               titleID: "2",
-              name: "",
+              instanceID: null
             },
             {
               id: "dsfjsdklflkdsfds-345345",
               titleID: "4",
-              name: "",
+              instanceID: null
             },
           ],
         },

@@ -19,19 +19,19 @@ class App extends React.Component {
     newTableShown: false,
   };
 
-  recursiveChangeCells = (node, cell) => {
+  recursiveChangeCells = (node, data) => {
     node.forEach(cond => {
-      if (cond.id === cell.conditionID) {
+      if (cond.id === data.conditionID) {
 
         cond.testCaseValues.forEach(tcv => {
-          if (tcv.id === cell.cellID) {
-            tcv.name = cell.value;
+          if (tcv.id === data.cellID) {
+            tcv.instanceID = data.instanceID;
           }
         });
 
       } else if (cond.subconditions && cond.subconditions.length > 0) {
 
-        this.recursiveChangeCells(cond.subconditions, cell);
+        this.recursiveChangeCells(cond.subconditions, data);
 
       }
     });
@@ -92,14 +92,14 @@ class App extends React.Component {
     });
   };
 
-  updateCells = cell => {
+  updateCells = data => {
     let arr = this.state.tables;
-
+    console.log('updateCells', data);
     arr.forEach(table => {
 
-      if (cell.tableID === table._id) {
+      if (data.tableID === table._id) {
         table.attributes.forEach(attr => {
-          this.recursiveChangeCells(attr.conditions, cell);
+          this.recursiveChangeCells(attr.conditions, data);
         });
       }
 
