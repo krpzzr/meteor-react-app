@@ -137,10 +137,10 @@ class Table extends React.Component {
     });
   };
 
-  updateCell = (e, tableID, conditionID, instanceID, cellID) => {
+  updateCell = (e, tableID, conditionID, instance, cellID) => {
     e.stopPropagation();
 
-    this.props.updateCell(tableID, conditionID, instanceID, cellID);
+    this.props.updateCell(tableID, conditionID, instance, cellID);
     this.hideDropdown();
   };
 
@@ -291,6 +291,7 @@ class Table extends React.Component {
                                   condition={condition}
                                   hideCombination={this.hideCombination}
                                   createInstance={this.props.createInstance}
+                                  createCombination={this.props.createCombination}
                                 />
                               }
 

@@ -83,11 +83,11 @@ class TableWrapper extends React.Component {
     });
   };
 
-  updateCell = (tableID, conditionID, instanceID, cellID) => {
+  updateCell = (tableID, conditionID, instance, cellID) => {
     let updateCell = {
       tableID,
       conditionID,
-      instanceID,
+      instance,
       cellID
     };
 
@@ -199,6 +199,7 @@ class TableWrapper extends React.Component {
                 cellCreateInputs={this.state.cellCreateInputs}
                 createCell={this.createCell}
                 createInstance={this.props.createInstance}
+                createCombination={this.props.createCombination}
               />
 
             }

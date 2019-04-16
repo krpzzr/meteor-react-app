@@ -19,19 +19,41 @@ class App extends React.Component {
     newTableShown: false,
   };
 
-  recursiveChangeCells = (node, data) => {
+  recursiveChangeCells = (node, data, child = false, titleID = null) => {
     node.forEach(cond => {
-      if (cond.id === data.conditionID) {
+      if (child && data.instance.subInstances.length > 0) {
+
+        data.instance.subInstances.forEach(subI => {
+          if (subI.conditionID === cond.id) {
+            cond.testCaseValues.forEach(tcv2 => {
+              if (tcv2.titleID === titleID) {
+                tcv2.instanceID = subI.instanceID;
+              }
+            })
+          } else if (cond.subconditions.length > 0) {
+            this.recursiveChangeCells(cond.subconditions, data, true, titleID);
+          }
+        });
+
+        if (cond.subconditions.length > 0) {
+          this.recursiveChangeCells(cond.subconditions, data, true, titleID);
+        }
+
+      } else if (cond.id === data.conditionID) {
 
         cond.testCaseValues.forEach(tcv => {
           if (tcv.id === data.cellID) {
-            tcv.instanceID = data.instanceID;
+            tcv.instanceID = data.instance.id;
+
+            if (cond.subconditions.length > 0) {
+              this.recursiveChangeCells(cond.subconditions, data, true, tcv.titleID);
+            }
           }
         });
 
       } else if (cond.subconditions && cond.subconditions.length > 0) {
 
-        this.recursiveChangeCells(cond.subconditions, data);
+        this.recursiveChangeCells(cond.subconditions, data, false, null);
 
       }
     });
@@ -94,7 +116,7 @@ class App extends React.Component {
 
   updateCells = data => {
     let arr = this.state.tables;
-    console.log('updateCells', data);
+
     arr.forEach(table => {
 
       if (data.tableID === table._id) {
@@ -290,12 +312,35 @@ class App extends React.Component {
         cond.instances.push({
           id: ID(),
           name,
-          subconditions: []
-        })
+          subconditions: [],
+        });
 
       } else if (cond.subconditions && cond.subconditions.length > 0) {
 
         this.recursiveCreateInstance(cond.subconditions, conditionID, name);
+
+      }
+    });
+  };
+
+  // CREATE COMBINATION
+  recursiveCreateCombination = (node, conditionID, combinationName, array) => {
+    const ID = function () {
+      return "_" + Math.random().toString(36).substr(2, 9);
+    };
+
+    node.forEach(cond => {
+      if (cond.id === conditionID) {
+
+        cond.instances.push({
+          id: ID(),
+          name: combinationName,
+          subInstances: array,
+        });
+
+      } else if (cond.subconditions && cond.subconditions.length > 0) {
+
+        this.recursiveCreateCombination(cond.subconditions, conditionID, combinationName, array);
 
       }
     });
@@ -320,8 +365,22 @@ class App extends React.Component {
   };
 
   // Create COMBINATION
-  createCombination = () => {
+  createCombination = (tableID, attributeID, conditionID, combinationName, array) => {
+    let arr = this.state.tables;
 
+    arr.forEach(table => {
+
+      if (tableID === table._id) {
+        table.attributes.forEach(attr => {
+          if (attr.id === attributeID) {
+            this.recursiveCreateCombination(attr.conditions, conditionID, combinationName, array);
+          }
+        });
+      }
+
+    });
+
+    this.setState({tables: arr});
   };
 
   render() {
@@ -403,6 +462,7 @@ class App extends React.Component {
                     updateTitles={this.updateTitles}
                     createColumn={this.createColumn}
                     createInstance={this.createInstance}
+                    createCombination={this.createCombination}
                   />
                 );
               })

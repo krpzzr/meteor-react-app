@@ -29,7 +29,7 @@ class CombinationWrapper extends React.Component {
   };
 
   render() {
-    const {tableID, combination, attribute, condition, createInstance, hideCombination} = this.props;
+    const {tableID, combination, attribute, condition, createInstance, hideCombination, createCombination} = this.props;
     return (
 
       <div
@@ -53,9 +53,18 @@ class CombinationWrapper extends React.Component {
                   type="text"
                 />
               </div>
-              <button
-                onClick={() => createInstance(tableID, combination.attributeID, combination.conditionID, this.state.value)}>Add
-              </button>
+              {
+                combination.type === "COMBINATION" ?
+                  <button
+                    onClick={() => createCombination(tableID, combination.attributeID, combination.conditionID, 'COMBINATION 1', [
+                      {conditionID: "username_id", instanceID: "2jjky9"},
+                      {conditionID: "type_of_user_id2", instanceID: "dasmdas-mdas-lmd-asdmas6"}
+                      ])}>Add
+                  </button> :
+                  <button
+                    onClick={() => createInstance(tableID, combination.attributeID, combination.conditionID, this.state.value)}>Add
+                  </button>
+              }
               <button onClick={hideCombination}>Hide</button>
             </> :
             <div className="comb_opacity">
