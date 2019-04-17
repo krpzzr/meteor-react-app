@@ -77,6 +77,7 @@
     justify-content: center;
     margin-right: 3px;
     margin-left: 3px;
+    margin-bottom: 3px;
 }
 
 .gwt-GIVEN {
@@ -92,7 +93,7 @@
 }
 
 .header {
-    height: 40px;
+    height: 52px;
     width: 200px;
     flex: 0 0 200px;
     font-weight: 500;
@@ -272,6 +273,18 @@ i.condition_arrow {
     bottom: 3px;
 }
 
+.hide_comb {
+    position: absolute;
+    right: 0;
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border: none;
+    top: 0px;
+    cursor: pointer;
+    outline: none;
+}
+
 .comb_wrapper {
     position: absolute;
     top: 0;
@@ -281,6 +294,29 @@ i.condition_arrow {
     padding: 20px;
     background-color: #f1f1f2;
     z-index: 100;
+    overflow: hidden;
+}
+
+.comb_opacity::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: .7;
+}
+
+.GIVEN-comb .comb_opacity::after {
+    background-color: #4F287B;
+}
+
+.WHEN-comb .comb_opacity::after {
+    background-color: #E85755;
+}
+
+.THEN-comb .comb_opacity::after {
+    background-color: #3EB775;
 }
 
 .GIVEN-comb {
@@ -293,6 +329,18 @@ i.condition_arrow {
 
 .THEN-comb {
     background-color: #d8f5e5;
+}
+
+.GIVEN-comb .hide_comb path {
+    fill: #4F287B;
+}
+
+.WHEN-comb .hide_comb path {
+    fill: #E85755;
+}
+
+.THEN-comb .hide_comb path {
+    fill: #3EB775;
 }
 
 .GIVEN-comb .comb_title {
@@ -346,29 +394,52 @@ i.condition_arrow {
 
 .comb_opacity {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .comb_item {
-    width: 50%;
-    background-color: red;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 40px;
-    display: flex;
+    width: calc(50% - 4px);
+    padding-right: 46px;
     position: relative;
-}
-
-.comb_item:nth-child(odd) {
+    color: #fff;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    height: 30px;
+    padding-top: 7px;
+    padding-left: 8px;
     margin-right: 2px;
+    margin-left: 2px;
+    margin-bottom: 4px;
 }
 
-.comb_item:nth-child(even) {
-    margin-left: 2px;
+.GIVEN-comb .comb_item {
+    background-color: #4F287B;
+}
+
+.WHEN-comb .comb_item {
+    background-color: #E85755;
+}
+
+.THEN-comb .comb_item {
+    background-color: #3EB775;
 }
 
 .comb_edit-delete_btns {
     position: absolute;
+    right: 3px;
+    top: 7px;
+}
+
+.comb_edit-delete_btns button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.comb_edit-delete_btns path {
+    fill: #fff;
 }
 
 .cells_dropdown {

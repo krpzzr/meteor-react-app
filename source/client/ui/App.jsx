@@ -28,6 +28,10 @@ class App extends React.Component {
             cond.testCaseValues.forEach(tcv2 => {
               if (tcv2.titleID === titleID) {
                 tcv2.instanceID = subI.instanceID;
+
+                if (cond.subconditions.length > 0) {
+                  this.recursiveChangeCells(cond.subconditions, data, true, titleID);
+                }
               }
             })
           } else if (cond.subconditions.length > 0) {
@@ -333,7 +337,7 @@ class App extends React.Component {
       if (cond.id === conditionID) {
 
         cond.instances.push({
-          id: ID(),
+          id: '1488',
           name: combinationName,
           subInstances: array,
         });
