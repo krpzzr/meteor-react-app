@@ -1,5 +1,37 @@
 /* TABLE COMPONENTS */
 
+/* CUSTOM SCROLL */
+.cells_dropdown::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cells_dropdown::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.cells_dropdown::-webkit-scrollbar-thumb {
+    background-color: #000;
+    outline: 1px solid slategrey;
+}
+
+.comb_wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+
+.comb_wrapper::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.comb_wrapper::-webkit-scrollbar-thumb {
+    background-color: #000;
+    outline: 1px solid slategrey;
+}
+
+
+.clear {
+    clear: both;
+}
+
 .container {
     margin-left: 15px;
     margin-right: 15px;
@@ -290,11 +322,16 @@ i.condition_arrow {
     top: 0;
     left: 454px;
     width: 420px;
-    height: 392px;
     padding: 20px;
     background-color: #f1f1f2;
     z-index: 100;
+    height: 76px;
     overflow: hidden;
+}
+
+.comb_active {
+    height: 389px;
+    overflow: auto;
 }
 
 .comb_opacity::after {
@@ -392,6 +429,50 @@ i.condition_arrow {
     border-bottom: 1px solid #3EB775;
 }
 
+.add_comb_inst {
+    float: right;
+    border: 2px solid #000;
+    margin-top: 10px;
+    text-transform: uppercase;
+    background: transparent;
+    color: #000;
+    cursor: pointer;
+    transition: all .20s ease;
+    outline: none;
+}
+
+.GIVEN-comb .add_comb_inst {
+    border: 2px solid #4F287B;
+    color: #4F287B;
+}
+
+.GIVEN-comb .add_comb_inst:hover {
+    background-color: #4F287B;
+}
+
+.WHEN-comb .add_comb_inst {
+    border: 2px solid #E85755;
+    color: #E85755;
+}
+
+.WHEN-comb .add_comb_inst:hover {
+    background-color: #E85755;
+}
+
+.THEN-comb .add_comb_inst {
+    border: 2px solid #3EB775;
+    color: #3EB775;
+}
+
+.THEN-comb .add_comb_inst:hover {
+    background-color: #3EB775;
+}
+
+.add_comb_inst:hover {
+    transition: all .20s ease;
+    color: #fff;
+}
+
 .comb_opacity {
     display: flex;
     flex-wrap: wrap;
@@ -409,9 +490,7 @@ i.condition_arrow {
     height: 30px;
     padding-top: 7px;
     padding-left: 8px;
-    margin-right: 2px;
-    margin-left: 2px;
-    margin-bottom: 4px;
+    margin: 2px;
 }
 
 .GIVEN-comb .comb_item {
@@ -505,6 +584,13 @@ i.condition_arrow {
 
 .attr-THEN:hover, .cells-THEN:hover {
     background-color: rgba(62, 183, 117, 0.16);
+}
+
+.instances_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 23px;
+    overflow-y: auto;
 }
 
 /**/

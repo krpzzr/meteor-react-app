@@ -337,7 +337,7 @@ class App extends React.Component {
       if (cond.id === conditionID) {
 
         cond.instances.push({
-          id: '1488',
+          id: '1299',
           name: combinationName,
           subInstances: array,
         });
