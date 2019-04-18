@@ -10,16 +10,100 @@ class CreateCombination extends React.Component {
 
   state = {
     value: "",
+    conditionRows: [],
+    currentConditionRow: "",
+    currentConditionInstances: [],
+    currentConditionInstance: "",
+    choosenInstances: [],
+    choosedIdentificatiors: [],
+    refresh: false,
   };
 
-  onInputChange = (e) => {
+  componentDidMount() {
+    this.toFlatData();
+    console.log("componentDidMount");
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+
+    if (this.state.currentConditionRow !== prevState.currentConditionRow) {
+      return this.state.currentConditionRow
+    }
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (snapshot !== null) {
+      // this.toFlatData(this.props.condition.subconditions);
+      console.log('this.state.conditionRows', this.state.conditionRows)
+      this.state.conditionRows.map(r => {
+        if (r.id === this.state.currentConditionRow) {
+          this.setState({
+            currentConditionInstances: [...r.instances]
+          });
+          // r.subconditions.map(sub => {
+          //   this.setState(prevState => ({
+          //     currentConditionInstances: [
+          //       ...prevState.currentConditionInstances,
+          //       ...sub.instances
+          //     ]
+          //   }))
+          // })
+        }
+      });
+    }
+  }
+
+  toFlatData = () => {
+    this.setState(prevState => ({
+      conditionRows: [...this.props.condition.subconditions]
+    }))
+    // if (node.length) {
+    //   node.map(item => {
+    //
+    //     this.setState(prevState => ({
+    //       conditionRows: [
+    //         ...prevState.conditionRows,
+    //         _.assign({}, item, {level: curLevel}),
+    //       ],
+    //     }), () => {
+    //       curLevel++;
+    //
+    //       if (item.subconditions && item.subconditions.length > 0) {
+    //         this.toFlatData(item.subconditions, curLevel);
+    //       }
+    //
+    //       curLevel--;
+    //     });
+    //   });
+    // }
+  };
+
+  onInputChange = e => {
     this.setState({
       value: e.target.value,
     });
   };
 
+  onConditionSelectChange = e => this.setState({
+    currentConditionRow: e.target.value
+  });
+
+  onInstanceSelectChange = e => {
+    let value = e.target.value;
+
+    this.setState(prevState => ({
+      currentConditionInstance: value,
+      choosenInstances: [
+        ...prevState.choosenInstances,
+        value
+      ]
+    }));
+  };
+
   render() {
     const {tableID, combination, attribute, condition, hideCombination, createCombination} = this.props;
+    console.log("currentConditionInstances", this.state.currentConditionInstances);
     return (
 
       <div>
@@ -54,6 +138,58 @@ class CreateCombination extends React.Component {
             type="text"
           />
         </div>
+
+        <label htmlFor="choose_row">Choose condition</label>
+        <select
+          name="choose_row"
+          id="choose_row"
+          onChange={this.onConditionSelectChange}
+          value={this.state.currentConditionRow}
+        >
+          <>
+            <option defaultValue>Choose condition</option>
+            {
+              this.state.conditionRows.map(row => {
+                return (
+                  <option
+                    key={row.id}
+                    value={row.id}
+                  >
+                    {row.name}
+                  </option>
+                );
+              })
+            }
+          </>
+        </select>
+
+        <label htmlFor="choose_instance">Choose instance</label>
+        <select
+          name="choose_instance"
+          id="choose_instance"
+          onChange={this.onInstanceSelectChange}
+          value={this.state.currentConditionInstance}
+        >
+          <>
+            <option defaultValue>Choose instance</option>
+            {
+              this.state.currentConditionInstances.map(instance => {
+                console.log('AAAA', instance)
+                return (
+                  <option
+                    key={instance.id}
+                    value={instance.id}
+                  >
+                    {instance.name}
+                  </option>
+                );
+              })
+            }
+          </>
+        </select>
+
+        <button>+</button>
+
         <button
           className="add_comb_inst"
           onClick={() => createCombination(tableID, combination.attributeID, combination.conditionID, "COMBINATION 1", [
@@ -65,7 +201,7 @@ class CreateCombination extends React.Component {
               conditionID: "type_of_user_id2",
               instanceID: "dasmdas-mdas-lmd-asdmas6",
             },
-          ])}>Add
+          ])}>Create
         </button>
 
         <div className="clear"/>

@@ -14,24 +14,6 @@ class CombinationWrapper extends React.Component {
     value: "",
   };
 
-  onInputChange = (e) => {
-    this.setState({
-      value: e.target.value,
-    });
-  };
-
-  currentName = () => {
-    const {combination, condition} = this.props;
-
-    if (combination.conditionID === condition.id && combination.type === "COMBINATION") {
-      return "CREATE COMBINATIONS";
-    } else if (combination.conditionID === condition.id && combination.type === "INSTANCE") {
-      return "CREATE INSTANCE";
-    } else {
-      return "";
-    }
-  };
-
   render() {
     const {tableID, combination, attribute, condition, createInstance, hideCombination, createCombination} = this.props;
     return (
