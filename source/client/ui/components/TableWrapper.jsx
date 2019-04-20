@@ -200,6 +200,7 @@ class TableWrapper extends React.Component {
                 createCell={this.createCell}
                 createInstance={this.props.createInstance}
                 createCombination={this.props.createCombination}
+                editCombination={this.props.editCombination}
               />
 
             }

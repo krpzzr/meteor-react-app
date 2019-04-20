@@ -297,6 +297,7 @@ class Table extends React.Component {
                                   hideCombination={this.hideCombination}
                                   createInstance={this.props.createInstance}
                                   createCombination={this.props.createCombination}
+                                  editCombination={this.props.editCombination}
                                 />
                               }
 

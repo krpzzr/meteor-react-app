@@ -21,6 +21,7 @@ class Instances extends React.Component {
 
                 <div className="comb_edit-delete_btns">
                   <button
+                    onClick={() => this.props.onEditCombination(instance)}
                     style={{paddingRight: 4, outline: 'none'}}
                   >
                     <svg

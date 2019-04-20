@@ -337,7 +337,7 @@ class App extends React.Component {
       if (cond.id === conditionID) {
 
         cond.instances.push({
-          id: '1299',
+          id: ID(),
           name: combinationName,
           subInstances: array,
         });
@@ -378,6 +378,45 @@ class App extends React.Component {
         table.attributes.forEach(attr => {
           if (attr.id === attributeID) {
             this.recursiveCreateCombination(attr.conditions, conditionID, combinationName, array);
+          }
+        });
+      }
+
+    });
+
+    this.setState({tables: arr});
+  };
+
+  // Edit COMBINATION
+  recursiveEditCombination = (node, conditionID, instanceID, combinationName, array) => {
+
+    node.forEach(cond => {
+      if (cond.id === conditionID) {
+
+        cond.instances.forEach(instance => {
+          if (instance.id === instanceID) {
+            instance.name = combinationName;
+            instance.subInstances = array;
+          }
+        })
+
+      } else if (cond.subconditions && cond.subconditions.length > 0) {
+
+        this.recursiveEditCombination(cond.subconditions, conditionID, instanceID, combinationName, array);
+
+      }
+    });
+  };
+
+  editCombination = (tableID, attributeID, conditionID, instanceID, combinationName, array) => {
+    let arr = this.state.tables;
+
+    arr.forEach(table => {
+
+      if (tableID === table._id) {
+        table.attributes.forEach(attr => {
+          if (attr.id === attributeID) {
+            this.recursiveEditCombination(attr.conditions, conditionID, instanceID, combinationName, array);
           }
         });
       }
@@ -467,6 +506,7 @@ class App extends React.Component {
                     createColumn={this.createColumn}
                     createInstance={this.createInstance}
                     createCombination={this.createCombination}
+                    editCombination={this.editCombination}
                   />
                 );
               })

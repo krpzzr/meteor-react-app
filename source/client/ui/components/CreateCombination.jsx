@@ -18,20 +18,33 @@ class CreateCombination extends React.Component {
         instanceID: "",
         instanceName: "",
         instances: [],
-      },
-      {
-        conditionID: "",
-        conditionName: "",
-        instanceID: "",
-        instanceName: "",
-        instances: [],
-      },
+      }
     ],
+    instanceID: ""
   };
 
   componentDidMount() {
     this.setState({availableConditions: [...this.props.condition.subconditions]});
   }
+
+  onEditCombination = (instance) => {
+    this.setState({
+      instanceID: instance.id,
+      selects: instance.subInstances,
+      value: instance.name
+    });
+  };
+
+  editCombination = () => {
+    this.props.editCombination(
+      this.props.tableID,
+      this.props.attribute.id,
+      this.props.condition.id,
+      this.state.instanceID,
+      this.state.value,
+      this.state.selects
+    )
+  };
 
   onInputChange = (e) => {
     this.setState({value: e.target.value});
@@ -58,17 +71,41 @@ class CreateCombination extends React.Component {
         if (instance.id === e.target.value) {
           selects[idx].instanceName = instance.name;
         }
-      })
+      });
     }
 
     this.setState({
-      selects
+      selects,
     });
+  };
+
+  addSelect = () => {
+    this.setState(prevState => ({
+      selects: [
+        ...prevState.selects,
+        {
+          conditionID: "",
+          conditionName: "",
+          instanceID: "",
+          instanceName: "",
+          instances: [],
+        }
+      ]
+    }))
+  };
+
+  deleteSelect = (idx) => {
+    let selects = [...this.state.selects];
+
+    selects.splice(idx, 1);
+
+    this.setState({
+      selects
+    })
   };
 
   render() {
     const {tableID, combination, attribute, condition, hideCombination, createCombination} = this.props;
-    console.log("selects", this.state.selects);
     return (
 
       <div>
@@ -110,7 +147,9 @@ class CreateCombination extends React.Component {
               <div key={idx}>
                 {
                   <>
-                    <select name="" id="" onChange={(e) => this.onSelectChange(e, idx, 'conditionID')} value={select.conditionID}>
+                    <select name="" id=""
+                            onChange={(e) => this.onSelectChange(e, idx, "conditionID")}
+                            value={select.conditionID}>
                       <option value={select.conditionID}>{select.conditionName}</option>
 
                       {
@@ -123,15 +162,22 @@ class CreateCombination extends React.Component {
                       }
                     </select>
 
-                    <select name="" id="" onChange={(e) => this.onSelectChange(e, idx, 'instanceID')} value={select.instanceID}>
+                    <select name="" id=""
+                            onChange={(e) => this.onSelectChange(e, idx, "instanceID")}
+                            value={select.instanceID}>
                       <option value={select.instanceID}>{select.instanceName}</option>
 
                       {
                         select.instances.map(instance => {
-                          return <option key={instance.id} value={instance.id}>{instance.name}</option>
+                          if (!_.find(this.state.selects, {instanceID: instance.id})) {
+                            return <option key={instance.id}
+                                           value={instance.id}>{instance.name}</option>;
+                          }
                         })
                       }
                     </select>
+
+                    <button onClick={() => this.deleteSelect(idx)}>Delete</button>
                   </>
                 }
               </div>
@@ -139,18 +185,16 @@ class CreateCombination extends React.Component {
           })
         }
 
+        <button onClick={this.addSelect}>Create new row</button>
+
+
         <button
           className="add_comb_inst"
-          onClick={() => createCombination(tableID, combination.attributeID, combination.conditionID, "COMBINATION 1", [
-            {
-              conditionID: "username_id",
-              instanceID: "2jjky9",
-            },
-            {
-              conditionID: "type_of_user_id2",
-              instanceID: "dasmdas-mdas-lmd-asdmas6",
-            },
-          ])}>Create
+          onClick={() => createCombination(tableID, combination.attributeID, combination.conditionID, this.state.value, this.state.selects)}>Create
+        </button>
+        <button
+          className="add_comb_inst"
+          onClick={this.editCombination}>Edit
         </button>
 
         <div className="clear"/>
@@ -158,6 +202,7 @@ class CreateCombination extends React.Component {
         <div className="instances_wrapper">
           <Instances
             condition={condition}
+            onEditCombination={this.onEditCombination}
           />
         </div>
       </div>
