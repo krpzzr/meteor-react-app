@@ -46,6 +46,15 @@ class CreateCombination extends React.Component {
     )
   };
 
+  deleteCombination = (instanceID) => {
+    this.props.deleteCombination(
+      this.props.tableID,
+      this.props.attribute.id,
+      this.props.condition.id,
+      instanceID,
+    )
+  };
+
   onInputChange = (e) => {
     this.setState({value: e.target.value});
   };
@@ -203,6 +212,7 @@ class CreateCombination extends React.Component {
           <Instances
             condition={condition}
             onEditCombination={this.onEditCombination}
+            deleteCombination={this.deleteCombination}
           />
         </div>
       </div>

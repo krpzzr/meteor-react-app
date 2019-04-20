@@ -15,7 +15,7 @@ class CombinationWrapper extends React.Component {
   };
 
   render() {
-    const {tableID, combination, attribute, condition, createInstance, hideCombination, createCombination, editCombination} = this.props;
+    const {tableID, combination, attribute, condition, createInstance, hideCombination, createCombination, editCombination, deleteCombination} = this.props;
     return (
 
       <div
@@ -34,6 +34,7 @@ class CombinationWrapper extends React.Component {
                     hideCombination={hideCombination}
                     createCombination={createCombination}
                     editCombination={editCombination}
+                    deleteCombination={deleteCombination}
                   /> :
                   <CreateInstance
                     tableID={tableID}

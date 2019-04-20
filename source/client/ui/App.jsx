@@ -426,6 +426,44 @@ class App extends React.Component {
     this.setState({tables: arr});
   };
 
+  // Delete COMBINATION
+  recursiveDeleteCombination = (node, conditionID, instanceID) => {
+
+    node.forEach(cond => {
+      if (cond.id === conditionID) {
+        for (let i = 0; i  < cond.instances.length; i++) {
+          let instance = cond.instances[i];
+          if (instance.id === instanceID) {
+            cond.instances.splice(i, 1);
+          }
+        }
+
+      } else if (cond.subconditions && cond.subconditions.length > 0) {
+
+        this.recursiveDeleteCombination(cond.subconditions, conditionID, instanceID);
+
+      }
+    });
+  };
+
+  deleteCombination = (tableID, attributeID, conditionID, instanceID) => {
+    let arr = this.state.tables;
+
+    arr.forEach(table => {
+
+      if (tableID === table._id) {
+        table.attributes.forEach(attr => {
+          if (attr.id === attributeID) {
+            this.recursiveDeleteCombination(attr.conditions, conditionID, instanceID);
+          }
+        });
+      }
+
+    });
+
+    this.setState({tables: arr});
+  };
+
   render() {
     return (
       <div className="container">
@@ -507,6 +545,7 @@ class App extends React.Component {
                     createInstance={this.createInstance}
                     createCombination={this.createCombination}
                     editCombination={this.editCombination}
+                    deleteCombination={this.deleteCombination}
                   />
                 );
               })

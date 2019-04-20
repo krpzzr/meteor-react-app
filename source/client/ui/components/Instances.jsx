@@ -41,6 +41,7 @@ class Instances extends React.Component {
 
                   <button
                     style={{paddingLeft: 4, outline: 'none'}}
+                    onClick={() => this.props.deleteCombination(instance.id)}
                   >
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                          xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
