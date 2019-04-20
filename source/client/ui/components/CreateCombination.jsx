@@ -10,100 +10,65 @@ class CreateCombination extends React.Component {
 
   state = {
     value: "",
-    conditionRows: [],
-    currentConditionRow: "",
-    currentConditionInstances: [],
-    currentConditionInstance: "",
-    choosenInstances: [],
-    choosedIdentificatiors: [],
-    refresh: false,
+    availableConditions: [],
+    selects: [
+      {
+        conditionID: "",
+        conditionName: "",
+        instanceID: "",
+        instanceName: "",
+        instances: [],
+      },
+      {
+        conditionID: "",
+        conditionName: "",
+        instanceID: "",
+        instanceName: "",
+        instances: [],
+      },
+    ],
   };
 
   componentDidMount() {
-    this.toFlatData();
-    console.log("componentDidMount");
+    this.setState({availableConditions: [...this.props.condition.subconditions]});
   }
 
-  getSnapshotBeforeUpdate(prevProps, prevState) {
+  onInputChange = (e) => {
+    this.setState({value: e.target.value});
+  };
 
-    if (this.state.currentConditionRow !== prevState.currentConditionRow) {
-      return this.state.currentConditionRow
-    }
-    return null;
-  }
+  onSelectChange = (e, idx, name) => {
+    let selects = [...this.state.selects];
+    let availableConditions = [...this.state.availableConditions];
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (snapshot !== null) {
-      // this.toFlatData(this.props.condition.subconditions);
-      console.log('this.state.conditionRows', this.state.conditionRows)
-      this.state.conditionRows.map(r => {
-        if (r.id === this.state.currentConditionRow) {
-          this.setState({
-            currentConditionInstances: [...r.instances]
-          });
-          // r.subconditions.map(sub => {
-          //   this.setState(prevState => ({
-          //     currentConditionInstances: [
-          //       ...prevState.currentConditionInstances,
-          //       ...sub.instances
-          //     ]
-          //   }))
-          // })
+    selects[idx][name] = e.target.value;
+
+    if (name === "conditionID") {
+      availableConditions.map(i => {
+        if (i.id === e.target.value) {
+          selects[idx].conditionName = i.name;
+          selects[idx].instanceName = "";
+          selects[idx].instanceID = "";
+          selects[idx].instances = i.instances;
         }
       });
     }
-  }
+    if (name === "instanceID") {
+      selects[idx].instances.map(instance => {
+        if (instance.id === e.target.value) {
+          selects[idx].instanceName = instance.name;
+        }
+      })
+    }
 
-  toFlatData = () => {
-    this.setState(prevState => ({
-      conditionRows: [...this.props.condition.subconditions]
-    }))
-    // if (node.length) {
-    //   node.map(item => {
-    //
-    //     this.setState(prevState => ({
-    //       conditionRows: [
-    //         ...prevState.conditionRows,
-    //         _.assign({}, item, {level: curLevel}),
-    //       ],
-    //     }), () => {
-    //       curLevel++;
-    //
-    //       if (item.subconditions && item.subconditions.length > 0) {
-    //         this.toFlatData(item.subconditions, curLevel);
-    //       }
-    //
-    //       curLevel--;
-    //     });
-    //   });
-    // }
-  };
-
-  onInputChange = e => {
     this.setState({
-      value: e.target.value,
+      selects
     });
-  };
-
-  onConditionSelectChange = e => this.setState({
-    currentConditionRow: e.target.value
-  });
-
-  onInstanceSelectChange = e => {
-    let value = e.target.value;
-
-    this.setState(prevState => ({
-      currentConditionInstance: value,
-      choosenInstances: [
-        ...prevState.choosenInstances,
-        value
-      ]
-    }));
   };
 
   render() {
     const {tableID, combination, attribute, condition, hideCombination, createCombination} = this.props;
-    console.log("currentConditionInstances", this.state.currentConditionInstances);
+    console.log("selects", this.state.selects);
     return (
 
       <div>
@@ -139,56 +104,40 @@ class CreateCombination extends React.Component {
           />
         </div>
 
-        <label htmlFor="choose_row">Choose condition</label>
-        <select
-          name="choose_row"
-          id="choose_row"
-          onChange={this.onConditionSelectChange}
-          value={this.state.currentConditionRow}
-        >
-          <>
-            <option defaultValue>Choose condition</option>
-            {
-              this.state.conditionRows.map(row => {
-                return (
-                  <option
-                    key={row.id}
-                    value={row.id}
-                  >
-                    {row.name}
-                  </option>
-                );
-              })
-            }
-          </>
-        </select>
+        {
+          this.state.selects.map((select, idx) => {
+            return (
+              <div key={idx}>
+                {
+                  <>
+                    <select name="" id="" onChange={(e) => this.onSelectChange(e, idx, 'conditionID')} value={select.conditionID}>
+                      <option value={select.conditionID}>{select.conditionName}</option>
 
-        <label htmlFor="choose_instance">Choose instance</label>
-        <select
-          name="choose_instance"
-          id="choose_instance"
-          onChange={this.onInstanceSelectChange}
-          value={this.state.currentConditionInstance}
-        >
-          <>
-            <option defaultValue>Choose instance</option>
-            {
-              this.state.currentConditionInstances.map(instance => {
-                console.log('AAAA', instance)
-                return (
-                  <option
-                    key={instance.id}
-                    value={instance.id}
-                  >
-                    {instance.name}
-                  </option>
-                );
-              })
-            }
-          </>
-        </select>
+                      {
+                        this.state.availableConditions.map(condition => {
+                          if (!_.find(this.state.selects, {conditionID: condition.id})) {
+                            return <option key={condition.id}
+                                           value={condition.id}>{condition.name}</option>;
+                          }
+                        })
+                      }
+                    </select>
 
-        <button>+</button>
+                    <select name="" id="" onChange={(e) => this.onSelectChange(e, idx, 'instanceID')} value={select.instanceID}>
+                      <option value={select.instanceID}>{select.instanceName}</option>
+
+                      {
+                        select.instances.map(instance => {
+                          return <option key={instance.id} value={instance.id}>{instance.name}</option>
+                        })
+                      }
+                    </select>
+                  </>
+                }
+              </div>
+            );
+          })
+        }
 
         <button
           className="add_comb_inst"
