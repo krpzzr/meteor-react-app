@@ -18,6 +18,33 @@ class CreateInstance extends React.Component {
     });
   };
 
+  onEditCombination = (instance) => {
+    this.setState({
+      instanceID: instance.id,
+      value: instance.name
+    });
+  };
+
+  editCombination = () => {
+    this.props.editCombination(
+      this.props.tableID,
+      this.props.attribute.id,
+      this.props.condition.id,
+      this.state.instanceID,
+      this.state.value,
+      []
+    )
+  };
+
+  deleteCombination = (instanceID) => {
+    this.props.deleteCombination(
+      this.props.tableID,
+      this.props.attribute.id,
+      this.props.condition.id,
+      instanceID,
+    )
+  };
+
   render() {
     const {tableID, combination, attribute, condition, createInstance, hideCombination} = this.props;
     return (
@@ -57,6 +84,10 @@ class CreateInstance extends React.Component {
 
         <button
           className="add_comb_inst"
+          onClick={this.editCombination}>Edit
+        </button>
+        <button
+          className="add_comb_inst"
           onClick={() => createInstance(tableID, combination.attributeID, combination.conditionID, this.state.value)}>Add
         </button>
 
@@ -65,6 +96,8 @@ class CreateInstance extends React.Component {
         <div className="instances_wrapper">
           <Instances
             condition={condition}
+            onEditCombination={this.onEditCombination}
+            deleteCombination={this.deleteCombination}
           />
         </div>
       </div>

@@ -188,6 +188,7 @@
     justify-content: center;
     padding: 10px;
     position: relative;
+    word-break: break-all;
 }
 
 .cells span {

@@ -43,6 +43,8 @@ class CombinationWrapper extends React.Component {
                     condition={condition}
                     createInstance={createInstance}
                     hideCombination={hideCombination}
+                    editCombination={editCombination}
+                    deleteCombination={deleteCombination}
                   />
               }
             </> :
