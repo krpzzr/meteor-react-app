@@ -82,6 +82,17 @@ class Table extends React.Component {
           subconditionsShown: prevState.subconditionsShown.filter(id => id !== subcondition.id),
         }));
 
+        if (this.state.combination.conditionID === subcondition.id) {
+          this.setState({
+            combination: {
+              isShown: false,
+              attributeID: null,
+              conditionID: null,
+              type: "",
+            }
+          });
+        }
+
         include = true;
       }
     });
@@ -285,7 +296,7 @@ class Table extends React.Component {
                                     (combination.conditionID === condition.id) ||
                                     (combination.attributeID !== attribute.id)
                                   ) &&
-                                    <span className="comb_arrow" />
+                                  <span className="comb_arrow"/>
                                 }
                               </div>
 
