@@ -24,6 +24,8 @@ class CreateInstance extends React.Component {
     this.setState({
       instanceID: instance.id,
       value: instance.name,
+      isEditing: true,
+      isCreating: false
     });
   };
 
@@ -67,7 +69,7 @@ class CreateInstance extends React.Component {
   };
 
   render() {
-    const {tableID, combination, attribute, condition, createInstance, hideCombination} = this.props;
+    const {condition, hideCombination} = this.props;
     return (
 
       <div>

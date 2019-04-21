@@ -22,13 +22,13 @@ class CreateCombination extends React.Component {
     ],
     instanceID: "",
     isEditing: false,
-    isCreating: false
+    isCreating: false,
   };
 
   componentDidMount() {
     this.setState({
       availableConditions: [...this.props.condition.subconditions],
-      isCreating: true
+      isCreating: true,
     });
   }
 
@@ -38,7 +38,7 @@ class CreateCombination extends React.Component {
       selects: instance.subInstances,
       value: instance.name,
       isEditing: true,
-      isCreating: false
+      isCreating: false,
     });
   };
 
@@ -65,7 +65,7 @@ class CreateCombination extends React.Component {
       ],
       instanceID: "",
       isEditing: false,
-      isCreating: true
+      isCreating: true,
     });
   };
 
@@ -142,7 +142,7 @@ class CreateCombination extends React.Component {
       this.props.combination.attributeID,
       this.props.combination.conditionID,
       this.state.value,
-      this.state.selects
+      this.state.selects,
     );
 
     this.setState({
@@ -160,8 +160,15 @@ class CreateCombination extends React.Component {
     });
   };
 
+  ss = () => {
+
+    let ss = this.state.availableConditions.filter(f => _.find(this.state.selects, {conditionID: f.id}));
+
+  };
+
   render() {
     const {condition, hideCombination} = this.props;
+
     return (
 
       <div>
@@ -241,7 +248,11 @@ class CreateCombination extends React.Component {
                     className="delete_select_button"
                     onClick={() => this.deleteSelect(idx)}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         viewBox="0 0 24 24">
+                      <path
+                        d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                    </svg>
                   </button>
                 </>
               </div>);
@@ -249,13 +260,16 @@ class CreateCombination extends React.Component {
         }
 
 
-        <button
-          className="add_comb_inst"
-          style={{float: 'left'}}
-          onClick={this.addSelect}
-        >
-          Add select
-        </button>
+        {
+          this.state.availableConditions.filter(f => !_.find(this.state.selects, {conditionID: f.id})).length !== 0 &&
+          <button
+            className="add_comb_inst"
+            style={{float: "left"}}
+            onClick={this.addSelect}
+          >
+            Add select
+          </button>
+        }
 
         {
           this.state.isCreating &&
