@@ -595,6 +595,30 @@ i.condition_arrow {
     overflow-y: auto;
 }
 
+.comb_arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12.5px 0 12.5px 13px;
+    border-color: transparent transparent transparent #e85755;
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.attr-GIVEN .comb_arrow{
+    border-color: transparent transparent transparent #4f287b;
+}
+
+.attr-WHEN .comb_arrow {
+    border-color: transparent transparent transparent #e85755;
+}
+
+.attr-THEN .comb_arrow{
+    border-color: transparent transparent transparent #3eb775;
+}
+
 /**/
 
 .table_name {
