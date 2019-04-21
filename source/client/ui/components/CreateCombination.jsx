@@ -11,7 +11,15 @@ class CreateCombination extends React.Component {
   state = {
     value: "",
     availableConditions: [],
-    selects: [],
+    selects: [
+      {
+        conditionID: "",
+        conditionName: "",
+        instanceID: "",
+        instanceName: "",
+        instances: [],
+      },
+    ],
     instanceID: "",
     isEditing: false,
     isCreating: false,
@@ -47,7 +55,15 @@ class CreateCombination extends React.Component {
 
       this.setState({
         value: "",
-        selects: [],
+        selects: [
+          {
+            conditionID: "",
+            conditionName: "",
+            instanceID: "",
+            instanceName: "",
+            instances: [],
+          },
+        ],
         instanceID: "",
         isEditing: false,
         isCreating: true,
@@ -136,7 +152,15 @@ class CreateCombination extends React.Component {
 
       this.setState({
         value: "",
-        selects: [],
+        selects: [
+          {
+            conditionID: "",
+            conditionName: "",
+            instanceID: "",
+            instanceName: "",
+            instances: [],
+          },
+        ],
         instanceID: "",
       });
     } else {
