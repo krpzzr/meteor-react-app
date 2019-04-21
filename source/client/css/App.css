@@ -536,15 +536,19 @@ i.condition_arrow {
     margin: 0;
     width: 100%;
     padding: 5px;
-    border-top: 1px solid #000;
+    border-top: 1px solid #b7b7b7;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     transition: all .20s ease;
 }
 
+.cells_dropdown p:first-child {
+    border-top: none;
+}
+
 .cells_dropdown p:last-child {
-    border-bottom: 1px solid #000
+    border-bottom: 1px solid #b7b7b7
 }
 
 .cells_dropdown p:hover {
@@ -838,6 +842,15 @@ i.condition_arrow {
     outline: none;
     border-radius: 0;
     position: relative;
+}
+
+.comb_select::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    right: 0;
 }
 
 .delete_select_button {
