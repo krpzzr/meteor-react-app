@@ -56,16 +56,20 @@ class CreateInstance extends React.Component {
   };
 
   createInstance = () => {
-    this.props.createInstance(
-      this.props.tableID,
-      this.props.combination.attributeID,
-      this.props.combination.conditionID,
-      this.state.value,
-    );
+    if (this.state.value !== "") {
+      this.props.createInstance(
+        this.props.tableID,
+        this.props.combination.attributeID,
+        this.props.combination.conditionID,
+        this.state.value,
+      );
 
-    this.setState({
-      value: "",
-    });
+      this.setState({
+        value: "",
+      });
+    } else {
+      alert("Instance name is empty!")
+    }
   };
 
   render() {

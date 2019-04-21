@@ -159,8 +159,7 @@ class Table extends React.Component {
 
   render() {
     const {
-      table, cellEditInputs, onChangeInputCell, cellCreateInputs,
-      onChangeInputCreateCell, createCell, titleEditInputs, onChangeInputTitile,
+      table, titleEditInputs, onChangeInputTitile,
       editTitle, addColumn,
     } = this.props;
 

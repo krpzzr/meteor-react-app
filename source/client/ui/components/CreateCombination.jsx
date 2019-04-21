@@ -43,30 +43,34 @@ class CreateCombination extends React.Component {
   };
 
   editCombination = () => {
-    this.props.editCombination(
-      this.props.tableID,
-      this.props.attribute.id,
-      this.props.condition.id,
-      this.state.instanceID,
-      this.state.value,
-      this.state.selects,
-    );
+    if (this.state.value !== "") {
+      this.props.editCombination(
+        this.props.tableID,
+        this.props.attribute.id,
+        this.props.condition.id,
+        this.state.instanceID,
+        this.state.value,
+        this.state.selects,
+      );
 
-    this.setState({
-      value: "",
-      selects: [
-        {
-          conditionID: "",
-          conditionName: "",
-          instanceID: "",
-          instanceName: "",
-          instances: [],
-        },
-      ],
-      instanceID: "",
-      isEditing: false,
-      isCreating: true,
-    });
+      this.setState({
+        value: "",
+        selects: [
+          {
+            conditionID: "",
+            conditionName: "",
+            instanceID: "",
+            instanceName: "",
+            instances: [],
+          },
+        ],
+        instanceID: "",
+        isEditing: false,
+        isCreating: true,
+      });
+    } else {
+      alert("Combination name is empty!")
+    }
   };
 
   deleteCombination = (instanceID) => {
@@ -137,32 +141,31 @@ class CreateCombination extends React.Component {
   };
 
   createCombination = () => {
-    this.props.createCombination(
-      this.props.tableID,
-      this.props.combination.attributeID,
-      this.props.combination.conditionID,
-      this.state.value,
-      this.state.selects,
-    );
+    if (this.state.value !== '') {
+      this.props.createCombination(
+        this.props.tableID,
+        this.props.combination.attributeID,
+        this.props.combination.conditionID,
+        this.state.value,
+        this.state.selects,
+      );
 
-    this.setState({
-      value: "",
-      selects: [
-        {
-          conditionID: "",
-          conditionName: "",
-          instanceID: "",
-          instanceName: "",
-          instances: [],
-        },
-      ],
-      instanceID: "",
-    });
-  };
-
-  ss = () => {
-
-    let ss = this.state.availableConditions.filter(f => _.find(this.state.selects, {conditionID: f.id}));
+      this.setState({
+        value: "",
+        selects: [
+          {
+            conditionID: "",
+            conditionName: "",
+            instanceID: "",
+            instanceName: "",
+            instances: [],
+          },
+        ],
+        instanceID: "",
+      });
+    } else {
+      alert("Combination name is empty!")
+    }
 
   };
 
