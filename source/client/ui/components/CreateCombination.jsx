@@ -18,20 +18,27 @@ class CreateCombination extends React.Component {
         instanceID: "",
         instanceName: "",
         instances: [],
-      }
+      },
     ],
-    instanceID: ""
+    instanceID: "",
+    isEditing: false,
+    isCreating: false
   };
 
   componentDidMount() {
-    this.setState({availableConditions: [...this.props.condition.subconditions]});
+    this.setState({
+      availableConditions: [...this.props.condition.subconditions],
+      isCreating: true
+    });
   }
 
   onEditCombination = (instance) => {
     this.setState({
       instanceID: instance.id,
       selects: instance.subInstances,
-      value: instance.name
+      value: instance.name,
+      isEditing: true,
+      isCreating: false
     });
   };
 
@@ -42,8 +49,24 @@ class CreateCombination extends React.Component {
       this.props.condition.id,
       this.state.instanceID,
       this.state.value,
-      this.state.selects
-    )
+      this.state.selects,
+    );
+
+    this.setState({
+      value: "",
+      selects: [
+        {
+          conditionID: "",
+          conditionName: "",
+          instanceID: "",
+          instanceName: "",
+          instances: [],
+        },
+      ],
+      instanceID: "",
+      isEditing: false,
+      isCreating: true
+    });
   };
 
   deleteCombination = (instanceID) => {
@@ -52,7 +75,7 @@ class CreateCombination extends React.Component {
       this.props.attribute.id,
       this.props.condition.id,
       instanceID,
-    )
+    );
   };
 
   onInputChange = (e) => {
@@ -60,8 +83,8 @@ class CreateCombination extends React.Component {
   };
 
   onSelectChange = (e, idx, name) => {
-    let selects = [...this.state.selects];
-    let availableConditions = [...this.state.availableConditions];
+    let selects = _.map(this.state.selects, _.clone);
+    let availableConditions = _.map(this.state.availableConditions, _.clone);
 
     selects[idx][name] = e.target.value;
 
@@ -98,9 +121,9 @@ class CreateCombination extends React.Component {
           instanceID: "",
           instanceName: "",
           instances: [],
-        }
-      ]
-    }))
+        },
+      ],
+    }));
   };
 
   deleteSelect = (idx) => {
@@ -109,12 +132,36 @@ class CreateCombination extends React.Component {
     selects.splice(idx, 1);
 
     this.setState({
-      selects
-    })
+      selects,
+    });
+  };
+
+  createCombination = () => {
+    this.props.createCombination(
+      this.props.tableID,
+      this.props.combination.attributeID,
+      this.props.combination.conditionID,
+      this.state.value,
+      this.state.selects
+    );
+
+    this.setState({
+      value: "",
+      selects: [
+        {
+          conditionID: "",
+          conditionName: "",
+          instanceID: "",
+          instanceName: "",
+          instances: [],
+        },
+      ],
+      instanceID: "",
+    });
   };
 
   render() {
-    const {tableID, combination, attribute, condition, hideCombination, createCombination} = this.props;
+    const {condition, hideCombination} = this.props;
     return (
 
       <div>
@@ -151,60 +198,80 @@ class CreateCombination extends React.Component {
         </div>
 
         {
+
           this.state.selects.map((select, idx) => {
             return (
-              <div key={idx}>
-                {
-                  <>
-                    <select name="" id=""
-                            onChange={(e) => this.onSelectChange(e, idx, "conditionID")}
-                            value={select.conditionID}>
-                      <option value={select.conditionID}>{select.conditionName}</option>
+              <div className="select_wrapper" key={idx}>
+                <>
+                  <select
+                    className="comb_select"
+                    onChange={(e) => this.onSelectChange(e, idx, "conditionID")}
+                    value={select.conditionID}
+                  >
+                    <option value={select.conditionID}>{select.conditionName}</option>
 
-                      {
-                        this.state.availableConditions.map(condition => {
-                          if (!_.find(this.state.selects, {conditionID: condition.id})) {
-                            return <option key={condition.id}
-                                           value={condition.id}>{condition.name}</option>;
-                          }
-                        })
-                      }
-                    </select>
+                    {
+                      this.state.availableConditions.map(condition => {
+                        if (!_.find(this.state.selects, {conditionID: condition.id})) {
+                          return <option key={condition.id}
+                                         value={condition.id}>{condition.name}</option>;
+                        }
+                      })
+                    }
+                  </select>
 
-                    <select name="" id=""
-                            onChange={(e) => this.onSelectChange(e, idx, "instanceID")}
-                            value={select.instanceID}>
-                      <option value={select.instanceID}>{select.instanceName}</option>
+                  <select
+                    className="comb_select"
+                    onChange={(e) => this.onSelectChange(e, idx, "instanceID")}
+                    value={select.instanceID}
+                  >
+                    <option value={select.instanceID}>{select.instanceName}</option>
 
-                      {
-                        select.instances.map(instance => {
-                          if (!_.find(this.state.selects, {instanceID: instance.id})) {
-                            return <option key={instance.id}
-                                           value={instance.id}>{instance.name}</option>;
-                          }
-                        })
-                      }
-                    </select>
+                    {
+                      select.instances.map(instance => {
+                        if (!_.find(this.state.selects, {instanceID: instance.id})) {
+                          return <option key={instance.id}
+                                         value={instance.id}>{instance.name}</option>;
+                        }
+                      })
+                    }
+                  </select>
 
-                    <button onClick={() => this.deleteSelect(idx)}>Delete</button>
-                  </>
-                }
-              </div>
-            );
+                  <button
+                    className="delete_select_button"
+                    onClick={() => this.deleteSelect(idx)}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                  </button>
+                </>
+              </div>);
           })
         }
 
-        <button onClick={this.addSelect}>Create new row</button>
-
 
         <button
           className="add_comb_inst"
-          onClick={() => createCombination(tableID, combination.attributeID, combination.conditionID, this.state.value, this.state.selects)}>Create
+          style={{float: 'left'}}
+          onClick={this.addSelect}
+        >
+          Add select
         </button>
-        <button
-          className="add_comb_inst"
-          onClick={this.editCombination}>Edit
-        </button>
+
+        {
+          this.state.isCreating &&
+          <button
+            className="add_comb_inst"
+            onClick={this.createCombination}>Create combination
+          </button>
+        }
+
+        {
+          this.state.isEditing &&
+          <button
+            className="add_comb_inst"
+            onClick={this.editCombination}>Edit combination
+          </button>
+        }
 
         <div className="clear"/>
 

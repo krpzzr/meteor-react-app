@@ -6,11 +6,11 @@
 }
 
 .cells_dropdown::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .cells_dropdown::-webkit-scrollbar-thumb {
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.50);
     outline: 1px solid slategrey;
 }
 
@@ -19,14 +19,13 @@
 }
 
 .comb_wrapper::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .comb_wrapper::-webkit-scrollbar-thumb {
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.50);
     outline: 1px solid slategrey;
 }
-
 
 .clear {
     clear: both;
@@ -440,6 +439,8 @@ i.condition_arrow {
     cursor: pointer;
     transition: all .20s ease;
     outline: none;
+    height: 30px;
+    padding: 0 10px;
 }
 
 .GIVEN-comb .add_comb_inst {
@@ -798,6 +799,57 @@ i.condition_arrow {
     border: none;
     cursor: pointer;
     outline: none;
+}
+
+.select_wrapper {
+    display: flex;
+    margin-top: 15px;
+}
+
+.comb_select {
+    width: 50%;
+    height: 30px;
+    background: transparent;
+    margin-right: 8px;
+    outline: none;
+    border-radius: 0;
+    position: relative;
+}
+
+.delete_select_button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.GIVEN-comb .comb_select {
+    border-color: #4F287B;
+    color: #4F287B;
+}
+
+.WHEN-comb .comb_select {
+    border-color: #E85755;
+    color: #E85755;
+}
+
+.THEN-comb .comb_select {
+    border-color: #3EB775;
+    color: #3EB775;
+}
+
+.GIVEN-comb .delete_select_button path {
+    fill: #4F287B;
+}
+
+.WHEN-comb .delete_select_button path {
+    fill: #E85755;
+}
+
+.THEN-comb .delete_select_button path {
+    fill: #3EB775;
 }
 
 /* TABLE CREATE COMPONENTS */

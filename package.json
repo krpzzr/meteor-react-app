@@ -29,6 +29,7 @@
 		"react-dnd": "^7.4.3",
 		"react-dnd-html5-backend": "^7.4.0",
 		"react-dom": "^16.8.4",
+		"react-select": "^2.4.3",
 		"semantic-ui-css": "^2.4.1",
 		"semantic-ui-react": "^0.85.0",
 		"styled-components": "^4.1.3"

@@ -10,6 +10,8 @@ class CreateInstance extends React.Component {
 
   state = {
     value: "",
+    isEditing: false,
+    isCreating: true,
   };
 
   onInputChange = (e) => {
@@ -21,7 +23,7 @@ class CreateInstance extends React.Component {
   onEditCombination = (instance) => {
     this.setState({
       instanceID: instance.id,
-      value: instance.name
+      value: instance.name,
     });
   };
 
@@ -32,8 +34,14 @@ class CreateInstance extends React.Component {
       this.props.condition.id,
       this.state.instanceID,
       this.state.value,
-      []
-    )
+      [],
+    );
+
+    this.setState({
+      value: "",
+      isEditing: false,
+      isCreating: true,
+    });
   };
 
   deleteCombination = (instanceID) => {
@@ -42,7 +50,20 @@ class CreateInstance extends React.Component {
       this.props.attribute.id,
       this.props.condition.id,
       instanceID,
-    )
+    );
+  };
+
+  createInstance = () => {
+    this.props.createInstance(
+      this.props.tableID,
+      this.props.combination.attributeID,
+      this.props.combination.conditionID,
+      this.state.value,
+    );
+
+    this.setState({
+      value: "",
+    });
   };
 
   render() {
@@ -82,14 +103,21 @@ class CreateInstance extends React.Component {
           />
         </div>
 
-        <button
-          className="add_comb_inst"
-          onClick={this.editCombination}>Edit
-        </button>
-        <button
-          className="add_comb_inst"
-          onClick={() => createInstance(tableID, combination.attributeID, combination.conditionID, this.state.value)}>Add
-        </button>
+        {
+          this.state.isEditing &&
+          <button
+            className="add_comb_inst"
+            onClick={this.editCombination}>Edit instance
+          </button>
+        }
+        {
+          this.state.isCreating &&
+          <button
+            className="add_comb_inst"
+            onClick={this.createInstance}>Create instance
+          </button>
+        }
+
 
         <div className="clear"/>
 
